@@ -1,0 +1,50 @@
+{
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 100,
+  "importSorter.importStringConfiguration.trailingComma": "multiLine",
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.sortConfiguration.customOrderingRules.rules": [
+    {
+      "regex": "^@angular|^@ng",
+      "orderLevel": 20,
+      "numberOfEmptyLinesAfterGroup": 1,
+      "type": "path"
+    },
+    {
+      "regex": "^[a-z]",
+      "orderLevel": 30,
+      "numberOfEmptyLinesAfterGroup": 1,
+      "type": "path"
+    },
+    {
+      "regex": "^[@]",
+      "orderLevel": 40,
+      "numberOfEmptyLinesAfterGroup": 1
+    },
+    {
+      "regex": "^[.]",
+      "orderLevel": 50,
+      "numberOfEmptyLinesAfterGroup": 0
+    }
+  ],
+  "importSorter.sortConfiguration.removeUnusedDefaultImports": true,
+  "importSorter.sortConfiguration.removeUnusedImports": true,
+  "importSorter.importStringConfiguration.tabSize": 2,
+  "npm.enableRunFromFolder": false,
+  "npm.packageManager": "auto",
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "html"
+  ],
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".ts",
+      "html"
+    ]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+}
