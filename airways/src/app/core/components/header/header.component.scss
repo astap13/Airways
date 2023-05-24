@@ -1,0 +1,37 @@
+.navbar {
+    height: 88px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar .logo {
+    order: 1; 
+}
+
+.navbar .nav-items {
+    display: flex;
+    order: 2; 
+    gap: 20px;
+}
+
+.card-valutes ::ng-deep .p-dropdown-trigger {
+    display: none;
+}
+
+.card-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    grid-gap: 20px;
+  }
+  
+  .field {
+    margin-bottom: 10px;
+  }
+  
