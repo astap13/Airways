@@ -12,6 +12,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BookingModule } from './booking/booking.module';
 import { CoreComponent } from './core/core.component';
 import { CoreModule } from './core/core.module';
 
@@ -30,6 +31,7 @@ import { CoreModule } from './core/core.module';
     OverlayPanelModule,
     DividerModule,
     InputTextModule,
+    BookingModule,
   ],
 })
 export class AppModule {}
