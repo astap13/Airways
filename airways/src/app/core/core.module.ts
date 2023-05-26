@@ -9,10 +9,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
+import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
     DropdownModule,
@@ -22,6 +23,6 @@ import { HeaderComponent } from './components/header/header.component';
     ButtonModule,
     InputTextModule,
   ],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}
