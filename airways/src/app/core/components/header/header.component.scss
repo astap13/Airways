@@ -1,8 +1,11 @@
 .navbar {
-    height: 88px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    background-color: #74767a20;
+    backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
 }
 
 .img-logo {
