@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -26,6 +26,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     ButtonModule,
     DropdownModule,
     OverlayPanelModule,
