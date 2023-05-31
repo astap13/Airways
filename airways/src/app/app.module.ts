@@ -1,14 +1,14 @@
+import { NgFor } from '@angular/common';
 /* eslint-disable import/no-extraneous-dependencies */
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { ButtonModule } from 'primeng/button';
-import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputTextModule } from 'primeng/inputtext';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,16 +23,17 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    ButtonModule,
-    DropdownModule,
-    OverlayPanelModule,
-    DividerModule,
-    InputTextModule,
     BookingModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgFor,
+    MatInputModule,
+    CoreModule,
+    MatMenuModule,
+    MatButtonModule,
   ],
 })
 export class AppModule {}

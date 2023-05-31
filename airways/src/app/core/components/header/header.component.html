@@ -1,46 +1,35 @@
 <nav class="navbar">
+  <div class="nav-items-container">
     <div class="logo">
-       <a class="navbar-brand" href="#"><img class="img-logo" src="../../../../assets/logo.png" alt="" /></a>
+      <a class="navbar-brand" href="#"><img class="img-logo" src="../../../../assets/logo.png" alt="" /></a>
     </div>
     <div class="nav-items">
-        <div class="card-dates flex justify-content-center">
-        <p-dropdown [options]="formsOfDates" [(ngModel)]="selectedFormsOfDates" optionLabel="name"></p-dropdown>
+      <div class="card-dates">
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label>Format of date</mat-label>
+          <mat-select [(value)]="selectedFormsOfDates">
+            <mat-option *ngFor="let date of formsOfDates" [value]="date">
+              {{date.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="card-dates">
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label>Valute</mat-label>
+          <mat-select [(value)]="selectedValute">
+            <mat-option *ngFor="let valute of valutes" [value]="valute">
+              {{valute.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="login">
+        <button mat-stroked-button [matMenuTriggerFor]="beforeMenu">Sign In</button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <p>here will be pop-up with login</p>
+        </mat-menu>
+      </div>
     </div>
-    <div class="card-valutes flex justify-content-center">
-        <p-dropdown [options]="valutes" [(ngModel)]="selectedValute" optionLabel="name"></p-dropdown>
-    </div>
-    <div class="login flex justify-content-center">
-        <p-overlayPanel #op>
-            <ng-template pTemplate="content">
-                <div class="card-login">
-                  <div class="grid">
-                    <div class="col-5 flex align-items-center justify-content-center">
-                      <div class="p-fluid">
-                        <div class="field">
-                          <label for="username">Username</label>
-                          <input pInputText id="username" type="text" />
-                        </div>
-                        <div class="field">
-                          <label for="password">Password</label>
-                          <input pInputText id="password" type="password" />
-                        </div>
-                        <p-button label="Login"></p-button>
-                      </div>
-                    </div>
-                    <div class="col-2">
-                      <p-divider layout="vertical">
-                        <b>OR</b>
-                      </p-divider>
-                    </div>
-                    <div class="col-5 flex align-items-center justify-content-center">
-                      <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success"></p-button>
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-        </p-overlayPanel>
-        <p-button (click)="op.toggle($event)" icon="pi pi-user" label="Sign in"></p-button>
-    </div>
-    <p-button styleClass="p-button-text" icon="pi pi-shopping-cart"></p-button>
-    </div>
+  </div>
 </nav>

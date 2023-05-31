@@ -16,7 +16,7 @@ interface IValute {
 export class HeaderComponent implements OnInit {
   formsOfDates!: IFormsOfDates[];
 
-  selectedFormsOfDates!: IFormsOfDates;
+  selectedFormsOfDates: IFormsOfDates = { name: 'MM/DD/YYYY' };
 
   valutes!: IValute[];
 

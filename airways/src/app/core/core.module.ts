@@ -1,13 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { ButtonModule } from 'primeng/button';
-import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputTextModule } from 'primeng/inputtext';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -16,12 +15,13 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
-    DropdownModule,
     FormsModule,
-    OverlayPanelModule,
-    DividerModule,
-    ButtonModule,
-    InputTextModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgFor,
+    MatInputModule,
+    MatMenuModule,
+    MatButtonModule,
   ],
   exports: [HeaderComponent, FooterComponent],
 })
