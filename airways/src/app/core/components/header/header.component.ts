@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   valutes!: IValute[];
 
-  selectedValute!: IValute;
+  selectedValute: IValute = { name: 'EUR' };
 
   ngOnInit() {
     this.formsOfDates = [

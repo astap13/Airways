@@ -5,30 +5,36 @@
     </div>
     <div class="nav-items">
       <div class="card-dates">
-        <mat-form-field appearance="fill" subscriptSizing="dynamic">
-          <mat-label>Format of date</mat-label>
-          <mat-select [(value)]="selectedFormsOfDates">
-            <mat-option *ngFor="let date of formsOfDates" [value]="date">
-              {{date.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="d-inline-block" ngbDropdown #myDropDate="ngbDropdown">
+          <button type="button" class="btn btn-outline-primary btn-outline-secondary me-2" id="dropdownManual"
+            ngbDropdownAnchor (focus)="myDropDate.open()">
+            {{ selectedFormsOfDates.name }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem *ngFor="let date of formsOfDates" (click)="selectedFormsOfDates = date">
+              {{ date.name }}
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="card-dates">
-        <mat-form-field appearance="fill" subscriptSizing="dynamic">
-          <mat-label>Valute</mat-label>
-          <mat-select [(value)]="selectedValute">
-            <mat-option *ngFor="let valute of valutes" [value]="valute">
-              {{valute.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="card-valutes">
+        <div class="d-inline-block" ngbDropdown #myDropValute="ngbDropdown">
+          <button type="button" class="btn btn-outline-primary btn-outline-secondary me-2" id="dropdownManual"
+            ngbDropdownAnchor (focus)="myDropValute.open()">
+            {{ selectedValute.name }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem *ngFor="let valute of valutes" (click)="selectedValute = valute">
+              {{ valute.name }}
+            </button>
+          </div>
+        </div>
       </div>
       <div class="login">
-        <button mat-stroked-button [matMenuTriggerFor]="beforeMenu">Sign In</button>
+        <!-- <button mat-stroked-button [matMenuTriggerFor]="beforeMenu">Sign In</button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
           <p>here will be pop-up with login</p>
-        </mat-menu>
+        </mat-menu> -->
       </div>
     </div>
   </div>
