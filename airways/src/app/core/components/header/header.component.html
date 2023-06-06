@@ -8,12 +8,12 @@
         <div class="d-inline-block" ngbDropdown #myDropDate="ngbDropdown">
           <button type="button" class="btn btn-outline-primary custom-outline-color me-2" id="dropdownManual"
             ngbDropdownAnchor (focus)="myDropDate.open()">
-            {{ selectedFormsOfDates.name }}
+            {{ selectedFormsOfDates$ | async }}
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button ngbDropdownItem *ngFor="let date of formsOfDates" (click)="selectedFormsOfDates = date">
+            <!-- <button ngbDropdownItem *ngFor="let date of formsOfDates" (click)="selectedFormsOfDates = date">
               {{ date.name }}
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -21,12 +21,12 @@
         <div class="d-inline-block" ngbDropdown #myDropValute="ngbDropdown">
           <button type="button" class="btn btn-outline-primary custom-outline-color me-2" id="dropdownManual"
             ngbDropdownAnchor (focus)="myDropValute.open()">
-            {{ selectedValute.name }}
+            {{ selectedValute$ | async }}
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button ngbDropdownItem *ngFor="let valute of valutes" (click)="selectedValute = valute">
+            <!-- <button ngbDropdownItem *ngFor="let valute of valutes" (click)="selectedValute$ = valute">
               {{ valute.name }}
-            </button>
+            </button> -->
           </div>
         </div>
       </div>

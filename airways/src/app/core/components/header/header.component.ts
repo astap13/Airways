@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 
-interface IFormsOfDates {
-  name: string;
-}
+import { Observable } from 'rxjs';
+import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
-interface IValute {
-  name: string;
-}
+import { IFormsOfDates, IValute } from './models/header.interface';
+import * as HeaderValuesActions from './store/actions';
+import { isLoadingChoseFormDateSelector, isLoadingChoseValuteSelector } from './store/selectors';
 
 @Component({
   selector: 'app-header',
@@ -14,15 +14,22 @@ interface IValute {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  formsOfDates!: IFormsOfDates[];
+  selectedValute$: Observable<string>;
 
-  selectedFormsOfDates: IFormsOfDates = { name: 'MM/DD/YYYY' };
+  selectedFormsOfDates$: Observable<string>;
+
+  constructor(private store: Store<IAppStateInterface>) {
+    this.selectedValute$ = this.store.pipe(select(isLoadingChoseValuteSelector));
+    this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingChoseFormDateSelector));
+  }
+
+  formsOfDates!: IFormsOfDates[];
 
   valutes!: IValute[];
 
-  selectedValute: IValute = { name: 'EUR' };
-
   ngOnInit() {
+    this.store.dispatch(HeaderValuesActions.getHeaderValues());
+
     this.formsOfDates = [
       { name: 'MM/DD/YYYY' },
       { name: 'DD/MM/YYYY' },

@@ -8,9 +8,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { reducers } from './components/header/store/reducer';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -24,6 +26,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatMenuModule,
     MatButtonModule,
     NgbDropdownModule,
+    StoreModule.forFeature('header', reducers),
   ],
   exports: [HeaderComponent, FooterComponent],
 })
