@@ -7,6 +7,6 @@ export interface IValute {
 }
 
 export interface IHeaderStateInterface {
-  choseFormOfDates: string;
-  choseValutes: string;
+  selectedFormOfDates: string;
+  selectedValutes: string;
 }

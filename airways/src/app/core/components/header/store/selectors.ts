@@ -4,12 +4,12 @@ import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 export const selectFeature = (state: IAppStateInterface) => state.header;
 
-export const isLoadingChoseValuteSelector = createSelector(
+export const isLoadingSelectedValuteSelector = createSelector(
   selectFeature,
-  (state) => state.choseValutes,
+  (state) => state.selectedValutes,
 );
 
-export const isLoadingChoseFormDateSelector = createSelector(
+export const isLoadingSelectedFormDateSelector = createSelector(
   selectFeature,
-  (state) => state.choseFormOfDates,
+  (state) => state.selectedFormOfDates,
 );

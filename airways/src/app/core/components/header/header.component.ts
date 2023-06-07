@@ -6,7 +6,10 @@ import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import { IFormsOfDates, IValute } from './models/header.interface';
 import * as HeaderValuesActions from './store/actions';
-import { isLoadingChoseFormDateSelector, isLoadingChoseValuteSelector } from './store/selectors';
+import {
+  isLoadingSelectedFormDateSelector,
+  isLoadingSelectedValuteSelector,
+} from './store/selectors';
 
 @Component({
   selector: 'app-header',
@@ -18,14 +21,14 @@ export class HeaderComponent implements OnInit {
 
   selectedFormsOfDates$: Observable<string>;
 
-  constructor(private store: Store<IAppStateInterface>) {
-    this.selectedValute$ = this.store.pipe(select(isLoadingChoseValuteSelector));
-    this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingChoseFormDateSelector));
-  }
-
   formsOfDates!: IFormsOfDates[];
 
   valutes!: IValute[];
+
+  constructor(private store: Store<IAppStateInterface>) {
+    this.selectedValute$ = this.store.pipe(select(isLoadingSelectedValuteSelector));
+    this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingSelectedFormDateSelector));
+  }
 
   ngOnInit() {
     this.store.dispatch(HeaderValuesActions.getHeaderValues());
@@ -38,5 +41,15 @@ export class HeaderComponent implements OnInit {
     ];
 
     this.valutes = [{ name: 'EUR' }, { name: 'USA' }, { name: 'BYN' }, { name: 'PLN' }];
+  }
+
+  selectFormOfDate(formOfDate: string) {
+    this.store.dispatch(
+      HeaderValuesActions.setSelectedFormOfDates({ selectedFormOfDates: formOfDate }),
+    );
+  }
+
+  selectValute(valute: string) {
+    this.store.dispatch(HeaderValuesActions.setSelectedValutes({ selectedValutes: valute }));
   }
 }

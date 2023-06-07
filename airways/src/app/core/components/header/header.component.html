@@ -11,9 +11,9 @@
             {{ selectedFormsOfDates$ | async }}
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <!-- <button ngbDropdownItem *ngFor="let date of formsOfDates" (click)="selectedFormsOfDates = date">
+            <button ngbDropdownItem *ngFor="let date of formsOfDates" (click)="selectFormOfDate(date.name)">
               {{ date.name }}
-            </button> -->
+            </button>
           </div>
         </div>
       </div>
@@ -24,9 +24,9 @@
             {{ selectedValute$ | async }}
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <!-- <button ngbDropdownItem *ngFor="let valute of valutes" (click)="selectedValute$ = valute">
+            <button ngbDropdownItem *ngFor="let valute of valutes" (click)="selectValute(valute.name)">
               {{ valute.name }}
-            </button> -->
+            </button>
           </div>
         </div>
       </div>
