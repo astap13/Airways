@@ -13,7 +13,13 @@
         <label class="form-check-label" for="flexRadioDefault1">Round Trip</label>
       </div>
       <div class="radio-checkbox">
-        <input mdbRadio class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+        <input
+          mdbRadio
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault2"
+        />
         <label class="form-check-label" for="flexRadioDefault2">One way</label>
       </div>
     </div>
@@ -30,9 +36,13 @@
         [resultFormatter]="formatCityResult"
         [inputFormatter]="formatCityResult"
         #fromInstance="ngbTypeahead"
+        placeholder="Choose your start city"
       />
     </div>
     <div class="to-city-container">
+      <button class="btn btn-outline-secondary rounded-circle custom-button">
+        <img class="arrows" src="../../../../assets/arrows.svg" alt="" />
+      </button>
       <label for="typeahead-to">Destination:</label>
       <input
         id="typeahead-to"
@@ -45,7 +55,63 @@
         [resultFormatter]="formatCityResult"
         [inputFormatter]="formatCityResult"
         #toInstance="ngbTypeahead"
+        placeholder="Choose your destination"
       />
+    </div>
+    <div class="col-12">
+      <div class="dp-hidden position-absolute">
+        <div class="input-group">
+          <input
+            name="datepicker"
+            class="form-control"
+            ngbDatepicker
+            #datepicker="ngbDatepicker"
+            [autoClose]="'outside'"
+            (dateSelect)="onDateSelection($event)"
+            [displayMonths]="2"
+            [dayTemplate]="t"
+            outsideDays="hidden"
+            [startDate]="fromDate!"
+            tabindex="-1"
+          />
+          <ng-template #t let-date let-focused="focused">
+            <span
+              class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null"
+            >
+              {{ date.day }}
+            </span>
+          </ng-template>
+        </div>
+      </div>
+      <div class="input-group">
+        <input
+          #dpFromDate
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dpFromDate"
+          [value]="formatter.format(fromDate)"
+          (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"></button>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="input-group">
+        <input
+          #dpToDate
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dpToDate"
+          [value]="formatter.format(toDate)"
+          (input)="toDate = validateInput(toDate, dpToDate.value)"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"></button>
+      </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

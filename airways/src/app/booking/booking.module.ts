@@ -2,7 +2,11 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { NgbDropdownModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDatepickerModule,
+  NgbDropdownModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 import { BookingComponent } from './booking.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
@@ -18,6 +22,7 @@ import { MainComponent } from './pages/main/main.component';
     NgbDropdownModule,
     NgbTypeaheadModule,
     JsonPipe,
+    NgbDatepickerModule,
   ],
   exports: [BookingComponent, MainComponent],
 })

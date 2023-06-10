@@ -15,11 +15,68 @@ form {
     background: rgba(255, 255, 255, 0.85);
     border-radius: 8px;
     flex-direction: column;
-    
+    position: relative;
+
+    .dp-hidden {
+        width: 0;
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+    .custom-day {
+        text-align: center;
+        padding: 0.185rem 0.25rem;
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+    }
+    .custom-day.focused {
+        background-color: #e6e6e6;
+    }
+    .custom-day.range,
+    .custom-day:hover {
+        background-color: rgb(2, 117, 216);
+        color: white;
+    }
+    .custom-day.faded {
+        background-color: rgba(2, 117, 216, 0.5);
+    }
+
     .radio-checkbox-container {
         display: flex;
         width: 60%;
         justify-content: space-between;
     }
 
+    .from-city-container {
+        margin-top: 20px;
+    }
+
+    .to-city-container {
+        margin-top: 20px;
+    }
+
+    .custom-button {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // margin-top: -13px;
+        background-color: #fff;
+        position: absolute;
+        left: 85%;
+    }
+
+    .form-check-label {
+        font-size: 20px;
+        color: #11397E;
+        margin-left: 10px;
+    }
+
+    button:hover img.arrows {
+        filter: brightness(100) invert(1);
+        width: 20px;
+        height: 20px;
+    }
 }
