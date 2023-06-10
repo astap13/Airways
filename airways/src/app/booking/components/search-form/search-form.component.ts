@@ -4,6 +4,7 @@ import {
   NgbCalendar,
   NgbDate,
   NgbDateParserFormatter,
+  NgbPopoverConfig,
   NgbTypeahead,
 } from '@ng-bootstrap/ng-bootstrap';
 
@@ -31,9 +32,14 @@ interface ICity {
   styleUrls: ['./search-form.component.scss'],
 })
 export class SearchFormComponent implements OnInit {
-  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+  constructor(
+    private calendar: NgbCalendar,
+    public formatter: NgbDateParserFormatter,
+    config: NgbPopoverConfig,
+  ) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    config.autoClose = 'outside';
   }
 
   cities: ICity[] = [

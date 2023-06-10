@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   NgbDatepickerModule,
   NgbDropdownModule,
+  NgbPopoverModule,
   NgbTypeaheadModule,
 } from '@ng-bootstrap/ng-bootstrap';
 
@@ -23,6 +24,7 @@ import { MainComponent } from './pages/main/main.component';
     NgbTypeaheadModule,
     JsonPipe,
     NgbDatepickerModule,
+    NgbPopoverModule,
   ],
   exports: [BookingComponent, MainComponent],
 })
