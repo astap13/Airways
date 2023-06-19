@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="from-city-container">
-      <label for="typeahead-from">From:</label>
+      <!-- <label for="typeahead-from">From:</label> -->
       <input
         id="typeahead-from"
         type="text"
@@ -43,7 +43,7 @@
       <button class="btn btn-outline-secondary rounded-circle custom-button">
         <img class="arrows" src="../../../../assets/arrows.svg" alt="" />
       </button>
-      <label for="typeahead-to">Destination:</label>
+      <!-- <label for="typeahead-to">Destination:</label> -->
       <input
         id="typeahead-to"
         type="text"
@@ -120,15 +120,17 @@
           autoClose="outside"
         ></button>
       </div>
-      <button
-        type="button"
-        class="btn btn-outline-secondary me-2"
-        placement="bottom"
-        ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-        popoverTitle="Passengers"
-      >
-        Passengers
-      </button>
+      <div class="passengers-container">
+        <button
+          type="button"
+          class="btn btn-outline-secondary me-2"
+          placement="bottom"
+          ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+          popoverTitle="Passengers"
+        >
+          Passengers
+        </button>
+      </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
