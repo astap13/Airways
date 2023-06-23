@@ -21,9 +21,9 @@ import {
 
 interface ICity {
   name: string;
-  code: string;
-  airport: string; // Добавляем поле для названия аэропорта
-  country: string; // Добавляем поле для названия страны
+  code?: string;
+  airport?: string;
+  country?: string;
 }
 
 @Component({
@@ -77,6 +77,8 @@ export class SearchFormComponent implements OnInit {
 
   toDate: NgbDate | null;
 
+  isCollapsed = true;
+
   ngOnInit() {
     this.searchFormGroup = new FormGroup({
       selectedWay: new FormControl(),
@@ -88,7 +90,7 @@ export class SearchFormComponent implements OnInit {
   }
 
   formatCityResult = (value: ICity) => {
-    return `${value.name} (${value.airport}), ${value.country}`; // Возвращаем имя города с описанием, каждый в отдельном элементе span
+    return `${value.name} ${value.airport} ${value.country}`;
   };
 
   @ViewChild('fromInstance', { static: true }) fromInstance!: NgbTypeahead;

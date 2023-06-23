@@ -5,7 +5,9 @@
     justify-content: left;
     margin-top: 62px;
 }
-
+  .collapse-btn {
+        margin-top: 20px;
+    }
 form {
     padding: 24px;
     display: flex;
@@ -16,6 +18,10 @@ form {
     border-radius: 8px;
     flex-direction: column;
     position: relative;
+
+    .submit-btn {
+        margin-top: 10px;
+    }
 
     .radio-checkbox-container {
         display: flex;

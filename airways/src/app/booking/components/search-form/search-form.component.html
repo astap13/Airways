@@ -120,18 +120,20 @@
           autoClose="outside"
         ></button>
       </div>
-      <div class="passengers-container">
-        <button
-          type="button"
-          class="btn btn-outline-secondary me-2"
-          placement="bottom"
-          ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-          popoverTitle="Passengers"
-        >
-          Passengers
-        </button>
-      </div>
+      <div class="passengers-container"></div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button
+      type="button"
+      class="btn btn-outline-primary collapse-btn"
+      (click)="collapse.toggle()"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseExample"
+    >
+    Passengers
+    </button>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <app-passengers></app-passengers>
+    </div>
+    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
   </form>
 </div>
