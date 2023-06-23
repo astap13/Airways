@@ -12,11 +12,22 @@ import {
 
 import { BookingComponent } from './booking.component';
 import { PassengersComponent } from './components/passengers/passengers.component';
+import { RadioComponent } from './components/radio/radio.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { MainComponent } from './pages/main/main.component';
+import { DirectionsComponent } from './components/directions/directions.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 @NgModule({
-  declarations: [BookingComponent, MainComponent, SearchFormComponent, PassengersComponent],
+  declarations: [
+    BookingComponent,
+    MainComponent,
+    SearchFormComponent,
+    PassengersComponent,
+    RadioComponent,
+    DirectionsComponent,
+    DatepickerComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

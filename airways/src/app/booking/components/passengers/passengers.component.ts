@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './passengers.component.html',
   styleUrls: ['./passengers.component.scss'],
 })
-export class PassengersComponent {}
+export class PassengersComponent {
+  isCollapsed: boolean = false;
+}

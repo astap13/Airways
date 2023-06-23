@@ -1,4 +1,14 @@
-<div class="passanders-container">
+<button
+      type="button"
+      class="btn btn-outline-primary collapse-btn"
+      (click)="collapse.toggle()"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseExample"
+    >
+      Passengers
+    </button>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <div class="passanders-container">
     <div class="passangers-item">
       <div class="title">
         <p class="title-item">Adults</p>
@@ -39,3 +49,4 @@
       </div>
     </div>
   </div>
+    </div>

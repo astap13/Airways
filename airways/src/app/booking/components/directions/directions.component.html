@@ -1,0 +1,33 @@
+<div class="from-city-container">
+    <input
+      id="typeahead-from"
+      type="text"
+      class="form-control"
+      [(ngModel)]="fromModel"
+      [ngbTypeahead]="fromSearch"
+      (focus)="fromFocus$.next($any($event).target.value)"
+      (click)="fromClick$.next($any($event).target.value)"
+      [resultFormatter]="formatCityResult"
+      [inputFormatter]="formatCityResult"
+      #fromInstance="ngbTypeahead"
+      placeholder="Choose your start city"
+    />
+  </div>
+  <div class="to-city-container">
+    <button class="btn btn-outline-secondary rounded-circle custom-button">
+      <img class="arrows" src="../../../../assets/arrows.svg" alt="" />
+    </button>
+    <input
+      id="typeahead-to"
+      type="text"
+      class="form-control"
+      [ngModel]="toModel"
+      [ngbTypeahead]="toSearch"
+      (focus)="toFocus$.next($any($event).target.value)"
+      (click)="toClick$.next($any($event).target.value)"
+      [resultFormatter]="formatCityResult"
+      [inputFormatter]="formatCityResult"
+      #toInstance="ngbTypeahead"
+      placeholder="Choose your destination"
+    />
+  </div>

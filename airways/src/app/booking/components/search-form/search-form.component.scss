@@ -5,9 +5,7 @@
     justify-content: left;
     margin-top: 62px;
 }
-  .collapse-btn {
-        margin-top: 20px;
-    }
+
 form {
     padding: 24px;
     display: flex;
@@ -23,77 +21,5 @@ form {
         margin-top: 10px;
     }
 
-    .radio-checkbox-container {
-        display: flex;
-        width: 60%;
-        justify-content: space-between;
-    }
-
-    .from-city-container {
-        margin-top: 20px;
-    }
-
-    .to-city-container {
-        margin-top: 10px;
-    }
-
-    .custom-button {
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #fff;
-        position: absolute;
-        left: 85%;
-        top: 89px;
-    }
-
-    .form-check-label {
-        font-size: 20px;
-        color: #11397e;
-        margin-left: 10px;
-    }
-
-    button:hover img.arrows {
-        filter: brightness(100) invert(1);
-        width: 20px;
-        height: 20px;
-    }
-
-    .date-people-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        .datepicker-container {
-            margin-top: 20px;
-            max-width: 130px;
-            display: flex;
-
-            .dp-hidden {
-                width: 0;
-                margin: 0;
-                border: none;
-                padding: 0;
-            }
-            .custom-day {
-                text-align: center;
-                padding: 0.185rem 0.25rem;
-                display: inline-block;
-                height: 2rem;
-                width: 2rem;
-            }
-            .custom-day.focused {
-                background-color: #e6e6e6;
-            }
-            .custom-day.range,
-            .custom-day:hover {
-                background-color: rgb(2, 117, 216);
-                color: white;
-            }
-            .custom-day.faded {
-                background-color: rgba(2, 117, 216, 0.5);
-            }
-        }
-    }
+    
 }
