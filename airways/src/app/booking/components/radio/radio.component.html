@@ -6,7 +6,7 @@
       type="radio"
       name="flexRadioDefault"
       id="flexRadioDefault1"
-      [checked]="true"
+      [checked]="$selectedWay | async"
     />
     <label class="form-check-label" for="flexRadioDefault1">Round Trip</label>
   </div>

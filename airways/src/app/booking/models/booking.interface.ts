@@ -1,12 +1,18 @@
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
-
 export interface IBookingStateInterface {
-  selectedWay: string;
+  selectedWay: boolean; // if true --> round trip
   selectedFromCity: string;
   selectedDestinationCity: string;
   selectedDate: {
-    fromDate: NgbDate; // надо преобразовать
-    toDate: NgbDate; // надо преобразовать
+    fromDate: {
+      year: number;
+      month: number;
+      day: number;
+    };
+    toDate: {
+      year: number;
+      month: number;
+      day: number;
+    };
   };
   selectedPassengers: {
     adult: number;

@@ -9,14 +9,16 @@ import {
   NgbPopoverModule,
   NgbTypeaheadModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
 
 import { BookingComponent } from './booking.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { DirectionsComponent } from './components/directions/directions.component';
 import { PassengersComponent } from './components/passengers/passengers.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { MainComponent } from './pages/main/main.component';
-import { DirectionsComponent } from './components/directions/directions.component';
-import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { reducer } from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
     NgbDatepickerModule,
     NgbPopoverModule,
     NgbCollapseModule,
+    StoreModule.forFeature('booking', reducer),
   ],
   exports: [BookingComponent, MainComponent],
 })

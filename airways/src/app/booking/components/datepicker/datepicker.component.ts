@@ -68,4 +68,9 @@ export class DatepickerComponent {
       ? NgbDate.from(parsed)
       : currentValue;
   }
+
+  test() {
+    console.log(this.fromDate);
+    console.log(this.toDate);
+  }
 }
