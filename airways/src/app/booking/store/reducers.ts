@@ -1,6 +1,7 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { IBookingStateInterface } from '../models/booking.interface';
+import * as BookingValuesActions from '../store/actions';
 
 export const initialState: IBookingStateInterface = {
   selectedWay: false,
@@ -27,7 +28,16 @@ export const initialState: IBookingStateInterface = {
 
 export const reducer = createReducer(
   initialState,
-  //     , on(bookingValueActions.getBookingValues, state => {
-  //     ...state, selectedWay: false,
-  // })
+  on(BookingValuesActions.getBookingValues, (state) => ({
+    ...state,
+    // selectedWay: action.bookingValues.selectedWay,
+    // selectedFromCity: action.bookingValues.selectedFromCity,
+    // selectedDestinationCity: action.bookingValues.selectedFromCity,
+    // selectedDate: action.bookingValues.selectedDate,
+    // selectedPassengers: action.bookingValues.selectedPassengers,
+  })),
+  on(BookingValuesActions.setSelectedWay, (state, action) => ({
+    ...state,
+    selectedWay: action.selectedWay,
+  })),
 );

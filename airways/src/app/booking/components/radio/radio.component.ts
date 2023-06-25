@@ -13,13 +13,17 @@ import { selectedWaySelector } from '../../store/selectors';
   styleUrls: ['./radio.component.scss'],
 })
 export class RadioComponent implements OnInit {
-  $selectedWay: Observable<boolean>;
+  selectedWay$: Observable<boolean>;
 
   constructor(private store: Store<IAppStateInterface>) {
-    this.$selectedWay = this.store.pipe(select(selectedWaySelector));
+    this.selectedWay$ = this.store.pipe(select(selectedWaySelector));
   }
 
   ngOnInit(): void {
     this.store.dispatch(bookingActions.getBookingValues());
+  }
+
+  onRadioChange(selectedWay: boolean) {
+    this.store.dispatch(bookingActions.setSelectedWay({ selectedWay }));
   }
 }

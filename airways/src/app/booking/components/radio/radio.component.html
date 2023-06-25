@@ -6,7 +6,8 @@
       type="radio"
       name="flexRadioDefault"
       id="flexRadioDefault1"
-      [checked]="$selectedWay | async"
+      [checked]="(selectedWay$ | async) === true"
+      (change)="onRadioChange(true)"
     />
     <label class="form-check-label" for="flexRadioDefault1">Round Trip</label>
   </div>
@@ -17,6 +18,8 @@
       type="radio"
       name="flexRadioDefault"
       id="flexRadioDefault2"
+      [checked]="(selectedWay$ | async) === false"
+      (change)="onRadioChange(false)"
     />
     <label class="form-check-label" for="flexRadioDefault2">One way</label>
   </div>
