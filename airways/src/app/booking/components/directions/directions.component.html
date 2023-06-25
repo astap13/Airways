@@ -11,6 +11,7 @@
       [inputFormatter]="formatCityResult"
       #fromInstance="ngbTypeahead"
       placeholder="Choose your start city"
+      (selectItem)="onFromCitySelected($event.item)"
     />
   </div>
   <div class="to-city-container">
@@ -29,5 +30,6 @@
       [inputFormatter]="formatCityResult"
       #toInstance="ngbTypeahead"
       placeholder="Choose your destination"
+      (selectItem)="onDestinationCitySelected($event.item)"
     />
   </div>

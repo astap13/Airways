@@ -40,4 +40,12 @@ export const reducer = createReducer(
     ...state,
     selectedWay: action.selectedWay,
   })),
+  on(BookingValuesActions.setSelectedFromCity, (state, action) => ({
+    ...state,
+    selectedFromCity: action.selectedFromCity,
+  })),
+  on(BookingValuesActions.setSelectedDestinationCity, (state, action) => ({
+    ...state,
+    selectedDestinationCity: action.selectedDestinationCity,
+  })),
 );

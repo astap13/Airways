@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { select, Store } from '@ngrx/store';
 
 import {
   debounceTime,
@@ -12,6 +12,10 @@ import {
   OperatorFunction,
   Subject,
 } from 'rxjs';
+import { IAppStateInterface } from 'src/app/redux/appState.interface';
+
+import * as bookingActions from '../../store/actions';
+import { selectedFromCitySelector } from '../../store/selectors';
 
 export interface ICity {
   name: string;
@@ -25,7 +29,7 @@ export interface ICity {
   templateUrl: './directions.component.html',
   styleUrls: ['./directions.component.scss'],
 })
-export class DirectionsComponent implements OnInit {
+export class DirectionsComponent {
   cities: ICity[] = [
     { name: 'New York', code: 'NY', airport: 'JFK', country: 'United States' },
     { name: 'Rome', code: 'RM', airport: 'FCO', country: 'Italy' },
@@ -49,23 +53,21 @@ export class DirectionsComponent implements OnInit {
     { name: 'Bangkok', code: 'BKK', airport: 'BKK', country: 'Thailand' },
   ]; //эти города возвращает бек, когда будет готов
 
+  selectedFromCity$: Observable<string>;
+
+  seceltedDestinationCity$: Observable<string>;
+
   fromModel: ICity | undefined;
 
   toModel: ICity | undefined;
 
-  searchFormGroup!: FormGroup;
-
-  ngOnInit() {
-    this.searchFormGroup = new FormGroup({
-      selectedWay: new FormControl(),
-    });
+  constructor(private store: Store<IAppStateInterface>) {
+    this.selectedFromCity$ = this.store.pipe(select(selectedFromCitySelector));
+    this.seceltedDestinationCity$ = this.store.pipe(select(selectedFromCitySelector));
   }
 
   submit() {
     console.log('this.submit');
-    if (this.fromModel) {
-      console.log('Откуда летим:', this.fromModel.name);
-    }
   }
 
   formatCityResult = (value: ICity) => {
@@ -125,4 +127,16 @@ export class DirectionsComponent implements OnInit {
       }),
     );
   };
+
+  onFromCitySelected(city: ICity) {
+    const selectedCode = city.code || 'MAD';
+    this.store.dispatch(bookingActions.setSelectedFromCity({ selectedFromCity: selectedCode }));
+  }
+
+  onDestinationCitySelected(city: ICity) {
+    const selectedCode = city.code || 'MAD';
+    this.store.dispatch(
+      bookingActions.setSelectedDestinationCity({ selectedDestinationCity: selectedCode }),
+    );
+  }
 }
