@@ -5,6 +5,13 @@ import {
   NgbDateParserFormatter,
   NgbPopoverConfig,
 } from '@ng-bootstrap/ng-bootstrap';
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+import { IAppStateInterface } from 'src/app/redux/appState.interface';
+
+import * as bookingActions from '../../store/actions';
+import { selectedFromDate, selectedToDate } from '../../store/selectors';
 
 @Component({
   selector: 'app-datepicker',
@@ -14,11 +21,14 @@ import {
 export class DatepickerComponent {
   constructor(
     private calendar: NgbCalendar,
+    private store: Store<IAppStateInterface>,
     public formatter: NgbDateParserFormatter,
     config: NgbPopoverConfig,
   ) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.selectedFromDate$ = this.store.pipe(select(selectedFromDate));
+    this.selectedToDate$ = this.store.pipe(select(selectedToDate));
     config.autoClose = 'outside';
   }
 
@@ -27,6 +37,10 @@ export class DatepickerComponent {
   fromDate: NgbDate | null;
 
   toDate: NgbDate | null;
+
+  selectedFromDate$: Observable<NgbDate>;
+
+  selectedToDate$: Observable<NgbDate>;
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -37,6 +51,9 @@ export class DatepickerComponent {
       this.toDate = null;
       this.fromDate = date;
     }
+
+    this.store.dispatch(bookingActions.setSelectedFromDate({ selectedFromDate: this.fromDate! }));
+    this.store.dispatch(bookingActions.setSelectedToDate({ selectedToDate: this.toDate! }));
   }
 
   isHovered(date: NgbDate) {
@@ -64,10 +81,29 @@ export class DatepickerComponent {
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
     const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed))
-      ? NgbDate.from(parsed)
-      : currentValue;
+    const selectedDate =
+      parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : null;
+
+    if (selectedDate && !selectedDate.equals(this.fromDate)) {
+      this.store.dispatch(bookingActions.setSelectedFromDate({ selectedFromDate: selectedDate }));
+    }
+
+    return selectedDate;
   }
+
+  updateDates(fromValue: string | null, toValue: string | null) {
+    if (fromValue !== null) {
+      this.fromDate = this.validateInput(this.fromDate, fromValue);
+    }
+    if (toValue !== null) {
+      this.toDate = this.validateInput(this.toDate, toValue);
+    }
+  }
+
+  // onFromDateSe(date: NgbDate) {
+  //   console.log(date);
+  //   this.store.dispatch(bookingActions.setSeceltedFromDate({ selectedFromDate: date }));
+  // }
 
   test() {
     console.log(this.fromDate);

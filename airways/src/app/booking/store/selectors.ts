@@ -15,3 +15,25 @@ export const selectedDestinationCitySelector = createSelector(
   selectFeature,
   (state) => state.selectedDestinationCity,
 );
+
+export const selectedFromDate = createSelector(
+  selectFeature,
+  (state) => state.selectedDate.fromDate,
+);
+
+export const selectedToDate = createSelector(selectFeature, (state) => state.selectedDate.toDate);
+
+export const selectedAdultPassengers = createSelector(
+  selectFeature,
+  (state) => state.selectedPassengers.adult,
+);
+
+export const selectedChildPassengers = createSelector(
+  selectFeature,
+  (state) => state.selectedPassengers.child,
+);
+
+export const selectedInfantPassengers = createSelector(
+  selectFeature,
+  (state) => state.selectedPassengers.infant,
+);
