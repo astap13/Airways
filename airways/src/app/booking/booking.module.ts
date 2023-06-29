@@ -11,6 +11,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 
+import { BookingRoutingModule } from './booking-routing.module';
 import { BookingComponent } from './booking.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DirectionsComponent } from './components/directions/directions.component';
@@ -41,6 +42,7 @@ import { reducer } from './store/reducers';
     NgbDatepickerModule,
     NgbPopoverModule,
     NgbCollapseModule,
+    BookingRoutingModule,
     StoreModule.forFeature('booking', reducer),
   ],
   exports: [BookingComponent, MainComponent],

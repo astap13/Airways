@@ -1,7 +1,7 @@
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 export interface IBookingStateInterface {
-  selectedWay: boolean; // if true --> round trip
+  selectedWay: boolean;
   selectedFromCity: string;
   selectedDestinationCity: string;
   selectedDate: {

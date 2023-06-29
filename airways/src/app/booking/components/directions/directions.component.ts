@@ -139,4 +139,15 @@ export class DirectionsComponent {
       bookingActions.setSelectedDestinationCity({ selectedDestinationCity: selectedCode }),
     );
   }
+
+  switchDirection() {
+    const from = this.fromModel;
+    const to = this.toModel;
+    this.toModel = from;
+    this.fromModel = to;
+    if (this.fromInstance && this.toInstance) {
+      this.fromInstance.writeValue(this.fromModel ? this.formatCityResult(this.fromModel) : '');
+      this.toInstance.writeValue(this.toModel ? this.formatCityResult(this.toModel) : '');
+    }
+  }
 }
