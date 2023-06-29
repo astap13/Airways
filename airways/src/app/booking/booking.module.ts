@@ -20,6 +20,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { MainComponent } from './pages/main/main.component';
 import { reducer } from './store/reducers';
+import { FlightComponent } from './pages/flight/flight.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { reducer } from './store/reducers';
     RadioComponent,
     DirectionsComponent,
     DatepickerComponent,
+    FlightComponent,
   ],
   imports: [
     CommonModule,

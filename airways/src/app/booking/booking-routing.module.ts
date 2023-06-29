@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { FlightComponent } from './pages/flight/flight.component';
 import { MainComponent } from './pages/main/main.component';
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'booking',
+    component: FlightComponent,
   },
 ];
 
