@@ -13,9 +13,10 @@ import { StoreModule } from '@ngrx/store';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { reducers } from './components/header/store/reducer';
+import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, BreadcrumbComponent],
   imports: [
     CommonModule,
     FormsModule,

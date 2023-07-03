@@ -100,11 +100,6 @@ export class DatepickerComponent {
     }
   }
 
-  // onFromDateSe(date: NgbDate) {
-  //   console.log(date);
-  //   this.store.dispatch(bookingActions.setSeceltedFromDate({ selectedFromDate: date }));
-  // }
-
   test() {
     console.log(this.fromDate);
     console.log(this.toDate);

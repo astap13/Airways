@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-form',
@@ -9,6 +10,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class SearchFormComponent implements OnInit {
   searchFormGroup!: FormGroup;
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
     this.searchFormGroup = new FormGroup({
       selectedWay: new FormControl(),
@@ -16,6 +19,6 @@ export class SearchFormComponent implements OnInit {
   }
 
   submit() {
-    console.log('this.submit');
+    this.router.navigate(['/booking']);
   }
 }
