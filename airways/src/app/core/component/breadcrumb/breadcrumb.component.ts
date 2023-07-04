@@ -9,6 +9,8 @@ import { NavigationEnd, Router } from '@angular/router';
 export class BreadcrumbComponent implements OnInit {
   showBreadcrumb: boolean;
 
+  isEditable = false;
+
   constructor(private router: Router) {
     this.showBreadcrumb = false;
   }
@@ -19,5 +21,9 @@ export class BreadcrumbComponent implements OnInit {
         this.showBreadcrumb = this.router.url === '/';
       }
     });
+  }
+
+  disableClick(event: MouseEvent): void {
+    event.preventDefault();
   }
 }

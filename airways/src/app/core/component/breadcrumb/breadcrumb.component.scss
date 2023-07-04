@@ -1,7 +1,35 @@
-.breadcrumb{
+.breadcrumb {
     font-size: 20px;
     color: white;
     display: flex;
     margin: 0;
-}
-
+  }
+  
+  .stepper {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    color: #fff;
+  }
+  
+  .step {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .step-number {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #b1b1b1;
+    border: 1px solid #b1b1b1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  
+  

@@ -7,13 +7,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 
+import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { reducers } from './components/header/store/reducer';
-import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, BreadcrumbComponent],
@@ -27,6 +28,7 @@ import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component
     MatMenuModule,
     MatButtonModule,
     NgbDropdownModule,
+    MatStepperModule,
     StoreModule.forFeature('header', reducers),
   ],
   exports: [HeaderComponent, FooterComponent],
