@@ -11,7 +11,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 
-import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { reducers } from './components/header/store/reducer';

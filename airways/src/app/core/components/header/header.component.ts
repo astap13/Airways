@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -25,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   valutes!: IValute[];
 
-  constructor(private store: Store<IAppStateInterface>) {
+  constructor(private store: Store<IAppStateInterface>, private route: ActivatedRoute) {
     this.selectedValute$ = this.store.pipe(select(isLoadingSelectedValuteSelector));
     this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingSelectedFormDateSelector));
   }
@@ -51,5 +52,9 @@ export class HeaderComponent implements OnInit {
 
   selectValute(valute: string) {
     this.store.dispatch(HeaderValuesActions.setSelectedValutes({ selectedValutes: valute }));
+  }
+
+  isBookingRoute(): boolean {
+    return this.route.snapshot.routeConfig?.path === 'booking';
   }
 }
