@@ -1,21 +1,30 @@
-<p class="breadcrumb" *ngIf="(actualStep) === 0">Book flights</p>
-<div class="stepper" *ngIf="(actualStep) === 1">
-    <div class="step">
-      <div class="step-number">1</div>
-      <div class="step-label">Fill out your name</div>
+<p class="breadcrumb" *ngIf="actualStep === 0">Book flights</p>
+<div class="stepper" *ngIf="actualStep > 0">
+  <div class="step">
+    <div class="step-number" [ngClass]="{ 'active': +actualStep === 1 }">
+      <ng-container *ngIf="+actualStep !== 1">1</ng-container>
+      <ng-container *ngIf="+actualStep === 1">
+        <img src="../../../../assets/pencil_icon.png" alt="Pencil Icon" />
+      </ng-container>
     </div>
-    <div class="step">
-      <div class="step-number">2</div>
-      <div class="step-label">Fill out your address</div>
+    <div class="step-label">Fill out your name</div>
+  </div>
+  <div class="step">
+    <div class="step-number" [ngClass]="{ 'active': +actualStep === 2 }">
+      <ng-container *ngIf="+actualStep !== 2">2</ng-container>
+      <ng-container *ngIf="+actualStep === 2">
+        <img src="../../../../assets/pencil_icon.png" alt="Pencil Icon" />
+      </ng-container>
     </div>
-    <div class="step">
-      <div class="step-number">3</div>
-      <div class="step-label">Done</div>
+    <div class="step-label">Fill out your address</div>
+  </div>
+  <div class="step">
+    <div class="step-number" [ngClass]="{ 'active': +actualStep === 3 }">
+      <ng-container *ngIf="+actualStep !== 3">3</ng-container>
+      <ng-container *ngIf="+actualStep === 3">
+        <img src="../../../../assets/pencil_icon.png" alt="Pencil Icon" />
+      </ng-container>
     </div>
+    <div class="step-label">Done</div>
+  </div>
 </div>
-  
-  
-  
-  
-  
-  
