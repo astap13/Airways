@@ -1,5 +1,5 @@
-<p class="breadcrumb" *ngIf="showBreadcrumb">Book flights</p>
-<div class="stepper" *ngIf="!showBreadcrumb">
+<p class="breadcrumb" *ngIf="(actualStep) === 0">Book flights</p>
+<div class="stepper" *ngIf="(actualStep) === 1">
     <div class="step">
       <div class="step-number">1</div>
       <div class="step-label">Fill out your name</div>

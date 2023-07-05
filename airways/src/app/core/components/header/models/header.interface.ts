@@ -9,4 +9,5 @@ export interface IValute {
 export interface IHeaderStateInterface {
   selectedFormOfDates: string;
   selectedValutes: string;
+  step: number;
 }

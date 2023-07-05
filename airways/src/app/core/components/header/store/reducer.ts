@@ -6,6 +6,7 @@ import * as HeaderValuesActions from './actions';
 export const initialState: IHeaderStateInterface = {
   selectedFormOfDates: 'MM/DD/YYYY',
   selectedValutes: 'EUR',
+  step: 0,
 };
 
 export const reducers = createReducer(
@@ -22,5 +23,9 @@ export const reducers = createReducer(
   on(HeaderValuesActions.setSelectedValutes, (state, action) => ({
     ...state,
     selectedValutes: action.selectedValutes,
+  })),
+  on(HeaderValuesActions.setStep, (state, action) => ({
+    ...state,
+    step: action.step,
   })),
 );

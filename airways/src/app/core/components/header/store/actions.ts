@@ -18,3 +18,5 @@ export const setSelectedValutes = createAction(
   '[HeaderValues] Set Selected Valutes',
   props<{ selectedValutes: string }>(),
 );
+
+export const setStep = createAction('[HeaderValues] Set Step', props<{ step: number }>());

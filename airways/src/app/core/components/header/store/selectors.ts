@@ -13,3 +13,5 @@ export const isLoadingSelectedFormDateSelector = createSelector(
   selectFeature,
   (state) => state.selectedFormOfDates,
 );
+
+export const isLoadingStep = createSelector(selectFeature, (state) => state.step);
