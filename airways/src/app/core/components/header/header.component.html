@@ -1,18 +1,30 @@
-<nav class="navbar" [ngClass]="{ 'white-header': isBookingRoute() }">
+<nav class="navbar" [ngClass]="{ 'white-header': (actualStep$ | async)! > 0 }">
   <div class="nav-items-container">
     <div class="logo">
-      <a class="navbar-brand" href="#"><img class="img-logo" src="../../../../assets/logo.png" alt="" /></a>
+      <a class="navbar-brand" href="#"
+        ><img class="img-logo" src="../../../../assets/logo.png" alt=""
+      /></a>
     </div>
     <app-breadcrumb class="item2"></app-breadcrumb>
     <div class="nav-items">
       <div class="card-dates">
         <div class="d-inline-block" ngbDropdown #myDropDate="ngbDropdown">
-          <button type="button" class="btn btn-outline-primary custom-outline-color me-2" id="dropdownManual"
-            ngbDropdownAnchor (focus)="myDropDate.open()">
+          <button
+            type="button"
+            [ngClass]="{ 'custom-outline-color-white': (actualStep$ | async)! > 0 }"
+            class="btn btn-outline-primary custom-outline-color me-2"
+            id="dropdownManual"
+            ngbDropdownAnchor
+            (focus)="myDropDate.open()"
+          >
             {{ selectedFormsOfDates$ | async }}
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button ngbDropdownItem *ngFor="let date of formsOfDates" (click)="selectFormOfDate(date.name)">
+            <button
+              ngbDropdownItem
+              *ngFor="let date of formsOfDates"
+              (click)="selectFormOfDate(date.name)"
+            >
               {{ date.name }}
             </button>
           </div>
@@ -20,12 +32,22 @@
       </div>
       <div class="card-valutes">
         <div class="d-inline-block" ngbDropdown #myDropValute="ngbDropdown">
-          <button type="button" class="btn btn-outline-primary custom-outline-color me-2" id="dropdownManual"
-            ngbDropdownAnchor (focus)="myDropValute.open()">
+          <button
+            type="button"
+            [ngClass]="{ 'custom-outline-color-white': (actualStep$ | async)! > 0 }"
+            class="btn btn-outline-primary custom-outline-color me-2"
+            id="dropdownManual"
+            ngbDropdownAnchor
+            (focus)="myDropValute.open()"
+          >
             {{ selectedValute$ | async }}
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button ngbDropdownItem *ngFor="let valute of valutes" (click)="selectValute(valute.name)">
+            <button
+              ngbDropdownItem
+              *ngFor="let valute of valutes"
+              (click)="selectValute(valute.name)"
+            >
               {{ valute.name }}
             </button>
           </div>

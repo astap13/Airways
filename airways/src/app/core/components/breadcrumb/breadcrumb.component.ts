@@ -14,8 +14,6 @@ import { isLoadingStep } from '../header/store/selectors';
   styleUrls: ['./breadcrumb.component.scss'],
 })
 export class BreadcrumbComponent implements OnInit {
-  showBreadcrumb: boolean;
-
   actualStep: number;
 
   constructor(
@@ -23,7 +21,6 @@ export class BreadcrumbComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {
-    this.showBreadcrumb = false;
     this.actualStep = 0;
   }
 

@@ -10,6 +10,7 @@ import * as HeaderValuesActions from './store/actions';
 import {
   isLoadingSelectedFormDateSelector,
   isLoadingSelectedValuteSelector,
+  isLoadingStep,
 } from './store/selectors';
 
 @Component({
@@ -26,9 +27,12 @@ export class HeaderComponent implements OnInit {
 
   valutes!: IValute[];
 
+  actualStep$: Observable<number> | null = null;
+
   constructor(private store: Store<IAppStateInterface>, private route: ActivatedRoute) {
     this.selectedValute$ = this.store.pipe(select(isLoadingSelectedValuteSelector));
     this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingSelectedFormDateSelector));
+    this.actualStep$ = this.store.pipe(select(isLoadingStep));
   }
 
   ngOnInit() {
