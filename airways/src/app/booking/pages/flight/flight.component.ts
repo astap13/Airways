@@ -65,4 +65,6 @@ export class FlightComponent {
       this.sumPassangers = passangerArray.adult + passangerArray.child + passangerArray.infant;
     });
   }
+
+  public isCollapsed = false;
 }
