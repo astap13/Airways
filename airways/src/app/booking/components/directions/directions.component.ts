@@ -129,12 +129,12 @@ export class DirectionsComponent {
   };
 
   onFromCitySelected(city: ICity) {
-    const selectedCode = city.code || 'MAD';
+    const selectedCode = city.name || 'MAD';
     this.store.dispatch(bookingActions.setSelectedFromCity({ selectedFromCity: selectedCode }));
   }
 
   onDestinationCitySelected(city: ICity) {
-    const selectedCode = city.code || 'MAD';
+    const selectedCode = city.name || 'MAD';
     this.store.dispatch(
       bookingActions.setSelectedDestinationCity({ selectedDestinationCity: selectedCode }),
     );

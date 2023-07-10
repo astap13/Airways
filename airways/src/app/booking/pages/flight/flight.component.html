@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="second-menu-container_background">
+    <div class="second-menu-container">
+      <div class="destination-container">
+        <p class="text">{{fromCity$ | async}}</p>
+        <img src="../../../../assets//return_trip.svg" alt="" />
+        <p class="text">{{destinationCity$ | async}}</p>
+      </div>
+      <div class="direction-container">
+        <ng-container *ngIf="selectedWay$ | async; else oneWayTemplate">
+          <p>Return</p>
+        </ng-container>
+        <ng-template #oneWayTemplate>
+          <p>One way</p>
+        </ng-template>
+        <p>·</p>
+        <p>{{formattedFromDate}} - {{formattedToDate}}</p>
+        <p>·</p>
+        <span>
+          <p>{{sumPassangers}}</p>
+          <i class="bi bi-person-fill"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

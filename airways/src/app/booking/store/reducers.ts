@@ -7,8 +7,8 @@ import * as BookingValuesActions from '../store/actions';
 
 export const initialState: IBookingStateInterface = {
   selectedWay: false,
-  selectedFromCity: '',
-  selectedDestinationCity: '',
+  selectedFromCity: 'New Yourk',
+  selectedDestinationCity: 'Moscow',
   selectedDate: {
     fromDate: {
       year: 0,
@@ -76,6 +76,10 @@ export const reducer = createReducer(
       ...state.selectedDate,
       toDate: action.selectedToDate,
     },
+  })),
+  on(BookingValuesActions.setSelectedPassanger, (state, action) => ({
+    ...state,
+    selectedPassengers: action.selectedPassanger,
   })),
   on(BookingValuesActions.setSelectedAdultPassanger, (state, action) => ({
     ...state,

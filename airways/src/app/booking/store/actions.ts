@@ -1,6 +1,12 @@
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { createAction, props } from '@ngrx/store';
 
+interface IPassangers {
+  adult: number;
+  child: number;
+  infant: number;
+}
+
 export const getBookingValues = createAction('[BookingValues] Get Booking Values');
 
 export const setSelectedWay = createAction(
@@ -26,6 +32,11 @@ export const setSelectedFromDate = createAction(
 export const setSelectedToDate = createAction(
   '[BookingValues] Set selected To Date',
   props<{ selectedToDate: NgbDate }>(),
+);
+
+export const setSelectedPassanger = createAction(
+  '[BookingValues] Set selected Passangers',
+  props<{ selectedPassanger: IPassangers }>(),
 );
 
 export const setSelectedAdultPassanger = createAction(

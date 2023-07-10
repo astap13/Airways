@@ -4,6 +4,8 @@ import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 export const selectFeature = (state: IAppStateInterface) => state.booking;
 
+export const selectedBookingValues = createSelector(selectFeature, (state) => state);
+
 export const selectedWaySelector = createSelector(selectFeature, (state) => state.selectedWay);
 
 export const selectedFromCitySelector = createSelector(
@@ -22,6 +24,11 @@ export const selectedFromDate = createSelector(
 );
 
 export const selectedToDate = createSelector(selectFeature, (state) => state.selectedDate.toDate);
+
+export const selectedPassengers = createSelector(
+  selectFeature,
+  (state) => state.selectedPassengers,
+);
 
 export const selectedAdultPassengers = createSelector(
   selectFeature,

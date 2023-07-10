@@ -1,4 +1,4 @@
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule, DatePipe, JsonPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,9 +18,9 @@ import { DirectionsComponent } from './components/directions/directions.componen
 import { PassengersComponent } from './components/passengers/passengers.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
+import { FlightComponent } from './pages/flight/flight.component';
 import { MainComponent } from './pages/main/main.component';
 import { reducer } from './store/reducers';
-import { FlightComponent } from './pages/flight/flight.component';
 
 @NgModule({
   declarations: [
@@ -48,5 +48,6 @@ import { FlightComponent } from './pages/flight/flight.component';
     StoreModule.forFeature('booking', reducer),
   ],
   exports: [BookingComponent, MainComponent],
+  providers: [DatePipe],
 })
 export class BookingModule {}
