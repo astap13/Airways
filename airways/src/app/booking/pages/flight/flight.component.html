@@ -2,9 +2,9 @@
   <div class="second-menu-container_background">
     <div class="second-menu-container">
       <div class="destination-container">
-        <p class="text">{{fromCity$ | async}}</p>
+        <p class="text">{{ fromCity$ | async }}</p>
         <img src="../../../../assets//return_trip.svg" alt="" />
-        <p class="text">{{destinationCity$ | async}}</p>
+        <p class="text">{{ destinationCity$ | async }}</p>
       </div>
       <div class="direction-container">
         <ng-container *ngIf="selectedWay$ | async; else oneWayTemplate">
@@ -14,27 +14,31 @@
           <p>One way</p>
         </ng-template>
         <p>·</p>
-        <p>{{formattedFromDate}} - {{formattedToDate}}</p>
+        <p>{{ formattedFromDate }} - {{ formattedToDate }}</p>
         <p>·</p>
         <span>
-          <p>{{sumPassangers}}</p>
+          <p>{{ sumPassangers }}</p>
           <i class="bi bi-person-fill"></i>
         </span>
       </div>
       <button
-		type="button"
-		class="btn btn-outline-primary ms-2"
-		(click)="isCollapsed = ! isCollapsed"
-		[attr.aria-expanded]="!isCollapsed"
-		aria-controls="collapseExample"
-	>
-		Toggle with Two Way Binding
-	</button>
+        type="button"
+        class="btn btn-outline-primary ms-2"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        Edit
+      </button>
     </div>
   </div>
   <div #collapse="ngbCollapse" [(ngbCollapse)]="!isCollapsed">
     <div class="card">
-      <div class="card-body">You can collapse this card by clicking one Toggle button</div>
+      <div class="card-body">
+        <app-directions></app-directions>
+        <app-datepicker></app-datepicker>
+        <app-passengers></app-passengers>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
@@ -61,9 +62,17 @@ export class DirectionsComponent {
 
   toModel: ICity | undefined;
 
-  constructor(private store: Store<IAppStateInterface>) {
+  showRedirectionButton: boolean;
+
+  constructor(private store: Store<IAppStateInterface>, private route: ActivatedRoute) {
     this.selectedFromCity$ = this.store.pipe(select(selectedFromCitySelector));
     this.seceltedDestinationCity$ = this.store.pipe(select(selectedFromCitySelector));
+    const currentRoute = this.route.snapshot.url.join('/');
+    this.showRedirectionButton = currentRoute === '';
+    this.route.url.subscribe((urlSegments) => {
+      const updatedRoute = urlSegments.join('/');
+      this.showRedirectionButton = updatedRoute === '';
+    });
   }
 
   submit() {

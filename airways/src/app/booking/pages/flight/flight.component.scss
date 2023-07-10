@@ -32,4 +32,15 @@
         align-items: center;
         gap: 20px;
     }
+
+    .btn {
+        height: 40px;
+        align-self: center;
+    }
+
+    .card-body {
+        display: flex;
+        justify-content: space-between;
+    }
+
 }
