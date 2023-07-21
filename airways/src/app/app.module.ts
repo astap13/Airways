@@ -1,4 +1,5 @@
 import { NgFor } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 /* eslint-disable import/no-extraneous-dependencies */
 import { isDevMode, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -48,6 +49,7 @@ import { CoreModule } from './core/core.module';
     FormsModule,
     ReactiveFormsModule,
     NgbDatepickerModule,
+    HttpClientModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

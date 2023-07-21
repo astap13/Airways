@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
@@ -18,35 +18,46 @@ export interface IActuallyFlights {
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  animations: [
-    // Добавьте анимацию в секцию "animations"
-    trigger('slideInOut', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('500ms ease-in', style({ transform: 'translateX(0%)' })),
-      ]),
-      transition(':leave', [animate('500ms ease-out', style({ transform: 'translateX(100%)' }))]),
-    ]),
-  ],
 })
 export class CarouselComponent implements OnInit {
   selectedFlight$: Observable<IBookingStateInterface>;
 
   actualyFlights: IActuallyFlights[] = [];
 
-  constructor(private store: Store<IAppStateInterface>) {
+  constructor(private store: Store<IAppStateInterface>, private http: HttpClient) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
+  }
+
+  makeTestPostRequest() {
+    const url = 'https://airways-api-ckd3.onrender.com/post';
+    const requestBody = {
+      from: 'Moscow',
+      to: 'New York',
+      date: '2023-08-03',
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+
+    this.http.post(url, requestBody, httpOptions).subscribe(
+      (response) => {
+        console.log('Post Request Response:', response);
+        // Do something with the response if needed
+      },
+      (error) => {
+        console.error('Error occurred during the POST request:', error);
+      },
+    );
   }
 
   ngOnInit(): void {
     this.selectedFlight$.subscribe((flightData: IBookingStateInterface) => {
       this.processFlightsData(flightData);
-      this.playCarouselAnimation();
+      this.makeTestPostRequest();
     });
-  }
-
-  playCarouselAnimation(): void {
-    // Просто вызываем анимацию на каждом элементе массива actualyFlights
   }
 
   increase() {
