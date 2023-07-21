@@ -21,6 +21,8 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
 import { FlightComponent } from './pages/flight/flight.component';
 import { MainComponent } from './pages/main/main.component';
 import { reducer } from './store/reducers';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { CarouselItemComponent } from './components/carousel/carousel-item/carousel-item.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { reducer } from './store/reducers';
     DirectionsComponent,
     DatepickerComponent,
     FlightComponent,
+    CarouselComponent,
+    CarouselItemComponent,
   ],
   imports: [
     CommonModule,

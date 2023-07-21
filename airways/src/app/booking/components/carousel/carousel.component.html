@@ -1,0 +1,6 @@
+<div class="container">
+    <button type="button" class="btn btn-outline-secondary" (click)="decrease()"><</button>
+    <app-carousel-item *ngFor="let flight of actualyFlights; let i = index" [flight]="flight" [ngClass]="{'third-item': i === 2}"></app-carousel-item>
+    <button type="button" class="btn btn-outline-secondary" (click)="increase()">></button>
+</div>
+  
