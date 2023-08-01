@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-loop-func */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -22,93 +24,100 @@ export interface IActuallyFlights {
 export class CarouselComponent implements OnInit {
   selectedFlight$: Observable<IBookingStateInterface>;
 
-  actualyFlights: IActuallyFlights[] = [];
+  postResponses: any[] = [];
+
+  loading: boolean = true;
+
+  Array: any;
 
   constructor(private store: Store<IAppStateInterface>, private http: HttpClient) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
   }
 
-  makeTestPostRequest() {
-    const url = 'https://airways-api-ckd3.onrender.com/post';
-    const requestBody = {
-      from: 'Moscow',
-      to: 'New York',
-      date: '2023-08-03',
-    };
+  async flightRequest() {
+    this.selectedFlight$.subscribe(async (flightData) => {
+      const url = 'https://airways-api-ckd3.onrender.com/post';
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      };
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
+      for (let i = -2; i <= 2; i++) {
+        const date: NgbDateStruct = flightData.selectedDate.fromDate;
 
-    this.http.post(url, requestBody, httpOptions).subscribe(
-      (response) => {
-        console.log('Post Request Response:', response);
-        // Do something with the response if needed
-      },
-      (error) => {
-        console.error('Error occurred during the POST request:', error);
-      },
-    );
+        const day = (date.day + i).toString().padStart(2, '0');
+        const month = date.month.toString().padStart(2, '0');
+        const year = date.year;
+
+        const formattedDate = `${day}-${month}-${year}`;
+        const requestBody = {
+          from: flightData.selectedFromCity,
+          to: flightData.selectedDestinationCity,
+          date: formattedDate,
+        };
+        console.log(requestBody);
+
+        try {
+          const response = await this.http.post(url, requestBody, httpOptions).toPromise();
+          console.log('Post Request Response:', response);
+          this.postResponses.push(response);
+        } catch (error) {
+          console.error('Error occurred during the POST request:', error);
+        }
+      }
+
+      this.loading = false;
+    });
   }
 
   ngOnInit(): void {
-    this.selectedFlight$.subscribe((flightData: IBookingStateInterface) => {
-      this.processFlightsData(flightData);
-      this.makeTestPostRequest();
+    this.selectedFlight$.subscribe(() => {
+      this.processFlightsData();
+      this.flightRequest();
     });
   }
 
   increase() {
-    this.actualyFlights.forEach((el) => {
-      const newDate = new Date(el.date);
-
-      newDate.setDate(newDate.getDate() + 1);
-
-      el.date = newDate;
-    });
+    // this.actualyFlights.forEach((el) => {
+    //   const newDate = new Date(el.date);
+    //   newDate.setDate(newDate.getDate() + 1);
+    //   el.date = newDate;
+    // });
   }
 
   decrease() {
-    this.actualyFlights.forEach((el) => {
-      const newDate = new Date(el.date);
-
-      newDate.setDate(newDate.getDate() - 1);
-
-      el.date = newDate;
-    });
+    // this.actualyFlights.forEach((el) => {
+    //   const newDate = new Date(el.date);
+    //   newDate.setDate(newDate.getDate() - 1);
+    //   el.date = newDate;
+    // });
   }
 
-  processFlightsData(flightData: IBookingStateInterface): void {
-    const fromDate = new Date(
-      flightData.selectedDate.fromDate.year,
-      flightData.selectedDate.fromDate.month - 1,
-      flightData.selectedDate.fromDate.day,
-    );
-
-    const daysOfWeek = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
-
-    for (let i = -2; i <= 2; i++) {
-      const newDate = new Date(fromDate);
-      newDate.setDate(fromDate.getDate() + i);
-
-      const dayIndexOffset = newDate.getDay();
-      const dayOfWeek = daysOfWeek[dayIndexOffset];
-
-      this.actualyFlights.push({
-        date: newDate,
-        day: dayOfWeek,
-        price: 0,
-      });
-    }
+  processFlightsData(): void {
+    // const fromDate = new Date(
+    //   flightData.selectedDate.fromDate.year,
+    //   flightData.selectedDate.fromDate.month - 1,
+    //   flightData.selectedDate.fromDate.day,
+    // );
+    // const daysOfWeek = [
+    //   'Sunday',
+    //   'Monday',
+    //   'Tuesday',
+    //   'Wednesday',
+    //   'Thursday',
+    //   'Friday',
+    //   'Saturday',
+    // ];
+    // for (let i = -2; i <= 2; i++) {
+    //   const newDate = new Date(fromDate);
+    //   newDate.setDate(fromDate.getDate() + i);
+    //   const dayIndexOffset = newDate.getDay();
+    //   const dayOfWeek = daysOfWeek[dayIndexOffset];
+    //   this.postResponses.push({
+    //     date: newDate,
+    //     day: dayOfWeek,
+    //   });
+    // }
   }
 }
