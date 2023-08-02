@@ -45,18 +45,3 @@ export class CarouselItemComponent implements OnInit {
     this.loading = false;
   }
 }
-
-// обработка даты на стороне главного компонента
-// const date: NgbDateStruct = flightData.selectedDate.fromDate;
-
-//         const day = (date.day + i).toString().padStart(2, '0');
-//         const month = date.month.toString().padStart(2, '0');
-//         const year = date.year;
-
-//         const formattedDate = `${day}-${month}-${year}`;
-//         const requestBody = {
-//           from: flightData.selectedFromCity,
-//           to: flightData.selectedDestinationCity,
-//           date: formattedDate,
-//         };
-//         console.log(requestBody);
