@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="container">
+  <div class="carousel_container">
     <button type="button" class="btn btn-outline-secondary" (click)="decrease()"><</button>
     <ng-container *ngFor="let flight of flightsRequest; index as i">
-      <app-carousel-item [flight]="flight" [ngClass]="{'third-item': i === 2}">
+      <app-carousel-item [flight]="flight" [ngClass]="{ 'third-item': i === 2 }">
       </app-carousel-item>
     </ng-container>
     <button type="button" class="btn btn-outline-secondary" (click)="increase()">></button>
   </div>
+  <app-chosed-carousel-item [flight]="flightsRequest[2]"></app-chosed-carousel-item>
 </div>
-  

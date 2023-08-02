@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="info_container">
+       <div class="from_container">
+        <p class="date">{{response?.time?.from | date:'fullDate'}}</p>
+        <p class="date">{{response?.time?.from | date:'shortTime'}}</p>
+        <p class="date">{{response?.from}}</p>
+       </div>
+       <div class="img_container">
+        <p class="img">🛫</p>
+        <p>Flight no: {{response?.flightNumber}}</p>
+       </div>
+       <div class="to_container">
+        <p class="date">{{response?.time?.to | date:'fullDate'}}</p>
+        <p class="date">{{response?.time?.to | date:'shortTime'}}</p>
+        <p class="date">{{response?.to}}</p>
+       </div>
+    </div>
+    <div class="select_container">
+        
+    </div>
+</div>

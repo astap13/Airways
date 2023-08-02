@@ -39,7 +39,7 @@ export class CarouselComponent implements OnInit {
         date: formattedDate,
       };
 
-      this.flightsRequest.push(requestBody);
+      this.flightsRequest = [...this.flightsRequest, requestBody];
     }
   }
 

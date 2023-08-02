@@ -23,6 +23,7 @@ import { MainComponent } from './pages/main/main.component';
 import { reducer } from './store/reducers';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CarouselItemComponent } from './components/carousel/carousel-item/carousel-item.component';
+import { ChosedCarouselItemComponent } from './components/carousel/chosed-carousel-item/chosed-carousel-item.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CarouselItemComponent } from './components/carousel/carousel-item/carou
     FlightComponent,
     CarouselComponent,
     CarouselItemComponent,
+    ChosedCarouselItemComponent,
   ],
   imports: [
     CommonModule,

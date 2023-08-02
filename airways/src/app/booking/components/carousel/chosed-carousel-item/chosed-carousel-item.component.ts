@@ -1,18 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
-export interface IActuallyFlights {
-  date: Date;
-  day: string;
-  price: number;
-}
+import { IActuallyFlights } from '../carousel-item/carousel-item.component';
 
 @Component({
-  selector: 'app-carousel-item',
-  templateUrl: './carousel-item.component.html',
-  styleUrls: ['./carousel-item.component.scss'],
+  selector: 'app-chosed-carousel-item',
+  templateUrl: './chosed-carousel-item.component.html',
+  styleUrls: ['./chosed-carousel-item.component.scss'],
 })
-export class CarouselItemComponent implements OnInit {
+export class ChosedCarouselItemComponent implements OnInit, OnChanges {
   @Input() flight!: IActuallyFlights | null;
 
   response!: any;
@@ -23,6 +19,13 @@ export class CarouselItemComponent implements OnInit {
 
   ngOnInit() {
     this.request();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // React to changes in the 'flight' input property
+    if (changes['flight'] && !changes['flight'].firstChange) {
+      this.request();
+    }
   }
 
   async request() {
@@ -36,7 +39,7 @@ export class CarouselItemComponent implements OnInit {
 
     try {
       const response = await this.http.post(url, this.flight, httpOptions).toPromise();
-      console.log('Post Request Response:', response);
+      console.log('Response:', response);
       this.response = response;
     } catch (error) {
       console.error('Error occurred during the POST request:', error);

@@ -1,13 +1,15 @@
-.container {
+.container  {
     margin-top: 30px;
     display: flex;
     max-width: 1440px;
     width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
-.container.spinner {
-    justify-content: center;
+.carousel_container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .third-item {
