@@ -1,12 +1,15 @@
 <div class="container">
-  <div class="container spinner" *ngIf="loading">
+  <!-- <div class="container spinner" *ngIf="loading">
     <div class="spinner-grow text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
-  </div>
-  <div class="container" *ngIf="!loading">
+  </div> -->
+  <div class="container">
     <button type="button" class="btn btn-outline-secondary" (click)="decrease()"><</button>
-    <app-carousel-item *ngFor="let flight of postResponses; let i = index" [flight]="flight" [ngClass]="{'third-item': i === 2}"></app-carousel-item>
+    <ng-container *ngFor="let flight of flightsRequest; index as i">
+      <app-carousel-item [flight]="flight" [ngClass]="{'third-item': i === 2}">
+      </app-carousel-item>
+    </ng-container>
     <button type="button" class="btn btn-outline-secondary" (click)="increase()">></button>
   </div>
 </div>

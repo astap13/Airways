@@ -77,3 +77,19 @@ export const increaseSelectedInfantPassengers = createAction(
 export const decreaseSelectedInfantPassengers = createAction(
   '[BookingValues] Decrease Selected Infant Passengers',
 );
+
+export const decreaseSelectedFromDate = createAction(
+  '[BookingValues] Decrease   Selected From Date',
+);
+
+export const increaseSelectedFromDate = createAction(
+  '[BookingValues] Increase Selected Selected From Date',
+);
+
+export const decreaseSelectedToDate = createAction(
+  '[BookingValues]  Decrease   Selected  To  Date',
+);
+
+export const increaseSelectedToDate = createAction(
+  '[BookingValues] Increase Selected Selected To Date',
+);

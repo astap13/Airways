@@ -1,5 +1,9 @@
 <div class="container">
-    <p class="date">{{flight!.date  | date}}</p>
-    <p class="day">{{flight!.day}}</p>
-    <p class="price">{{flight!.price}}€</p>
+     <div class="container spinner" *ngIf="loading">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+    <p *ngIf="!loading" class="date">{{responce?.date | date}}</p>
+    <p *ngIf="!loading" class="price">{{responce?.price}}€</p>
 </div>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { createReducer, on } from '@ngrx/store';
 
 import { IBookingStateInterface } from '../models/booking.interface';
@@ -130,4 +130,56 @@ export const reducer = createReducer(
       infant: state.selectedPassengers.infant - 1,
     },
   })),
+  on(BookingValuesActions.decreaseSelectedFromDate, (state) => {
+    const currentFromDate: NgbDate = state.selectedDate.fromDate;
+
+    const previousDay: NgbDate = {
+      year: currentFromDate.year,
+      month: currentFromDate.month,
+      day: currentFromDate.day - 1,
+      equals: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      before: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      after: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+    };
+
+    return {
+      ...state,
+      selectedDate: {
+        ...state.selectedDate,
+        fromDate: previousDay,
+      },
+    };
+  }),
+  on(BookingValuesActions.increaseSelectedFromDate, (state) => {
+    const currentFromDate: NgbDate = state.selectedDate.fromDate;
+
+    const previousDay: NgbDate = {
+      year: currentFromDate.year,
+      month: currentFromDate.month,
+      day: currentFromDate.day + 1,
+      equals: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      before: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      after: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+    };
+
+    return {
+      ...state,
+      selectedDate: {
+        ...state.selectedDate,
+        fromDate: previousDay,
+      },
+    };
+  }),
 );
