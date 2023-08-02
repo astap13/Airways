@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-loop-func */
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
@@ -8,14 +6,8 @@ import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import { IBookingStateInterface } from '../../models/booking.interface';
-import { increaseSelectedFromDate } from '../../store/actions';
+import { decreaseSelectedFromDate, increaseSelectedFromDate } from '../../store/actions';
 import { selectedBookingValues } from '../../store/selectors';
-
-export interface IActuallyFlights {
-  date: Date;
-  day: string;
-  price: number;
-}
 
 @Component({
   selector: 'app-carousel',
@@ -27,7 +19,7 @@ export class CarouselComponent implements OnInit {
 
   flightsRequest: any = [];
 
-  constructor(private store: Store<IAppStateInterface>, private http: HttpClient) {
+  constructor(private store: Store<IAppStateInterface>) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
   }
 
@@ -62,10 +54,6 @@ export class CarouselComponent implements OnInit {
   }
 
   decrease() {
-    // this.actualyFlights.forEach((el) => {
-    //   const newDate = new Date(el.date);
-    //   newDate.setDate(newDate.getDate() - 1);
-    //   el.date = newDate;
-    // });
+    this.store.dispatch(decreaseSelectedFromDate());
   }
 }

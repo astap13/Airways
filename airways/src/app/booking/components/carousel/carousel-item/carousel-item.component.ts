@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IActuallyFlights } from '../carousel.component';
+export interface IActuallyFlights {
+  date: Date;
+  day: string;
+  price: number;
+}
 
 @Component({
   selector: 'app-carousel-item',
