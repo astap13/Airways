@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { distinctUntilChanged, Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import { IBookingStateInterface } from '../../models/booking.interface';
-import { decreaseSelectedFromDate, increaseSelectedFromDate } from '../../store/actions';
-import { selectedBookingValues } from '../../store/selectors';
+import {
+  decreaseSelectedFromDate,
+  decreaseSelectedToDate,
+  increaseSelectedFromDate,
+  increaseSelectedToDate,
+} from '../../store/actions';
+import {
+  selectedBookingValues,
+  selectedFromDate,
+  selectedToDate,
+  selectedWaySelector,
+} from '../../store/selectors';
 
 @Component({
   selector: 'app-carousel',
@@ -17,14 +27,25 @@ import { selectedBookingValues } from '../../store/selectors';
 export class CarouselComponent implements OnInit {
   selectedFlight$: Observable<IBookingStateInterface>;
 
-  flightsRequest: any = [];
+  selectedWay$: Observable<boolean>;
+
+  selectedFromDate$: Observable<NgbDate>;
+
+  selectedToDate$: Observable<NgbDate>;
+
+  flightsRequestFrom: any = [];
+
+  flightsRequestTo: any = [];
 
   constructor(private store: Store<IAppStateInterface>) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
+    this.selectedWay$ = this.store.pipe(select(selectedWaySelector));
+    this.selectedFromDate$ = this.store.pipe(select(selectedFromDate), distinctUntilChanged());
+    this.selectedToDate$ = this.store.pipe(select(selectedToDate), distinctUntilChanged());
   }
 
-  async flightRequest(flightData: IBookingStateInterface) {
-    this.flightsRequest = [];
+  async flightRequestFrom(flightData: IBookingStateInterface) {
+    this.flightsRequestFrom = [];
     for (let i = -2; i <= 2; i++) {
       const date: NgbDateStruct = flightData.selectedDate.fromDate;
 
@@ -39,21 +60,71 @@ export class CarouselComponent implements OnInit {
         date: formattedDate,
       };
 
-      this.flightsRequest = [...this.flightsRequest, requestBody];
+      this.flightsRequestFrom = [...this.flightsRequestFrom, requestBody];
+    }
+  }
+
+  async flightRequestTo(flightData: IBookingStateInterface) {
+    this.flightsRequestTo = [];
+    for (let i = -2; i <= 2; i++) {
+      const date: NgbDateStruct = flightData.selectedDate.toDate;
+
+      const day = (date.day + i).toString().padStart(2, '0');
+      const month = date.month.toString().padStart(2, '0');
+      const year = date.year;
+
+      const formattedDate = `${day}-${month}-${year}`;
+      const requestBody = {
+        from: flightData.selectedFromCity,
+        to: flightData.selectedDestinationCity,
+        date: formattedDate,
+      };
+
+      this.flightsRequestTo = [...this.flightsRequestTo, requestBody];
     }
   }
 
   ngOnInit(): void {
-    this.selectedFlight$.subscribe((flightData) => {
-      this.flightRequest(flightData);
-    });
+    this.selectedFlight$
+      .pipe(
+        distinctUntilChanged((prev, current) => {
+          return (
+            prev.selectedDate.fromDate === current.selectedDate.fromDate &&
+            prev.selectedFromCity === current.selectedFromCity
+          );
+        }),
+      )
+      .subscribe((flightData) => {
+        this.flightRequestFrom(flightData);
+      });
+
+    this.selectedFlight$
+      .pipe(
+        distinctUntilChanged((prev, current) => {
+          return (
+            prev.selectedDate.toDate === current.selectedDate.toDate &&
+            prev.selectedDestinationCity === current.selectedDestinationCity
+          );
+        }),
+      )
+      .subscribe((flightData) => {
+        this.flightRequestTo(flightData);
+      });
   }
 
-  increase() {
+  increaseFrom() {
     this.store.dispatch(increaseSelectedFromDate());
   }
 
-  decrease() {
+  decreaseFrom() {
     this.store.dispatch(decreaseSelectedFromDate());
+  }
+
+  increaseTo() {
+    this.store.dispatch(increaseSelectedToDate());
+  }
+
+  decreaseTo() {
+    this.store.dispatch(decreaseSelectedToDate());
   }
 }

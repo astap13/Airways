@@ -1,4 +1,5 @@
 <div class="date-people-container">
+  <div class="container">
     <div class="datepicker-container">
       <div class="col-12">
         <div class="dp-hidden position-absolute">
@@ -10,7 +11,7 @@
               #datepicker="ngbDatepicker"
               [autoClose]="'outside'"
               (dateSelect)="onDateSelection($event)"
-              [displayMonths]="2"
+              [displayMonths]="3"
               [dayTemplate]="t"
               outsideDays="hidden"
               [startDate]="fromDate!"
@@ -32,36 +33,38 @@
         </div>
         <div class="input-group">
           <input
-          #dpFromDate
-          class="form-control"
-          placeholder="yyyy-mm-dd"
-          name="dpFromDate"
-          [value]="formatter.format(fromDate)"
-          (input)="updateDates(dpFromDate.value, null)"
-          readonly
-        />
+            #dpFromDate
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dpFromDate"
+            [value]="formatter.format(fromDate)"
+            (input)="updateDates(dpFromDate.value, null)"
+            readonly
+          />
         </div>
       </div>
       <div class="col-12">
         <div class="input-group">
           <input
-          #dpToDate
-          class="form-control"
-          placeholder="yyyy-mm-dd"
-          name="dpToDate"
-          [value]="formatter.format(toDate)"
-          (input)="updateDates(null, dpToDate.value)"
-          readonly
-        />
+            #dpToDate
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dpToDate"
+            [value]="formatter.format(toDate)"
+            (input)="updateDates(null, dpToDate.value)"
+            readonly
+          />
         </div>
       </div>
       <button
         class="btn btn-outline-secondary bi bi-calendar3"
         (click)="datepicker.toggle()"
-        (click)="test()"
         type="button"
         autoClose="outside"
       ></button>
     </div>
-    <div class="passengers-container"></div>
+    <!-- <ng-template #testBlock>
+      <div class="datepicker-container">test</div>
+    </ng-template> -->
   </div>
+</div>

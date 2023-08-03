@@ -182,4 +182,56 @@ export const reducer = createReducer(
       },
     };
   }),
+  on(BookingValuesActions.decreaseSelectedToDate, (state) => {
+    const currentToDate: NgbDate = state.selectedDate.toDate;
+
+    const previousDay: NgbDate = {
+      year: currentToDate.year,
+      month: currentToDate.month,
+      day: currentToDate.day - 1,
+      equals: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      before: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      after: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+    };
+
+    return {
+      ...state,
+      selectedDate: {
+        ...state.selectedDate,
+        toDate: previousDay,
+      },
+    };
+  }),
+  on(BookingValuesActions.increaseSelectedToDate, (state) => {
+    const currentToDate: NgbDate = state.selectedDate.toDate;
+
+    const previousDay: NgbDate = {
+      year: currentToDate.year,
+      month: currentToDate.month,
+      day: currentToDate.day + 1,
+      equals: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      before: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+      after: function (other?: NgbDateStruct | null | undefined): boolean {
+        throw new Error('Function not implemented.');
+      },
+    };
+
+    return {
+      ...state,
+      selectedDate: {
+        ...state.selectedDate,
+        toDate: previousDay,
+      },
+    };
+  }),
 );

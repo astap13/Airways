@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   NgbCalendar,
   NgbDate,
@@ -18,7 +18,7 @@ import { selectedFromDate, selectedToDate } from '../../store/selectors';
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent {
+export class DatepickerComponent implements OnInit {
   constructor(
     private calendar: NgbCalendar,
     private store: Store<IAppStateInterface>,
@@ -29,6 +29,7 @@ export class DatepickerComponent {
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.selectedFromDate$ = this.store.pipe(select(selectedFromDate));
     this.selectedToDate$ = this.store.pipe(select(selectedToDate));
+
     config.autoClose = 'outside';
   }
 
@@ -41,6 +42,14 @@ export class DatepickerComponent {
   selectedFromDate$: Observable<NgbDate>;
 
   selectedToDate$: Observable<NgbDate>;
+
+  selectedWay: boolean = true;
+
+  ngOnInit() {
+    // Load the initial dates from the calendar to the state
+    this.store.dispatch(bookingActions.setSelectedFromDate({ selectedFromDate: this.fromDate! }));
+    this.store.dispatch(bookingActions.setSelectedToDate({ selectedToDate: this.toDate! }));
+  }
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -98,10 +107,5 @@ export class DatepickerComponent {
     if (toValue !== null) {
       this.toDate = this.validateInput(this.toDate, toValue);
     }
-  }
-
-  test() {
-    console.log(this.fromDate);
-    console.log(this.toDate);
   }
 }
