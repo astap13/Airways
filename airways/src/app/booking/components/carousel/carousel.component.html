@@ -18,7 +18,7 @@
     </ng-container>
     <button type="button" class="btn btn-outline-secondary" (click)="increaseTo()">></button>
   </div>
-  <div class="container">
+  <div *ngIf="selectedWay$ | async" class="container">
     <app-chosed-carousel-item [flight]="flightsRequestTo[2]"></app-chosed-carousel-item>
   </div>
 </div>
