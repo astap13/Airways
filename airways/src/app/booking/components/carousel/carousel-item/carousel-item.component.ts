@@ -33,10 +33,8 @@ export class CarouselItemComponent implements OnInit {
         'Content-Type': 'application/json',
       }),
     };
-
     try {
       const response = await this.http.post(url, this.flight, httpOptions).toPromise();
-      console.log('Post Request Response:', response);
       this.response = response;
     } catch (error) {
       console.error('Error occurred during the POST request:', error);

@@ -1,9 +1,9 @@
 <div class="container">
-     <div class="container spinner" *ngIf="loading">
-    <div class="spinner-grow text-primary" role="status">
+  <div class="container spinner" *ngIf="loading">
+    <div class="spinner-grow" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-    <p *ngIf="!loading" class="date">{{response?.date | date}}</p>
-    <p *ngIf="!loading" class="price">{{response?.price}}€</p>
+  <p *ngIf="!loading" class="date">{{ response?.date | date }}</p>
+  <p *ngIf="!loading" class="price">{{ response?.price }}€</p>
 </div>

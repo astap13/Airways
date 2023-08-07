@@ -75,10 +75,6 @@ export class DirectionsComponent {
     });
   }
 
-  submit() {
-    console.log('this.submit');
-  }
-
   formatCityResult = (value: ICity) => {
     return `${value.name} ${value.airport} ${value.country}`;
   };

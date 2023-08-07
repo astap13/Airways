@@ -1,11 +1,17 @@
 <div class="container">
-    <div class="info_container">
+    <div class="spinner" *ngIf="loading">
+        <div class="spinner-grow" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    <div class="info_container" *ngIf="!loading">
        <div class="from_container">
         <p class="date">{{response?.time?.from | date:'fullDate'}}</p>
         <p class="date">{{response?.time?.from | date:'shortTime'}}</p>
         <p class="date">{{response?.from}}</p>
        </div>
        <div class="img_container">
+        <!-- [ ] сделать картинку вщлетающего и садяшегося самолета -->
         <p class="img">🛫</p>
         <p>Flight no: {{response?.flightNumber}}</p>
        </div>
@@ -15,12 +21,14 @@
         <p class="date">{{response?.to}}</p>
        </div>
     </div>
-    <div class="select_container">
+    <div class="select_container" *ngIf="!loading">
         <div class="seats_container">
             <div class="seats">{{response?.freeSeats}} seats available</div>
             <p>Price</p>
             <h1>€{{response?.price}}</h1>
         </div>
-        <button type="button" class="btn btn-success">Select</button>
+        <button (click)="select()" type="button" class="btn btn-success">Select</button>
+       <!-- TODO Добавить отдельный элемент в стейте выбранного рейса типа булеан, что если выбран то тру если не выбран то фолс, таким образом можно добавить кнопку добавить и удалить -->
+       <!--TODO Потом проверка на два тру которая позволит высветить кнопку дальше ил сделать ее активной -->
     </div>
 </div>
