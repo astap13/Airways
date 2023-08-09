@@ -21,4 +21,8 @@
   <div *ngIf="selectedWay$ | async" class="container">
     <app-chosed-carousel-item [flight]="flightsRequestTo[2]"></app-chosed-carousel-item>
   </div>
+  <div class="btn-container">
+    <button type="button" class="btn btn-secondary">Cancel</button>
+    <button type="button" disabled class="btn btn-primary">Next</button>
+  </div>
 </div>
