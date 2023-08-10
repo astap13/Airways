@@ -45,8 +45,4 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
 
     this.loading = false;
   }
-
-  select() {
-    console.log('Selected!');
-  }
 }

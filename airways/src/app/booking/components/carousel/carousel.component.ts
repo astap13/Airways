@@ -127,4 +127,16 @@ export class CarouselComponent implements OnInit {
   decreaseTo() {
     this.store.dispatch(decreaseSelectedToDate());
   }
+
+  selectToFlight() {
+    console.log('Selected to Flight!');
+    //TODO сделать добавление выбранного рейса вылета в стейт
+  }
+
+  selectReturnFlight() {
+    console.log('Selected return Flight!');
+    //TODO сделать добавление выбранного рейса возврата в стейт
+  }
+
+  // TODO добавить проверку кновки далее в зависимости от состояний стейта
 }

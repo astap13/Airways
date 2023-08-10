@@ -1,9 +1,14 @@
-.container  {
+.container {
     margin-top: 30px;
     display: flex;
     max-width: 1440px;
     width: 100%;
     flex-direction: column;
+    .select-btn {
+        width: 80px;
+        align-self: end;
+       margin-top: -40px;
+    }
 }
 
 .carousel_container {
@@ -16,7 +21,7 @@
 .third-item {
     margin-top: -20px;
     background-color: rgba(127, 255, 212, 0.252);
-  }
+}
 
 .btn-container {
     margin-top: 20px;
