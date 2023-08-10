@@ -44,6 +44,8 @@ export const initialState: IBookingStateInterface = {
     child: 0,
     infant: 0,
   },
+  selectedToFlight: null,
+  selectedReturnFlight: null,
 };
 
 export const reducer = createReducer(
@@ -234,4 +236,12 @@ export const reducer = createReducer(
       },
     };
   }),
+  on(BookingValuesActions.setSelectedToFright, (state, action) => ({
+    ...state,
+    selectedToFlight: action.selectedToFlight,
+  })),
+  on(BookingValuesActions.setSelectedReturnFright, (state, action) => ({
+    ...state,
+    selectedReturnFlight: action.selectedReturnFlight,
+  })),
 );

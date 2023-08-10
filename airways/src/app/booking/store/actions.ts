@@ -93,3 +93,13 @@ export const decreaseSelectedToDate = createAction(
 export const increaseSelectedToDate = createAction(
   '[BookingValues] Increase Selected Selected To Date',
 );
+
+export const setSelectedToFright = createAction(
+  '[BookingValues] Set selected To Flight',
+  props<{ selectedToFlight: any }>(),
+);
+
+export const setSelectedReturnFright = createAction(
+  '[BookingValues] Set selected Return Flight',
+  props<{ selectedReturnFlight: any }>(),
+);
