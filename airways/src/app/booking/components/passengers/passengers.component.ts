@@ -11,12 +11,12 @@ import {
   increaseSelectedAdultPassengers,
   increaseSelectedChildPassengers,
   increaseSelectedInfantPassengers,
-} from '../../store/actions';
+} from '../../../redux/actions';
 import {
   selectedAdultPassengers,
   selectedChildPassengers,
   selectedInfantPassengers,
-} from '../../store/selectors';
+} from '../../../redux/selectors';
 
 @Component({
   selector: 'app-passengers',

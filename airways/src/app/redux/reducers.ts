@@ -2,8 +2,8 @@
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { createReducer, on } from '@ngrx/store';
 
-import { IBookingStateInterface } from '../models/booking.interface';
-import * as BookingValuesActions from '../store/actions';
+import * as BookingValuesActions from '../redux/actions';
+import { IBookingStateInterface } from './booking.interface';
 
 export const initialState: IBookingStateInterface = {
   selectedWay: false,

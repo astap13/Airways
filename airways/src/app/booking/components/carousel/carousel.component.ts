@@ -5,19 +5,19 @@ import { select, Store } from '@ngrx/store';
 import { distinctUntilChanged, Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
-import { IBookingStateInterface } from '../../models/booking.interface';
 import {
   decreaseSelectedFromDate,
   decreaseSelectedToDate,
   increaseSelectedFromDate,
   increaseSelectedToDate,
-} from '../../store/actions';
+} from '../../../redux/actions';
+import { IBookingStateInterface } from '../../../redux/booking.interface';
 import {
   selectedBookingValues,
   selectedFromDate,
   selectedToDate,
   selectedWaySelector,
-} from '../../store/selectors';
+} from '../../../redux/selectors';
 
 @Component({
   selector: 'app-carousel',
@@ -129,12 +129,13 @@ export class CarouselComponent implements OnInit {
   }
 
   selectToFlight() {
-    console.log('Selected to Flight!');
+    console.log('Selected to Flight!', this.flightsRequestTo[2]);
     //TODO сделать добавление выбранного рейса вылета в стейт
   }
 
   selectReturnFlight() {
-    console.log('Selected return Flight!');
+    console.log('Selected return Flight!', this.flightsRequestFrom[2]);
+
     //TODO сделать добавление выбранного рейса возврата в стейт
   }
 

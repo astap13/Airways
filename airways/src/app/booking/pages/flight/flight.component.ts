@@ -13,7 +13,7 @@ import {
   selectedPassengers,
   selectedToDate,
   selectedWaySelector,
-} from '../../store/selectors';
+} from '../../../redux/selectors';
 
 interface IPassangers {
   adult: number;

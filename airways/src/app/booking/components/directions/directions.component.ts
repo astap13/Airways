@@ -15,8 +15,8 @@ import {
 } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
-import * as bookingActions from '../../store/actions';
-import { selectedFromCitySelector } from '../../store/selectors';
+import * as bookingActions from '../../../redux/actions';
+import { selectedFromCitySelector } from '../../../redux/selectors';
 
 export interface ICity {
   name: string;

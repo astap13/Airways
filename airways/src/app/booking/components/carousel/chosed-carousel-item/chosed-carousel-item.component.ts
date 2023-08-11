@@ -39,6 +39,7 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
     try {
       const response = await this.http.post(url, this.flight, httpOptions).toPromise();
       this.response = response;
+      console.log(this.response);
     } catch (error) {
       console.error('Error occurred during the POST request:', error);
     }

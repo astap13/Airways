@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
-import * as bookingActions from '../../store/actions';
-import { selectedWaySelector } from '../../store/selectors';
+import * as bookingActions from '../../../redux/actions';
+import { selectedWaySelector } from '../../../redux/selectors';
 
 @Component({
   selector: 'app-radio',

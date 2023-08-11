@@ -10,8 +10,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
-import * as bookingActions from '../../store/actions';
-import { selectedFromDate, selectedToDate } from '../../store/selectors';
+import * as bookingActions from '../../../redux/actions';
+import { selectedFromDate, selectedToDate } from '../../../redux/selectors';
 
 @Component({
   selector: 'app-datepicker',
