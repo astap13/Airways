@@ -5,10 +5,19 @@ import { createReducer, on } from '@ngrx/store';
 import * as BookingValuesActions from '../redux/actions';
 import { IBookingStateInterface } from './booking.interface';
 
+function isValidDate(date: NgbDate): boolean {
+  try {
+    new Date(date.year, date.month - 1, date.day);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 export const initialState: IBookingStateInterface = {
   selectedWay: false,
-  selectedFromCity: 'New Yourk',
-  selectedDestinationCity: 'Moscow',
+  selectedFromCity: 'Warszaw',
+  selectedDestinationCity: 'Rome',
   selectedDate: {
     fromDate: {
       year: 0,
@@ -44,8 +53,14 @@ export const initialState: IBookingStateInterface = {
     child: 0,
     infant: 0,
   },
-  selectedToFlight: null,
-  selectedReturnFlight: null,
+  selectedToFlight: {
+    flight: null,
+    isSelected: false,
+  },
+  selectedReturnFlight: {
+    flight: null,
+    isSelected: false,
+  },
 };
 
 export const reducer = createReducer(
@@ -150,18 +165,23 @@ export const reducer = createReducer(
       },
     };
 
-    return {
-      ...state,
-      selectedDate: {
-        ...state.selectedDate,
-        fromDate: previousDay,
-      },
-    };
+    if (isValidDate(previousDay)) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          fromDate: previousDay,
+        },
+      };
+    } else {
+      return state; // Не делайте изменений, если дата недопустима
+    }
   }),
+
   on(BookingValuesActions.increaseSelectedFromDate, (state) => {
     const currentFromDate: NgbDate = state.selectedDate.fromDate;
 
-    const previousDay: NgbDate = {
+    const nextDay: NgbDate = {
       year: currentFromDate.year,
       month: currentFromDate.month,
       day: currentFromDate.day + 1,
@@ -176,14 +196,19 @@ export const reducer = createReducer(
       },
     };
 
-    return {
-      ...state,
-      selectedDate: {
-        ...state.selectedDate,
-        fromDate: previousDay,
-      },
-    };
+    if (isValidDate(nextDay)) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          fromDate: nextDay,
+        },
+      };
+    } else {
+      return state; // Не делайте изменений, если дата недопустима
+    }
   }),
+
   on(BookingValuesActions.decreaseSelectedToDate, (state) => {
     const currentToDate: NgbDate = state.selectedDate.toDate;
 
@@ -202,18 +227,23 @@ export const reducer = createReducer(
       },
     };
 
-    return {
-      ...state,
-      selectedDate: {
-        ...state.selectedDate,
-        toDate: previousDay,
-      },
-    };
+    if (isValidDate(previousDay)) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          toDate: previousDay,
+        },
+      };
+    } else {
+      return state; // Не делайте изменений, если дата недопустима
+    }
   }),
+
   on(BookingValuesActions.increaseSelectedToDate, (state) => {
     const currentToDate: NgbDate = state.selectedDate.toDate;
 
-    const previousDay: NgbDate = {
+    const nextDay: NgbDate = {
       year: currentToDate.year,
       month: currentToDate.month,
       day: currentToDate.day + 1,
@@ -228,20 +258,30 @@ export const reducer = createReducer(
       },
     };
 
-    return {
-      ...state,
-      selectedDate: {
-        ...state.selectedDate,
-        toDate: previousDay,
-      },
-    };
+    if (isValidDate(nextDay)) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          toDate: nextDay,
+        },
+      };
+    } else {
+      return state; // Не делайте изменений, если дата недопустима
+    }
   }),
-  on(BookingValuesActions.setSelectedToFright, (state, action) => ({
+  on(BookingValuesActions.setSelectedToFlight, (state, action) => ({
     ...state,
-    selectedToFlight: action.selectedToFlight,
+    selectedToFlight: {
+      ...state.selectedToFlight,
+      flight: action.selectedToFlight,
+    },
   })),
-  on(BookingValuesActions.setSelectedReturnFright, (state, action) => ({
+  on(BookingValuesActions.setSelectedReturnFlight, (state, action) => ({
     ...state,
-    selectedReturnFlight: action.selectedReturnFlight,
+    selectedReturnFlight: {
+      ...state.selectedReturnFlight,
+      flight: action.selectedReturnFlight.flight,
+    },
   })),
 );

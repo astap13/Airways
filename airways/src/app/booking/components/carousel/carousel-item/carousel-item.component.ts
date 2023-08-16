@@ -1,5 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+import { IAppStateInterface } from 'src/app/redux/appState.interface';
+import { selectedToFlight } from 'src/app/redux/selectors';
 
 export interface IActuallyFlights {
   date: Date;
@@ -13,29 +18,33 @@ export interface IActuallyFlights {
   styleUrls: ['./carousel-item.component.scss'],
 })
 export class CarouselItemComponent implements OnInit {
-  @Input() flight!: IActuallyFlights | null;
+  @Input() flight!: any | null;
 
-  response!: any;
+  response: any;
 
   loading: boolean = true;
 
-  constructor(private http: HttpClient) {}
+  selectedFlight$: Observable<any>;
+
+  constructor(private http: HttpClient, private store: Store<IAppStateInterface>) {
+    this.selectedFlight$ = this.store.pipe(select(selectedToFlight));
+  }
 
   ngOnInit() {
     this.request();
   }
 
   async request() {
-    this.response = [];
-    const url = 'https://airways-api-ckd3.onrender.com/post';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
+    const url = `https://airways-api-ckd3.onrender.com/searchByDirection?from=${
+      this.flight!.from
+    }&to=${this.flight.to}&date=${this.flight.date}`;
+
+    console.log(this.flight);
+    console.log(url);
     try {
-      const response = await this.http.post(url, this.flight, httpOptions).toPromise();
+      const response = await this.http.get(url).toPromise();
       this.response = response;
+      console.log(response);
     } catch (error) {
       console.error('Error occurred during the POST request:', error);
     }

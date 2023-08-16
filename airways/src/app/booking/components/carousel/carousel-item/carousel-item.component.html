@@ -4,6 +4,11 @@
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-  <p *ngIf="!loading" class="date">{{ response?.date | date }}</p>
-  <p *ngIf="!loading" class="price">{{ response?.price }}€</p>
+  <div *ngIf="response">
+    <p *ngIf="!loading" class="date">{{ response?.date | date }}</p>
+    <p *ngIf="!loading" class="price">{{ response?.price }}€</p>
+  </div>
+  <div *ngIf="!response">
+    <i class="bi bi-x-circle"></i>
+  </div>
 </div>

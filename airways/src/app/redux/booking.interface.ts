@@ -13,6 +13,12 @@ export interface IBookingStateInterface {
     child: number;
     infant: number;
   };
-  selectedToFlight: any;
-  selectedReturnFlight: any;
+  selectedToFlight: {
+    flight: any;
+    isSelected: boolean;
+  };
+  selectedReturnFlight: {
+    flight: any;
+    isSelected: boolean;
+  };
 }

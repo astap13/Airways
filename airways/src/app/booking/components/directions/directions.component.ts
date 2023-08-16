@@ -51,7 +51,7 @@ export class DirectionsComponent {
     { name: 'Amsterdam', code: 'AMS', airport: 'AMS', country: 'Netherlands' },
     { name: 'Seoul', code: 'SEL', airport: 'ICN', country: 'South Korea' },
     { name: 'Mexico City', code: 'MEX', airport: 'MEX', country: 'Mexico' },
-    { name: 'Bangkok', code: 'BKK', airport: 'BKK', country: 'Thailand' },
+    { name: 'Warszaw', code: 'WAW', airport: 'WAW', country: 'Poland' },
   ]; //эти города возвращает бек, когда будет готов
 
   selectedFromCity$: Observable<string>;

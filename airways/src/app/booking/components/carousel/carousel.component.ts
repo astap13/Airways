@@ -53,7 +53,7 @@ export class CarouselComponent implements OnInit {
       const month = date.month.toString().padStart(2, '0');
       const year = date.year;
 
-      const formattedDate = `${day}-${month}-${year}`;
+      const formattedDate = `${year}-${month}-${day}`;
       const requestBody = {
         from: flightData.selectedFromCity,
         to: flightData.selectedDestinationCity,
@@ -73,7 +73,7 @@ export class CarouselComponent implements OnInit {
       const month = date.month.toString().padStart(2, '0');
       const year = date.year;
 
-      const formattedDate = `${day}-${month}-${year}`;
+      const formattedDate = `${year}-${month}-${day}`;
       const requestBody = {
         from: flightData.selectedFromCity,
         to: flightData.selectedDestinationCity,
@@ -129,13 +129,10 @@ export class CarouselComponent implements OnInit {
   }
 
   selectToFlight() {
-    console.log('Selected to Flight!', this.flightsRequestTo[2]);
     //TODO сделать добавление выбранного рейса вылета в стейт
   }
 
   selectReturnFlight() {
-    console.log('Selected return Flight!', this.flightsRequestFrom[2]);
-
     //TODO сделать добавление выбранного рейса возврата в стейт
   }
 

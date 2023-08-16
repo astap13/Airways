@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { IActuallyFlights } from '../carousel-item/carousel-item.component';
+import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 @Component({
   selector: 'app-chosed-carousel-item',
@@ -9,13 +10,13 @@ import { IActuallyFlights } from '../carousel-item/carousel-item.component';
   styleUrls: ['./chosed-carousel-item.component.scss'],
 })
 export class ChosedCarouselItemComponent implements OnInit, OnChanges {
-  @Input() flight!: IActuallyFlights | null;
+  @Input() flight!: any | null;
 
   response!: any;
 
   loading: boolean = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<IAppStateInterface>) {}
 
   ngOnInit() {
     this.request();
@@ -29,17 +30,14 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
 
   async request() {
     this.response = [];
-    const url = 'https://airways-api-ckd3.onrender.com/post';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
+    const url = `https://airways-api-ckd3.onrender.com/searchByDirection?from=${
+      this.flight!.from
+    }&to=${this.flight.to}&date=${this.flight.date}`;
 
     try {
-      const response = await this.http.post(url, this.flight, httpOptions).toPromise();
+      const response = await this.http.get(url).toPromise();
       this.response = response;
-      console.log(this.response);
+      // this.store.dispatch(bookingActions.setSelectedToFlight({ selectedToFlight: this.response }));
     } catch (error) {
       console.error('Error occurred during the POST request:', error);
     }

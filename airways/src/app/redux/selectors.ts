@@ -45,9 +45,12 @@ export const selectedInfantPassengers = createSelector(
   (state) => state.selectedPassengers.infant,
 );
 
-export const selectedToFright = createSelector(selectFeature, (state) => state.selectedToFlight);
-
-export const selectedReturnFright = createSelector(
+export const selectedToFlight = createSelector(
   selectFeature,
-  (state) => state.selectedReturnFlight,
+  (state) => state.selectedToFlight.flight,
+);
+
+export const selectedReturnFlight = createSelector(
+  selectFeature,
+  (state) => state.selectedReturnFlight.flight,
 );
