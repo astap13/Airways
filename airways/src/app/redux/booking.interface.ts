@@ -22,3 +22,20 @@ export interface IBookingStateInterface {
     isSelected: boolean;
   };
 }
+
+export interface IFlight {
+  _id?: {
+    $oid: string;
+  };
+  from?: string;
+  to?: string;
+  date?: string;
+  seats?: number;
+  freeSeats?: number;
+  price?: number;
+  flightNumber?: string;
+  time?: {
+    from?: string;
+    to?: string;
+  };
+}

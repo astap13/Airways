@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
+import * as bookingActions from '../../../../redux/actions';
+
 @Component({
   selector: 'app-chosed-carousel-item',
   templateUrl: './chosed-carousel-item.component.html',
@@ -35,11 +37,17 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
     }&to=${this.flight.to}&date=${this.flight.date}`;
 
     try {
-      const response = await this.http.get(url).toPromise();
+      const response: any = await this.http.get(url).toPromise();
       this.response = response;
-      // this.store.dispatch(bookingActions.setSelectedToFlight({ selectedToFlight: this.response }));
+
+      if (response && response.flightNumber) {
+        this.store.dispatch(
+          bookingActions.setSelectedToFlight({ selectedToFlight: response.flightNumber }),
+        );
+      }
     } catch (error) {
       console.error('Error occurred during the POST request:', error);
+      this.store.dispatch(bookingActions.setSelectedToFlight({ selectedToFlight: '' }));
     }
 
     this.loading = false;

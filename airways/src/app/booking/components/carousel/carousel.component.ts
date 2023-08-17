@@ -59,7 +59,6 @@ export class CarouselComponent implements OnInit {
         to: flightData.selectedDestinationCity,
         date: formattedDate,
       };
-
       this.flightsRequestFrom = [...this.flightsRequestFrom, requestBody];
     }
   }
@@ -75,8 +74,8 @@ export class CarouselComponent implements OnInit {
 
       const formattedDate = `${year}-${month}-${day}`;
       const requestBody = {
-        from: flightData.selectedFromCity,
-        to: flightData.selectedDestinationCity,
+        from: flightData.selectedDestinationCity,
+        to: flightData.selectedFromCity,
         date: formattedDate,
       };
 

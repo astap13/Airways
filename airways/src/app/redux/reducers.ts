@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { createReducer, on } from '@ngrx/store';
@@ -12,6 +13,72 @@ function isValidDate(date: NgbDate): boolean {
   } catch (error) {
     return false;
   }
+}
+
+function getNextValidDate(currentDate: NgbDate): NgbDate | null {
+  const nextDate: NgbDate = {
+    year: currentDate.year,
+    month: currentDate.month,
+    day: currentDate.day + 1,
+    equals: function (other?: NgbDateStruct | null | undefined): boolean {
+      throw new Error('Function not implemented.');
+    },
+    before: function (other?: NgbDateStruct | null | undefined): boolean {
+      throw new Error('Function not implemented.');
+    },
+    after: function (other?: NgbDateStruct | null | undefined): boolean {
+      throw new Error('Function not implemented.');
+    },
+  };
+
+  if (nextDate.month > 12) {
+    nextDate.month = 1;
+    nextDate.year++;
+  }
+
+  if (nextDate.day > getDaysInMonth(nextDate.year, nextDate.month)) {
+    nextDate.day = 1;
+    nextDate.month++;
+  }
+
+  return isValidDate(nextDate) ? nextDate : null;
+}
+
+function getPreviousValidDate(currentDate: NgbDate): NgbDate | null {
+  const previousDate: NgbDate = {
+    year: currentDate.year,
+    month: currentDate.month,
+    day: currentDate.day - 1,
+    equals: function (other?: NgbDateStruct | null | undefined): boolean {
+      throw new Error('Function not implemented.');
+    },
+    before: function (other?: NgbDateStruct | null | undefined): boolean {
+      throw new Error('Function not implemented.');
+    },
+    after: function (other?: NgbDateStruct | null | undefined): boolean {
+      throw new Error('Function not implemented.');
+    },
+  };
+
+  if (previousDate.month < 1) {
+    previousDate.month = 12;
+    previousDate.year--;
+  }
+
+  if (previousDate.day < 1) {
+    previousDate.month--;
+    if (previousDate.month < 1) {
+      previousDate.month = 12;
+      previousDate.year--;
+    }
+    previousDate.day = getDaysInMonth(previousDate.year, previousDate.month);
+  }
+
+  return isValidDate(previousDate) ? previousDate : null;
+}
+
+function getDaysInMonth(year: number, month: number): number {
+  return new Date(year, month, 0).getDate();
 }
 
 export const initialState: IBookingStateInterface = {
@@ -147,127 +214,70 @@ export const reducer = createReducer(
       infant: state.selectedPassengers.infant - 1,
     },
   })),
-  on(BookingValuesActions.decreaseSelectedFromDate, (state) => {
+  on(BookingValuesActions.increaseSelectedFromDate, (state) => {
     const currentFromDate: NgbDate = state.selectedDate.fromDate;
+    const nextValidDate = getNextValidDate(currentFromDate);
 
-    const previousDay: NgbDate = {
-      year: currentFromDate.year,
-      month: currentFromDate.month,
-      day: currentFromDate.day - 1,
-      equals: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      before: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      after: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-    };
-
-    if (isValidDate(previousDay)) {
+    if (nextValidDate) {
       return {
         ...state,
         selectedDate: {
           ...state.selectedDate,
-          fromDate: previousDay,
+          fromDate: nextValidDate,
         },
       };
     } else {
-      return state; // Не делайте изменений, если дата недопустима
+      return state;
     }
   }),
 
-  on(BookingValuesActions.increaseSelectedFromDate, (state) => {
+  on(BookingValuesActions.decreaseSelectedFromDate, (state) => {
     const currentFromDate: NgbDate = state.selectedDate.fromDate;
+    const previousValidDate = getPreviousValidDate(currentFromDate);
 
-    const nextDay: NgbDate = {
-      year: currentFromDate.year,
-      month: currentFromDate.month,
-      day: currentFromDate.day + 1,
-      equals: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      before: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      after: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-    };
-
-    if (isValidDate(nextDay)) {
+    if (previousValidDate) {
       return {
         ...state,
         selectedDate: {
           ...state.selectedDate,
-          fromDate: nextDay,
+          fromDate: previousValidDate,
         },
       };
     } else {
-      return state; // Не делайте изменений, если дата недопустима
+      return state;
+    }
+  }),
+  on(BookingValuesActions.increaseSelectedToDate, (state) => {
+    const currentToDate: NgbDate = state.selectedDate.toDate;
+    const nextValidDate = getNextValidDate(currentToDate);
+
+    if (nextValidDate) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          toDate: nextValidDate,
+        },
+      };
+    } else {
+      return state;
     }
   }),
 
   on(BookingValuesActions.decreaseSelectedToDate, (state) => {
     const currentToDate: NgbDate = state.selectedDate.toDate;
+    const previousValidDate = getPreviousValidDate(currentToDate);
 
-    const previousDay: NgbDate = {
-      year: currentToDate.year,
-      month: currentToDate.month,
-      day: currentToDate.day - 1,
-      equals: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      before: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      after: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-    };
-
-    if (isValidDate(previousDay)) {
+    if (previousValidDate) {
       return {
         ...state,
         selectedDate: {
           ...state.selectedDate,
-          toDate: previousDay,
+          toDate: previousValidDate,
         },
       };
     } else {
-      return state; // Не делайте изменений, если дата недопустима
-    }
-  }),
-
-  on(BookingValuesActions.increaseSelectedToDate, (state) => {
-    const currentToDate: NgbDate = state.selectedDate.toDate;
-
-    const nextDay: NgbDate = {
-      year: currentToDate.year,
-      month: currentToDate.month,
-      day: currentToDate.day + 1,
-      equals: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      before: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-      after: function (other?: NgbDateStruct | null | undefined): boolean {
-        throw new Error('Function not implemented.');
-      },
-    };
-
-    if (isValidDate(nextDay)) {
-      return {
-        ...state,
-        selectedDate: {
-          ...state.selectedDate,
-          toDate: nextDay,
-        },
-      };
-    } else {
-      return state; // Не делайте изменений, если дата недопустима
+      return state;
     }
   }),
   on(BookingValuesActions.setSelectedToFlight, (state, action) => ({

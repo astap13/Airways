@@ -39,12 +39,9 @@ export class CarouselItemComponent implements OnInit {
       this.flight!.from
     }&to=${this.flight.to}&date=${this.flight.date}`;
 
-    console.log(this.flight);
-    console.log(url);
     try {
       const response = await this.http.get(url).toPromise();
       this.response = response;
-      console.log(response);
     } catch (error) {
       console.error('Error occurred during the POST request:', error);
     }

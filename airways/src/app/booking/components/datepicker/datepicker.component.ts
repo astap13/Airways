@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   NgbCalendar,
   NgbDate,
@@ -18,7 +18,7 @@ import { selectedFromDate, selectedToDate } from '../../../redux/selectors';
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent {
   constructor(
     private calendar: NgbCalendar,
     private store: Store<IAppStateInterface>,
@@ -31,6 +31,9 @@ export class DatepickerComponent implements OnInit {
     this.selectedToDate$ = this.store.pipe(select(selectedToDate));
 
     config.autoClose = 'outside';
+
+    // this.store.dispatch(bookingActions.setSelectedFromDate({ selectedFromDate: this.fromDate! }));
+    // this.store.dispatch(bookingActions.setSelectedToDate({ selectedToDate: this.toDate! }));
   }
 
   hoveredDate: NgbDate | null = null;
@@ -45,11 +48,12 @@ export class DatepickerComponent implements OnInit {
 
   selectedWay: boolean = true;
 
-  ngOnInit() {
-    // Load the initial dates from the calendar to the state
-    this.store.dispatch(bookingActions.setSelectedFromDate({ selectedFromDate: this.fromDate! }));
-    this.store.dispatch(bookingActions.setSelectedToDate({ selectedToDate: this.toDate! }));
-  }
+  // ngOnInit() {
+  //   if (!this.isInitialized) {
+
+  //     this.isInitialized = true;
+  //   }
+  // }
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
