@@ -16,6 +16,7 @@ import {
   selectedBookingValues,
   selectedFromDate,
   selectedToDate,
+  selectedToFlight,
   selectedWaySelector,
 } from '../../../redux/selectors';
 
@@ -37,11 +38,14 @@ export class CarouselComponent implements OnInit {
 
   flightsRequestTo: any = [];
 
+  selectedToFlights$: Observable<any>;
+
   constructor(private store: Store<IAppStateInterface>) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
     this.selectedWay$ = this.store.pipe(select(selectedWaySelector));
     this.selectedFromDate$ = this.store.pipe(select(selectedFromDate), distinctUntilChanged());
     this.selectedToDate$ = this.store.pipe(select(selectedToDate), distinctUntilChanged());
+    this.selectedToFlights$ = this.store.pipe(select(selectedToFlight));
   }
 
   async flightRequestFrom(flightData: IBookingStateInterface) {
@@ -128,11 +132,19 @@ export class CarouselComponent implements OnInit {
   }
 
   selectToFlight() {
-    //TODO сделать добавление выбранного рейса вылета в стейт
+    this.selectedToFlights$.subscribe((selectedToFlightValue) => {
+      if (selectedToFlightValue!.flight !== '') {
+        console.log(selectedToFlightValue);
+      }
+    });
   }
 
   selectReturnFlight() {
-    //TODO сделать добавление выбранного рейса возврата в стейт
+    this.selectedToFlights$.subscribe((selectedToFlightValue) => {
+      if (selectedToFlightValue!.flight !== '') {
+        console.log(selectedToFlightValue);
+      }
+    });
   }
 
   // TODO добавить проверку кновки далее в зависимости от состояний стейта

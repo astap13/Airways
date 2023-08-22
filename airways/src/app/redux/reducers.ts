@@ -291,7 +291,7 @@ export const reducer = createReducer(
     ...state,
     selectedReturnFlight: {
       ...state.selectedReturnFlight,
-      flight: action.selectedReturnFlight.flight,
+      flight: action.selectedReturnFlight,
     },
   })),
 );

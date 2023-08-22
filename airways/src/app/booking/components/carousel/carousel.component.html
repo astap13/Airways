@@ -8,8 +8,14 @@
     <button type="button" class="btn btn-outline-secondary" (click)="increaseFrom()">></button>
   </div>
   <div class="container">
-    <app-chosed-carousel-item [flight]="flightsRequestFrom[2]"></app-chosed-carousel-item>
+    <app-chosed-carousel-item
+      [flight]="flightsRequestFrom[2]"
+      [flightType]="'from'"
+    ></app-chosed-carousel-item>
   </div>
+  <button (click)="selectToFlight()" type="button" class="btn btn-success select-btn">
+    Select
+  </button>
   <div *ngIf="selectedWay$ | async" class="carousel_container">
     <button type="button" class="btn btn-outline-secondary" (click)="decreaseTo()"><</button>
     <ng-container *ngFor="let flight of flightsRequestTo; index as i">
@@ -19,9 +25,14 @@
     <button type="button" class="btn btn-outline-secondary" (click)="increaseTo()">></button>
   </div>
   <div *ngIf="selectedWay$ | async" class="container">
-    <app-chosed-carousel-item [flight]="flightsRequestTo[2]">
-    </app-chosed-carousel-item>      
+    <app-chosed-carousel-item
+      [flight]="flightsRequestTo[2]"
+      [flightType]="'to'"
+    ></app-chosed-carousel-item>
   </div>
+  <button (click)="selectReturnFlight()" type="button" class="btn btn-success select-btn">
+    Select
+  </button>
   <div class="btn-container">
     <button type="button" class="btn btn-secondary">Cancel</button>
     <button type="button" disabled class="btn btn-primary">Next</button>

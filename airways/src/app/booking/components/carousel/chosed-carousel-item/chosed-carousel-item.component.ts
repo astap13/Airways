@@ -14,6 +14,8 @@ import * as bookingActions from '../../../../redux/actions';
 export class ChosedCarouselItemComponent implements OnInit, OnChanges {
   @Input() flight!: any | null;
 
+  @Input() flightType!: string; // Добавляем новое свойство для типа рейса
+
   response!: any;
 
   loading: boolean = true;
@@ -22,6 +24,7 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.request();
+    console.log(this.flightType);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -39,11 +42,16 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
     try {
       const response: any = await this.http.get(url).toPromise();
       this.response = response;
-
       if (response && response.flightNumber) {
-        this.store.dispatch(
-          bookingActions.setSelectedToFlight({ selectedToFlight: response.flightNumber }),
-        );
+        if (this.flightType === 'from') {
+          this.store.dispatch(
+            bookingActions.setSelectedToFlight({ selectedToFlight: response.flightNumber }),
+          );
+        } else if (this.flightType === 'to') {
+          this.store.dispatch(
+            bookingActions.setSelectedReturnFlight({ selectedReturnFlight: response.flightNumber }),
+          );
+        }
       }
     } catch (error) {
       console.error('Error occurred during the POST request:', error);
