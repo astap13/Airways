@@ -28,11 +28,11 @@
     <app-chosed-carousel-item
       [flight]="flightsRequestTo[2]"
       [flightType]="'to'"
-    ></app-chosed-carousel-item>
+    ></app-chosed-carousel-item
+    ><button (click)="selectReturnFlight()" type="button" class="btn btn-success select-btn">
+      Select
+    </button>
   </div>
-  <button (click)="selectReturnFlight()" type="button" class="btn btn-success select-btn">
-    Select
-  </button>
   <div class="btn-container">
     <button type="button" class="btn btn-secondary">Cancel</button>
     <button type="button" disabled class="btn btn-primary">Next</button>

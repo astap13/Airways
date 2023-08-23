@@ -14,7 +14,7 @@ import * as bookingActions from '../../../../redux/actions';
 export class ChosedCarouselItemComponent implements OnInit, OnChanges {
   @Input() flight!: any | null;
 
-  @Input() flightType!: string; // Добавляем новое свойство для типа рейса
+  @Input() flightType!: string;
 
   response!: any;
 
@@ -24,7 +24,6 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.request();
-    console.log(this.flightType);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -38,16 +37,16 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
     const url = `https://airways-api-ckd3.onrender.com/searchByDirection?from=${
       this.flight!.from
     }&to=${this.flight.to}&date=${this.flight.date}`;
-
     try {
       const response: any = await this.http.get(url).toPromise();
       this.response = response;
+
       if (response && response.flightNumber) {
-        if (this.flightType === 'from') {
+        if (this.flightType == 'from') {
           this.store.dispatch(
             bookingActions.setSelectedToFlight({ selectedToFlight: response.flightNumber }),
           );
-        } else if (this.flightType === 'to') {
+        } else if (this.flightType == 'to') {
           this.store.dispatch(
             bookingActions.setSelectedReturnFlight({ selectedReturnFlight: response.flightNumber }),
           );

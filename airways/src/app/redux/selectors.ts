@@ -54,3 +54,13 @@ export const selectedReturnFlight = createSelector(
   selectFeature,
   (state) => state.selectedReturnFlight.flight,
 );
+
+export const isSelectedToFlight = createSelector(
+  selectFeature,
+  (state) => state.selectedToFlight.isSelected,
+);
+
+export const isSelectedReturnFlight = createSelector(
+  selectFeature,
+  (state) => state.selectedReturnFlight.isSelected,
+);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { Component, OnInit } from '@angular/core';
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
@@ -13,8 +14,11 @@ import {
 } from '../../../redux/actions';
 import { IBookingStateInterface } from '../../../redux/booking.interface';
 import {
+  isSelectedReturnFlight,
+  isSelectedToFlight,
   selectedBookingValues,
   selectedFromDate,
+  selectedReturnFlight,
   selectedToDate,
   selectedToFlight,
   selectedWaySelector,
@@ -40,12 +44,21 @@ export class CarouselComponent implements OnInit {
 
   selectedToFlights$: Observable<any>;
 
+  selectedReturnFlights$: Observable<any>;
+
+  isSelectedToFlights$: Observable<boolean>;
+
+  isSelectedReturnFlights$: Observable<boolean>;
+
   constructor(private store: Store<IAppStateInterface>) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
     this.selectedWay$ = this.store.pipe(select(selectedWaySelector));
     this.selectedFromDate$ = this.store.pipe(select(selectedFromDate), distinctUntilChanged());
     this.selectedToDate$ = this.store.pipe(select(selectedToDate), distinctUntilChanged());
     this.selectedToFlights$ = this.store.pipe(select(selectedToFlight));
+    this.selectedReturnFlights$ = this.store.pipe(select(selectedReturnFlight));
+    this.isSelectedToFlights$ = this.store.pipe(select(isSelectedToFlight));
+    this.isSelectedReturnFlights$ = this.store.pipe(select(isSelectedReturnFlight));
   }
 
   async flightRequestFrom(flightData: IBookingStateInterface) {
@@ -132,20 +145,28 @@ export class CarouselComponent implements OnInit {
   }
 
   selectToFlight() {
-    this.selectedToFlights$.subscribe((selectedToFlightValue) => {
-      if (selectedToFlightValue!.flight !== '') {
-        console.log(selectedToFlightValue);
-      }
-    });
+    // this.selectedToFlights$.subscribe((selectedToFlightValue) => {
+    //   if (selectedToFlightValue !== '') {
+    //     this.isSelectedToFlights$.pipe(take(1)).subscribe((isSelectedToFlight) => {
+    //       this.store.dispatch(setIsSelectedToFlight({ isSelectedToFlight: !isSelectedToFlight }));
+    //     });
+    //   }
+    // });
   }
 
   selectReturnFlight() {
-    this.selectedToFlights$.subscribe((selectedToFlightValue) => {
-      if (selectedToFlightValue!.flight !== '') {
-        console.log(selectedToFlightValue);
-      }
-    });
+    // this.selectedReturnFlights$.subscribe((selectedReturnFlightsValue) => {
+    //   if (selectedReturnFlightsValue !== '') {
+    //     this.isSelectedReturnFlights$.pipe(take(1)).subscribe((isSelectedReturnFlight) => {
+    //       this.store.dispatch(
+    //         setIsSelectedReturnFlight({ isSelectedReturnFlight: !isSelectedReturnFlight }),
+    //       );
+    //     });
+    //   }
+    // });
   }
+
+  // TODO вспомнить как менять данные в стейте
 
   // TODO добавить проверку кновки далее в зависимости от состояний стейта
 }

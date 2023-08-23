@@ -294,4 +294,18 @@ export const reducer = createReducer(
       flight: action.selectedReturnFlight,
     },
   })),
+  on(BookingValuesActions.setIsSelectedToFlight, (state, action) => ({
+    ...state,
+    selectedToFlight: {
+      ...state.selectedToFlight,
+      isSelected: action.isSelectedToFlight,
+    },
+  })),
+  on(BookingValuesActions.setIsSelectedReturnFlight, (state, action) => ({
+    ...state,
+    selectedReturnFlight: {
+      ...state.selectedReturnFlight,
+      isSelected: action.isSelectedReturnFlight,
+    },
+  })),
 );
