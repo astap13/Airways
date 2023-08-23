@@ -40,7 +40,7 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
     try {
       const response: any = await this.http.get(url).toPromise();
       this.response = response;
-
+      console.log(response);
       if (response && response.flightNumber) {
         if (this.flightType == 'from') {
           this.store.dispatch(
@@ -51,6 +51,8 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
             bookingActions.setSelectedReturnFlight({ selectedReturnFlight: response.flightNumber }),
           );
         }
+      } else {
+        this.store.dispatch(bookingActions.setSelectedToFlight({ selectedToFlight: '' }));
       }
     } catch (error) {
       console.error('Error occurred during the POST request:', error);

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
-import { distinctUntilChanged, Observable } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map, Observable, take } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import {
@@ -11,6 +11,8 @@ import {
   decreaseSelectedToDate,
   increaseSelectedFromDate,
   increaseSelectedToDate,
+  setIsSelectedReturnFlight,
+  setIsSelectedToFlight,
 } from '../../../redux/actions';
 import { IBookingStateInterface } from '../../../redux/booking.interface';
 import {
@@ -49,6 +51,8 @@ export class CarouselComponent implements OnInit {
   isSelectedToFlights$: Observable<boolean>;
 
   isSelectedReturnFlights$: Observable<boolean>;
+
+  isNextButtonEnabled$: Observable<boolean> | undefined;
 
   constructor(private store: Store<IAppStateInterface>) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
@@ -126,6 +130,39 @@ export class CarouselComponent implements OnInit {
       .subscribe((flightData) => {
         this.flightRequestTo(flightData);
       });
+
+    this.isNextButtonEnabled$ = combineLatest([
+      this.selectedToFlights$,
+      this.selectedReturnFlights$,
+      this.isSelectedToFlights$,
+      this.isSelectedReturnFlights$,
+      this.selectedWay$,
+    ]).pipe(
+      map(
+        ([
+          selectedToFlightsValue,
+          selectedReturnFlightsValue,
+          isSelectedToFlight,
+          isSelectedReturnFlight,
+          selectedWay,
+        ]) => {
+          if (selectedWay) {
+            return (
+              selectedToFlightsValue !== null &&
+              selectedToFlightsValue !== '' &&
+              selectedReturnFlightsValue !== null &&
+              selectedReturnFlightsValue !== '' &&
+              isSelectedToFlight &&
+              isSelectedReturnFlight
+            );
+          } else {
+            return (
+              selectedToFlightsValue !== null && selectedToFlightsValue !== '' && isSelectedToFlight
+            );
+          }
+        },
+      ),
+    );
   }
 
   increaseFrom() {
@@ -145,28 +182,26 @@ export class CarouselComponent implements OnInit {
   }
 
   selectToFlight() {
-    // this.selectedToFlights$.subscribe((selectedToFlightValue) => {
-    //   if (selectedToFlightValue !== '') {
-    //     this.isSelectedToFlights$.pipe(take(1)).subscribe((isSelectedToFlight) => {
-    //       this.store.dispatch(setIsSelectedToFlight({ isSelectedToFlight: !isSelectedToFlight }));
-    //     });
-    //   }
-    // });
+    this.selectedToFlights$.subscribe((selectedToFlightValue) => {
+      if (selectedToFlightValue !== '') {
+        this.isSelectedToFlights$.pipe(take(1)).subscribe((isSelectedToFlight) => {
+          this.store.dispatch(setIsSelectedToFlight({ isSelectedToFlight: !isSelectedToFlight }));
+        });
+      }
+    });
   }
 
   selectReturnFlight() {
-    // this.selectedReturnFlights$.subscribe((selectedReturnFlightsValue) => {
-    //   if (selectedReturnFlightsValue !== '') {
-    //     this.isSelectedReturnFlights$.pipe(take(1)).subscribe((isSelectedReturnFlight) => {
-    //       this.store.dispatch(
-    //         setIsSelectedReturnFlight({ isSelectedReturnFlight: !isSelectedReturnFlight }),
-    //       );
-    //     });
-    //   }
-    // });
+    this.selectedReturnFlights$.subscribe((selectedReturnFlightsValue) => {
+      if (selectedReturnFlightsValue !== '') {
+        this.isSelectedReturnFlights$.pipe(take(1)).subscribe((isSelectedReturnFlight) => {
+          this.store.dispatch(
+            setIsSelectedReturnFlight({ isSelectedReturnFlight: !isSelectedReturnFlight }),
+          );
+        });
+      }
+    });
   }
-
-  // TODO вспомнить как менять данные в стейте
 
   // TODO добавить проверку кновки далее в зависимости от состояний стейта
 }
