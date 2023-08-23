@@ -202,6 +202,4 @@ export class CarouselComponent implements OnInit {
       }
     });
   }
-
-  // TODO добавить проверку кновки далее в зависимости от состояний стейта
 }
