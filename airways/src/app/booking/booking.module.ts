@@ -24,6 +24,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { FlightComponent } from './pages/flight/flight.component';
 import { MainComponent } from './pages/main/main.component';
+import { PassangersFormsComponent } from './components/passangers-forms/passangers-forms.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MainComponent } from './pages/main/main.component';
     CarouselComponent,
     CarouselItemComponent,
     ChosedCarouselItemComponent,
+    PassangersFormsComponent,
   ],
   imports: [
     CommonModule,

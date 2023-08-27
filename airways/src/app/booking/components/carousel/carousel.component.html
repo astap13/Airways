@@ -39,6 +39,7 @@
       type="button"
       [attr.disabled]="(isNextButtonEnabled$ | async) ? null : 'disabled'"
       class="btn btn-primary"
+      (click)="nextStep()"
     >
       Next
     </button>

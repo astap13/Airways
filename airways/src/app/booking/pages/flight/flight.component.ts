@@ -4,6 +4,7 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { isLoadingStep } from 'src/app/core/components/header/store/selectors';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import {
@@ -45,6 +46,8 @@ export class FlightComponent {
 
   sumPassangers: number | null | undefined;
 
+  actualStep$: Observable<number> | null = null;
+
   constructor(private store: Store<IAppStateInterface>, private datePipe: DatePipe) {
     this.destinationCity$ = this.store.pipe(select(selectedDestinationCitySelector));
     this.fromCity$ = this.store.pipe(select(selectedFromCitySelector));
@@ -52,6 +55,7 @@ export class FlightComponent {
     this.fromDate$ = this.store.pipe(select(selectedFromDate));
     this.toDate$ = this.store.pipe(select(selectedToDate));
     this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
+    this.actualStep$ = this.store.pipe(select(isLoadingStep));
 
     this.fromDate$.subscribe((ngbDate: NgbDate) => {
       const date: Date = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);

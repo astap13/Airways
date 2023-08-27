@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
 import { combineLatest, distinctUntilChanged, map, Observable, take } from 'rxjs';
+import { isLoadingStep } from 'src/app/core/components/header/store/selectors';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import {
@@ -54,7 +56,9 @@ export class CarouselComponent implements OnInit {
 
   isNextButtonEnabled$: Observable<boolean> | undefined;
 
-  constructor(private store: Store<IAppStateInterface>) {
+  actualStep$: Observable<number> | null = null;
+
+  constructor(private store: Store<IAppStateInterface>, private router: Router) {
     this.selectedFlight$ = this.store.pipe(select(selectedBookingValues));
     this.selectedWay$ = this.store.pipe(select(selectedWaySelector));
     this.selectedFromDate$ = this.store.pipe(select(selectedFromDate), distinctUntilChanged());
@@ -63,6 +67,7 @@ export class CarouselComponent implements OnInit {
     this.selectedReturnFlights$ = this.store.pipe(select(selectedReturnFlight));
     this.isSelectedToFlights$ = this.store.pipe(select(isSelectedToFlight));
     this.isSelectedReturnFlights$ = this.store.pipe(select(isSelectedReturnFlight));
+    this.actualStep$ = this.store.pipe(select(isLoadingStep));
   }
 
   async flightRequestFrom(flightData: IBookingStateInterface) {
@@ -201,5 +206,9 @@ export class CarouselComponent implements OnInit {
         });
       }
     });
+  }
+
+  nextStep() {
+    this.router.navigate(['/passangers']);
   }
 }
