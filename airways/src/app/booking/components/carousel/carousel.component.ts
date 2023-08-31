@@ -209,6 +209,6 @@ export class CarouselComponent implements OnInit {
   }
 
   nextStep() {
-    this.router.navigate(['/passangers']);
+    this.router.navigate(['booking/flightForm']);
   }
 }

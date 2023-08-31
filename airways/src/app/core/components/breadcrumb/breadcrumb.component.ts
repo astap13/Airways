@@ -50,7 +50,7 @@ export class BreadcrumbComponent implements OnInit {
             case 'booking':
               this.store.dispatch(setStep({ step: 1 }));
               break;
-            case 'passenger':
+            case 'flightForm':
               this.store.dispatch(setStep({ step: 2 }));
               break;
             case 'summary':
