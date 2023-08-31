@@ -1,0 +1,9 @@
+<div class="container">
+  <form [formGroup]="searchFormGroup" (ngSubmit)="submit()">
+    <app-radio></app-radio>
+    <app-directions></app-directions>
+    <app-datepicker></app-datepicker>
+    <app-passengers></app-passengers>
+    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+  </form>
+</div>

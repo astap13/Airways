@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="spinner" *ngIf="loading">
+        <div class="spinner-grow" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    <div class="info_container" *ngIf="!loading">
+       <div class="from_container">
+        <p class="date">{{response?.time?.from | date:'fullDate'}}</p>
+        <p class="date">{{response?.time?.from | date:'shortTime'}}</p>
+        <p class="date">{{response?.from}}</p>
+       </div>
+       <div class="img_container">
+        <!-- [ ] сделать картинку вщлетающего и садяшегося самолета -->
+        <p class="img">🛫</p>
+        <p>Flight no: {{response?.flightNumber}}</p>
+       </div>
+       <div class="to_container">
+        <p class="date">{{response?.time?.to | date:'fullDate'}}</p>
+        <p class="date">{{response?.time?.to | date:'shortTime'}}</p>
+        <p class="date">{{response?.to}}</p>
+       </div>
+    </div>
+    <div class="select_container" *ngIf="!loading">
+        <div class="seats_container">
+            <div class="seats">{{response?.freeSeats}} seats available</div>
+            <p>Price</p>
+            <h1>€{{response?.price}}</h1>
+        </div>
+    </div>
+</div>

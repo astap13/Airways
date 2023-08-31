@@ -1,0 +1,44 @@
+.passanders-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.collapse-btn {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.passangers-item {
+    align-items: center;
+}
+
+.passangers-item,
+.picker-container {
+    display: flex;
+    align-items: center;
+}
+
+.picker-container {
+    display: flex;
+    align-items: baseline;
+}
+
+.value {
+    font-size: 17px;
+}
+
+.picker-container button {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-item {
+    font-size: 18px;
+    margin-bottom: 0;
+    margin-top: 5px;
+}

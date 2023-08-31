@@ -1,0 +1,46 @@
+<button
+  type="button"
+  class="btn btn-outline-primary collapse-btn"
+  (click)="collapse.toggle()"
+  [attr.aria-expanded]="!isCollapsed"
+  aria-controls="collapseExample"
+>
+  Passengers
+</button>
+<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+  <div class="passanders-container">
+    <div class="passangers-item">
+      <div class="title">
+        <p class="title-item">Adults</p>
+        <p class="description">14+ years</p>
+      </div>
+      <div class="picker-container">
+        <button type="button" class="btn btn-outline-primary" (click)="decreaseAdults()">-</button>
+        <p class="value">{{ selectedAdults$ | async }}</p>
+        <button type="button" class="btn btn-outline-primary" (click)="increaseAdults()">+</button>
+      </div>
+    </div>
+    <div class="passangers-item">
+      <div class="title">
+        <p class="title-item">Child</p>
+        <p class="description">2-14 years</p>
+      </div>
+      <div class="picker-container">
+        <button type="button" class="btn btn-outline-primary" (click)="decreaseChild()">-</button>
+        <p class="value">{{ selectedChild$ | async }}</p>
+        <button type="button" class="btn btn-outline-primary" (click)="increaseChild()">+</button>
+      </div>
+    </div>
+    <div class="passangers-item">
+      <div class="title">
+        <p class="title-item">Infant</p>
+        <p class="description">0-2 years</p>
+      </div>
+      <div class="picker-container">
+        <button type="button" class="btn btn-outline-primary" (click)="decreaseInfant()">-</button>
+        <p class="value">{{ selectedInfant$ | async }}</p>
+        <button type="button" class="btn btn-outline-primary" (click)="increaseInfant()">+</button>
+      </div>
+    </div>
+  </div>
+</div>

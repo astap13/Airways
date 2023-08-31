@@ -1,0 +1,19 @@
+.container {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
+.info_container {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+.img {
+    font-size: 40px;
+}
+
+.select_container {
+    border-left: #b8b8b8 dashed 2px;
+    width: 20%;
+}
