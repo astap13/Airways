@@ -32,6 +32,6 @@
       </button> -->
     </div>
   </div>
-  <app-carousel></app-carousel>
-  <app-passangers-forms></app-passangers-forms>
+  <app-carousel *ngIf="(actualStep$ | async) === 1"></app-carousel>
+  <app-passangers-forms *ngIf="(actualStep$ | async) === 2"></app-passangers-forms>
 </div>
