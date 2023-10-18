@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>{{passenger}}</h1>
+  <form [formGroup]="passengerControl" action="">
+    <input type="text" formControlName="firstName" />
+    <input type="text" formControlName="lastName" />
+    <fieldset>
+      <input
+        formControlName="sex"
+        type="radio"
+        class="btn-check"
+        name="sex"
+        value="male"
+        id="male"
+        autocomplete="off"
+        checked
+      />
+      <label class="btn btn-secondary" for="male">Male</label>
+      <input
+        formControlName="sex"
+        type="radio"
+        class="btn-check"
+        name="sex"
+        value="female"
+        id="female"
+        autocomplete="off"
+      />
+      <label class="btn btn-secondary" for="female">Female</label>
+    </fieldset>
+			<input
+				class="form-control"
+				placeholder="yyyy-mm-dd"
+				name="dp"
+				ngbDatepicker
+				#d="ngbDatepicker"
+        formControlName="dateOfBirth"
+			/>
+			<button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+  </form>
+</div>

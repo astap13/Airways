@@ -16,7 +16,8 @@ import {
   selectedWaySelector,
 } from '../../../redux/selectors';
 
-interface IPassangers {
+export interface IPassengers {
+  [x: string]: number;
   adult: number;
   child: number;
   infant: number;
@@ -42,9 +43,9 @@ export class FlightComponent {
 
   formattedToDate: string | null | undefined;
 
-  selectedPassengers$: Observable<IPassangers>;
+  selectedPassengers$: Observable<IPassengers>;
 
-  sumPassangers: number | null | undefined;
+  sumPassengers: number | null | undefined;
 
   actualStep$: Observable<number> | null = null;
 
@@ -65,8 +66,8 @@ export class FlightComponent {
       const date: Date = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
       this.formattedToDate = this.datePipe.transform(date, 'dd MMM');
     });
-    this.selectedPassengers$.subscribe((passangerArray: IPassangers) => {
-      this.sumPassangers = passangerArray.adult + passangerArray.child + passangerArray.infant;
+    this.selectedPassengers$.subscribe((passengerArray: IPassengers) => {
+      this.sumPassengers = passengerArray.adult + passengerArray.child + passengerArray.infant;
     });
   }
 

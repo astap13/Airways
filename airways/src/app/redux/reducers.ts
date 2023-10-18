@@ -161,15 +161,15 @@ export const reducer = createReducer(
       toDate: action.selectedToDate,
     },
   })),
-  on(BookingValuesActions.setSelectedPassanger, (state, action) => ({
+  on(BookingValuesActions.setSelectedpassenger, (state, action) => ({
     ...state,
-    selectedPassengers: action.selectedPassanger,
+    selectedPassengers: action.selectedpassenger,
   })),
-  on(BookingValuesActions.setSelectedAdultPassanger, (state, action) => ({
+  on(BookingValuesActions.setSelectedAdultpassenger, (state, action) => ({
     ...state,
     selectedPassengers: {
       ...state.selectedPassengers,
-      adult: action.selectedAdultPassanger,
+      adult: action.selectedAdultpassenger,
     },
   })),
   on(BookingValuesActions.increaseSelectedAdultPassengers, (state) => ({
