@@ -9,9 +9,9 @@ export interface IBookingStateInterface {
     toDate: NgbDate;
   };
   selectedPassengers: {
-    adult: number;
-    child: number;
-    infant: number;
+    adult: IPassanger[];
+    child: IPassanger[];
+    infant: IPassanger[];
   };
   selectedToFlight: {
     flight: any;
@@ -38,4 +38,11 @@ export interface IFlight {
     from?: string;
     to?: string;
   };
+}
+
+export interface IPassanger {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  birthDate: NgbDate | null;
 }

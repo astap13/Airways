@@ -116,9 +116,16 @@ export const initialState: IBookingStateInterface = {
     },
   },
   selectedPassengers: {
-    adult: 1,
-    child: 0,
-    infant: 0,
+    adult: [
+      {
+        firstName: '',
+        lastName: '',
+        gender: '',
+        birthDate: null,
+      },
+    ],
+    child: [],
+    infant: [],
   },
   selectedToFlight: {
     flight: null,

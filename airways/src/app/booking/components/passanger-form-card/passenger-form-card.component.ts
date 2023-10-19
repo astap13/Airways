@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,8 +9,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class PassengerFormCardComponent implements OnInit {
   passengerControl!: FormGroup;
 
-  @Input()
-  passenger!: any;
+  // @Input()
+  // passenger!: any;
 
   ngOnInit() {
     this.passengerControl = new FormGroup({
@@ -21,6 +21,6 @@ export class PassengerFormCardComponent implements OnInit {
     });
     this.passengerControl.valueChanges.subscribe((value) => console.log(value));
     this.passengerControl.statusChanges.subscribe((status) => console.log(status));
-    console.log(this.passenger);
+    // console.log(this.passenger);
   }
 }

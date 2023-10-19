@@ -1,11 +1,7 @@
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { createAction, props } from '@ngrx/store';
 
-interface IPassengers {
-  adult: number;
-  child: number;
-  infant: number;
-}
+import { IPassengers } from '../booking/pages/flight/flight.component';
 
 export const getBookingValues = createAction('[BookingValues] Get Booking Values');
 
