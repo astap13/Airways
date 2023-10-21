@@ -290,4 +290,71 @@ export const reducer = createReducer(
       isSelected: action.isSelectedReturnFlight,
     },
   })),
+
+  on(BookingValuesActions.increaseSelectedFromDate, (state) => {
+    const currentFromDate: NgbDate = state.selectedDate.fromDate;
+    const nextValidDate = getNextValidDate(currentFromDate);
+
+    if (nextValidDate) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          fromDate: nextValidDate,
+        },
+      };
+    } else {
+      return state;
+    }
+  }),
+
+  on(BookingValuesActions.decreaseSelectedFromDate, (state) => {
+    const currentFromDate: NgbDate = state.selectedDate.fromDate;
+    const previousValidDate = getPreviousValidDate(currentFromDate);
+
+    if (previousValidDate) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          fromDate: previousValidDate,
+        },
+      };
+    } else {
+      return state;
+    }
+  }),
+  on(BookingValuesActions.increaseSelectedToDate, (state) => {
+    const currentToDate: NgbDate = state.selectedDate.toDate;
+    const nextValidDate = getNextValidDate(currentToDate);
+
+    if (nextValidDate) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          toDate: nextValidDate,
+        },
+      };
+    } else {
+      return state;
+    }
+  }),
+
+  on(BookingValuesActions.decreaseSelectedToDate, (state) => {
+    const currentToDate: NgbDate = state.selectedDate.toDate;
+    const previousValidDate = getPreviousValidDate(currentToDate);
+
+    if (previousValidDate) {
+      return {
+        ...state,
+        selectedDate: {
+          ...state.selectedDate,
+          toDate: previousValidDate,
+        },
+      };
+    } else {
+      return state;
+    }
+  }),
 );
