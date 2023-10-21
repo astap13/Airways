@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
-import { Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import {
@@ -24,11 +24,11 @@ import {
   styleUrls: ['./passengers.component.scss'],
 })
 export class PassengersComponent {
-  selectedAdults$: Observable<number>; // or Observable<number>
+  selectedAdults$: Observable<any>;
 
-  selectedChild$: Observable<number>;
+  selectedChild$: Observable<any>;
 
-  selectedInfant$: Observable<number>;
+  selectedInfant$: Observable<any>;
 
   isCollapsed: boolean = false;
 
@@ -39,50 +39,26 @@ export class PassengersComponent {
   }
 
   increaseAdults() {
-    this.selectedAdults$.pipe(take(1)).subscribe((selectedAdults) => {
-      if (selectedAdults < 4) {
-        this.store.dispatch(increaseSelectedAdultPassengers());
-      }
-    });
+    this.store.dispatch(increaseSelectedAdultPassengers());
   }
 
   decreaseAdults() {
-    this.selectedAdults$.pipe(take(1)).subscribe((selectedAdults) => {
-      if (selectedAdults > 1) {
-        this.store.dispatch(decreaseSelectedAdultPassengers());
-      }
-    });
+    this.store.dispatch(decreaseSelectedAdultPassengers());
   }
 
   increaseChild() {
-    this.selectedChild$.pipe(take(1)).subscribe((selectedChild) => {
-      if (selectedChild < 4) {
-        this.store.dispatch(increaseSelectedChildPassengers());
-      }
-    });
+    this.store.dispatch(increaseSelectedChildPassengers());
   }
 
   decreaseChild() {
-    this.selectedChild$.pipe(take(1)).subscribe((selectedChild) => {
-      if (selectedChild > 0) {
-        this.store.dispatch(decreaseSelectedChildPassengers());
-      }
-    });
+    this.store.dispatch(decreaseSelectedChildPassengers());
   }
 
   increaseInfant() {
-    this.selectedInfant$.pipe(take(1)).subscribe((selectedInfant) => {
-      if (selectedInfant < 4) {
-        this.store.dispatch(increaseSelectedInfantPassengers());
-      }
-    });
+    this.store.dispatch(increaseSelectedInfantPassengers());
   }
 
   decreaseInfant() {
-    this.selectedInfant$.pipe(take(1)).subscribe((selectedInfant) => {
-      if (selectedInfant > 0) {
-        this.store.dispatch(decreaseSelectedInfantPassengers());
-      }
-    });
+    this.store.dispatch(decreaseSelectedInfantPassengers());
   }
 }

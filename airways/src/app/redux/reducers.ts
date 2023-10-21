@@ -170,122 +170,97 @@ export const reducer = createReducer(
   })),
   on(BookingValuesActions.setSelectedpassenger, (state, action) => ({
     ...state,
-    selectedPassengers: action.selectedpassenger,
+    selectedPassengers: action.selectedPassenger,
   })),
-  on(BookingValuesActions.setSelectedAdultpassenger, (state, action) => ({
-    ...state,
-    selectedPassengers: {
-      ...state.selectedPassengers,
-      adult: action.selectedAdultpassenger,
-    },
-  })),
-  on(BookingValuesActions.increaseSelectedAdultPassengers, (state) => ({
-    ...state,
-    selectedPassengers: {
-      ...state.selectedPassengers,
-      adult: state.selectedPassengers.adult + 1,
-    },
-  })),
-  on(BookingValuesActions.decreaseSelectedAdultPassengers, (state) => ({
-    ...state,
-    selectedPassengers: {
-      ...state.selectedPassengers,
-      adult: state.selectedPassengers.adult - 1,
-    },
-  })),
-  on(BookingValuesActions.increaseSelectedChildPassengers, (state) => ({
-    ...state,
-    selectedPassengers: {
-      ...state.selectedPassengers,
-      child: state.selectedPassengers.child + 1,
-    },
-  })),
-  on(BookingValuesActions.decreaseSelectedChildPassengers, (state) => ({
-    ...state,
-    selectedPassengers: {
-      ...state.selectedPassengers,
-      child: state.selectedPassengers.child - 1,
-    },
-  })),
-  on(BookingValuesActions.increaseSelectedInfantPassengers, (state) => ({
-    ...state,
-    selectedPassengers: {
-      ...state.selectedPassengers,
-      infant: state.selectedPassengers.infant + 1,
-    },
-  })),
-  on(BookingValuesActions.decreaseSelectedInfantPassengers, (state) => ({
-    ...state,
-    selectedPassengers: {
-      ...state.selectedPassengers,
-      infant: state.selectedPassengers.infant - 1,
-    },
-  })),
-  on(BookingValuesActions.increaseSelectedFromDate, (state) => {
-    const currentFromDate: NgbDate = state.selectedDate.fromDate;
-    const nextValidDate = getNextValidDate(currentFromDate);
-
-    if (nextValidDate) {
-      return {
-        ...state,
-        selectedDate: {
-          ...state.selectedDate,
-          fromDate: nextValidDate,
-        },
-      };
-    } else {
-      return state;
-    }
+  on(BookingValuesActions.increaseSelectedAdultPassengers, (state) => {
+    const currentAdultPassengers = state.selectedPassengers.adult;
+    const newAdultPassenger = {
+      firstName: '',
+      lastName: '',
+      gender: '',
+      birthDate: null,
+    };
+    return {
+      ...state,
+      selectedPassengers: {
+        ...state.selectedPassengers,
+        adult: [...currentAdultPassengers, newAdultPassenger],
+      },
+    };
   }),
-
-  on(BookingValuesActions.decreaseSelectedFromDate, (state) => {
-    const currentFromDate: NgbDate = state.selectedDate.fromDate;
-    const previousValidDate = getPreviousValidDate(currentFromDate);
-
-    if (previousValidDate) {
+  on(BookingValuesActions.decreaseSelectedAdultPassengers, (state) => {
+    const currentAdultPassengers = state.selectedPassengers.adult;
+    if (currentAdultPassengers.length > 0) {
+      const updatedAdultPassengers = currentAdultPassengers.slice(0, -1);
       return {
         ...state,
-        selectedDate: {
-          ...state.selectedDate,
-          fromDate: previousValidDate,
+        selectedPassengers: {
+          ...state.selectedPassengers,
+          adult: updatedAdultPassengers,
         },
       };
-    } else {
-      return state;
     }
+    return state;
   }),
-  on(BookingValuesActions.increaseSelectedToDate, (state) => {
-    const currentToDate: NgbDate = state.selectedDate.toDate;
-    const nextValidDate = getNextValidDate(currentToDate);
-
-    if (nextValidDate) {
-      return {
-        ...state,
-        selectedDate: {
-          ...state.selectedDate,
-          toDate: nextValidDate,
-        },
-      };
-    } else {
-      return state;
-    }
+  on(BookingValuesActions.increaseSelectedChildPassengers, (state) => {
+    const currentChildPassengers = state.selectedPassengers.child;
+    const newChildPassenger = {
+      firstName: '',
+      lastName: '',
+      gender: '',
+      birthDate: null,
+    };
+    return {
+      ...state,
+      selectedPassengers: {
+        ...state.selectedPassengers,
+        child: [...currentChildPassengers, newChildPassenger],
+      },
+    };
   }),
-
-  on(BookingValuesActions.decreaseSelectedToDate, (state) => {
-    const currentToDate: NgbDate = state.selectedDate.toDate;
-    const previousValidDate = getPreviousValidDate(currentToDate);
-
-    if (previousValidDate) {
+  on(BookingValuesActions.decreaseSelectedChildPassengers, (state) => {
+    const currentChildPassengers = state.selectedPassengers.child;
+    if (currentChildPassengers.length > 0) {
+      const updatedChildPassengers = currentChildPassengers.slice(0, -1);
       return {
         ...state,
-        selectedDate: {
-          ...state.selectedDate,
-          toDate: previousValidDate,
+        selectedPassengers: {
+          ...state.selectedPassengers,
+          child: updatedChildPassengers,
         },
       };
-    } else {
-      return state;
     }
+    return state;
+  }),
+  on(BookingValuesActions.increaseSelectedInfantPassengers, (state) => {
+    const currentInfantPassengers = state.selectedPassengers.infant;
+    const newInfantPassenger = {
+      firstName: '',
+      lastName: '',
+      gender: '',
+      birthDate: null,
+    };
+    return {
+      ...state,
+      selectedPassengers: {
+        ...state.selectedPassengers,
+        infant: [...currentInfantPassengers, newInfantPassenger],
+      },
+    };
+  }),
+  on(BookingValuesActions.decreaseSelectedInfantPassengers, (state) => {
+    const currentInfantPassengers = state.selectedPassengers.infant;
+    if (currentInfantPassengers.length > 0) {
+      const updatedInfantPassengers = currentInfantPassengers.slice(0, -1);
+      return {
+        ...state,
+        selectedPassengers: {
+          ...state.selectedPassengers,
+          infant: updatedInfantPassengers,
+        },
+      };
+    }
+    return state;
   }),
   on(BookingValuesActions.setSelectedToFlight, (state, action) => ({
     ...state,

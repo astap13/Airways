@@ -43,7 +43,7 @@ export class FlightComponent {
 
   formattedToDate: string | null | undefined;
 
-  selectedPassengers$: Observable<IPassengers>;
+  selectedPassengers$: Observable<any>;
 
   sumPassengers: number | null | undefined;
 
@@ -66,8 +66,10 @@ export class FlightComponent {
       const date: Date = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
       this.formattedToDate = this.datePipe.transform(date, 'dd MMM');
     });
-    this.selectedPassengers$.subscribe((passengerArray: IPassengers) => {
-      this.sumPassengers = passengerArray.adult + passengerArray.child + passengerArray.infant;
+    this.selectedPassengers$.subscribe((passengerArray: any) => {
+      this.sumPassengers =
+        passengerArray.adult.length + passengerArray.child.length + passengerArray.infant.length;
+      console.log(passengerArray);
     });
   }
 

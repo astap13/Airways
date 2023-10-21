@@ -16,7 +16,7 @@
       </div>
       <div class="picker-container">
         <button type="button" class="btn btn-outline-primary" (click)="decreaseAdults()">-</button>
-        <p class="value">{{ selectedAdults$ | async }}</p>
+        <p class="value">{{ (selectedAdults$ | async)?.length }}</p>
         <button type="button" class="btn btn-outline-primary" (click)="increaseAdults()">+</button>
       </div>
     </div>
@@ -27,7 +27,7 @@
       </div>
       <div class="picker-container">
         <button type="button" class="btn btn-outline-primary" (click)="decreaseChild()">-</button>
-        <p class="value">{{ selectedChild$ | async }}</p>
+        <p class="value">{{ (selectedChild$ | async)?.length }}</p>
         <button type="button" class="btn btn-outline-primary" (click)="increaseChild()">+</button>
       </div>
     </div>
@@ -38,7 +38,7 @@
       </div>
       <div class="picker-container">
         <button type="button" class="btn btn-outline-primary" (click)="decreaseInfant()">-</button>
-        <p class="value">{{ selectedInfant$ | async }}</p>
+        <p class="value">{{ (selectedInfant$ | async)?.length }}</p>
         <button type="button" class="btn btn-outline-primary" (click)="increaseInfant()">+</button>
       </div>
     </div>

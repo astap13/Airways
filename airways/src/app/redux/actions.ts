@@ -1,8 +1,6 @@
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { createAction, props } from '@ngrx/store';
 
-import { IPassengers } from '../booking/pages/flight/flight.component';
-
 export const getBookingValues = createAction('[BookingValues] Get Booking Values');
 
 export const setSelectedWay = createAction(
@@ -32,7 +30,7 @@ export const setSelectedToDate = createAction(
 
 export const setSelectedpassenger = createAction(
   '[BookingValues] Set selected Passengers',
-  props<{ selectedpassenger: IPassengers }>(),
+  props<{ selectedPassenger: any }>(),
 );
 
 export const setSelectedAdultpassenger = createAction(
