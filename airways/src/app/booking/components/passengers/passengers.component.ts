@@ -32,6 +32,10 @@ export class PassengersComponent {
 
   isCollapsed: boolean = false;
 
+  sumPassengers: number = 1;
+
+  maxPassengers: number = 5;
+
   constructor(private store: Store<IAppStateInterface>) {
     this.selectedAdults$ = this.store.pipe(select(selectedAdultPassengers));
     this.selectedChild$ = this.store.pipe(select(selectedChildPassengers));
@@ -39,26 +43,44 @@ export class PassengersComponent {
   }
 
   increaseAdults() {
-    this.store.dispatch(increaseSelectedAdultPassengers());
+    if (this.sumPassengers < this.maxPassengers) {
+      this.store.dispatch(increaseSelectedAdultPassengers());
+      this.sumPassengers++;
+    }
   }
 
   decreaseAdults() {
-    this.store.dispatch(decreaseSelectedAdultPassengers());
+    if (this.sumPassengers > 1) {
+      this.store.dispatch(decreaseSelectedAdultPassengers());
+      this.sumPassengers--;
+    }
   }
 
   increaseChild() {
-    this.store.dispatch(increaseSelectedChildPassengers());
+    if (this.sumPassengers < this.maxPassengers) {
+      this.store.dispatch(increaseSelectedChildPassengers());
+      this.sumPassengers++;
+    }
   }
 
   decreaseChild() {
-    this.store.dispatch(decreaseSelectedChildPassengers());
+    if (this.sumPassengers > 1) {
+      this.store.dispatch(decreaseSelectedChildPassengers());
+      this.sumPassengers--;
+    }
   }
 
   increaseInfant() {
-    this.store.dispatch(increaseSelectedInfantPassengers());
+    if (this.sumPassengers < this.maxPassengers) {
+      this.store.dispatch(increaseSelectedInfantPassengers());
+      this.sumPassengers++;
+    }
   }
 
   decreaseInfant() {
-    this.store.dispatch(decreaseSelectedInfantPassengers());
+    if (this.sumPassengers > 1) {
+      this.store.dispatch(decreaseSelectedInfantPassengers());
+      this.sumPassengers--;
+    }
   }
 }
