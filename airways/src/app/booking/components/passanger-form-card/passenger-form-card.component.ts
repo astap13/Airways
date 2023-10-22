@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-passenger-form-card',
@@ -11,8 +11,6 @@ export class PassengerFormCardComponent implements OnInit {
 
   @Input()
   passenger!: any;
-
-  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.passengerControl = new FormGroup({
