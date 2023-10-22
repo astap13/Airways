@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
+import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
+import { selectedPassengers } from 'src/app/redux/selectors';
 
 @Component({
   selector: 'app-passengers-forms',
@@ -9,15 +11,15 @@ import { IAppStateInterface } from 'src/app/redux/appState.interface';
   styleUrls: ['./passengers-forms.component.scss'],
 })
 export class PassengersFormsComponent implements OnInit {
-  // selectedPassengers$: Observable<IPassengers>;
+  selectedPassengers$: Observable<any>;
 
   passengers: any = [];
 
   constructor(private store: Store<IAppStateInterface>) {
-    // this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
-    // this.selectedPassengers$.subscribe((item) => {
-    //   this.passengers = item;
-    // });
+    this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
+    this.selectedPassengers$.subscribe((item) => {
+      this.passengers = [...item.adult, ...item.child, ...item.infant];
+    });
   }
 
   ngOnInit() {
