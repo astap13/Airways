@@ -54,8 +54,27 @@
         </div>
       </div>
       <div class="login">
-        <!--here will be pop-up with login-->
+        <button class="btn btn-outline-primary mb-2 me-2" (click)="openVerticallyCentered(content)">
+          Login
+        </button>
       </div>
     </div>
   </div>
 </nav>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Sign In</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-sign-in></app-sign-in>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

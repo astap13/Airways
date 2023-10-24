@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -29,7 +30,11 @@ export class HeaderComponent implements OnInit {
 
   actualStep$: Observable<number> | null = null;
 
-  constructor(private store: Store<IAppStateInterface>, private route: ActivatedRoute) {
+  constructor(
+    private store: Store<IAppStateInterface>,
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+  ) {
     this.selectedValute$ = this.store.pipe(select(isLoadingSelectedValuteSelector));
     this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingSelectedFormDateSelector));
     this.actualStep$ = this.store.pipe(select(isLoadingStep));
@@ -60,5 +65,9 @@ export class HeaderComponent implements OnInit {
 
   isBookingRoute(): boolean {
     return this.route.snapshot.routeConfig?.path === 'booking';
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
   }
 }

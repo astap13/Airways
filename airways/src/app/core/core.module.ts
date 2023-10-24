@@ -11,13 +11,27 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 
+import { DashboardComponent } from '../auth/dashboard/dashboard.component';
+import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
+import { SignInComponent } from '../auth/sign-in/sign-in.component';
+import { SignUpComponent } from '../auth/sign-up/sign-up.component';
+import { VerifyEmailComponent } from '../auth/verify-email/verify-email.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { reducers } from './components/header/store/reducer';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, BreadcrumbComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    BreadcrumbComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
