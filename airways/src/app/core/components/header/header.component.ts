@@ -30,6 +30,8 @@ export class HeaderComponent implements OnInit {
 
   actualStep$: Observable<number> | null = null;
 
+  loginStatus: boolean = true;
+
   constructor(
     private store: Store<IAppStateInterface>,
     private route: ActivatedRoute,
@@ -69,5 +71,13 @@ export class HeaderComponent implements OnInit {
 
   openVerticallyCentered(content) {
     this.modalService.open(content, { centered: true });
+  }
+
+  toLogin() {
+    this.loginStatus = true;
+  }
+
+  toRegistration() {
+    this.loginStatus = false;
   }
 }

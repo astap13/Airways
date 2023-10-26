@@ -63,7 +63,10 @@
 </nav>
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Sign In</h4>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary" (click)="toLogin()">Sign In</button>
+      <button type="button" class="btn btn-primary" (click)="toRegistration()">Sign Up</button>
+    </div>
     <button
       type="button"
       class="btn-close"
@@ -72,7 +75,8 @@
     ></button>
   </div>
   <div class="modal-body">
-    <app-sign-in></app-sign-in>
+    <app-sign-in *ngIf="loginStatus"></app-sign-in>
+    <app-sign-up *ngIf="!loginStatus"></app-sign-up>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
