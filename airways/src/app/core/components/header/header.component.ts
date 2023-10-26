@@ -30,7 +30,11 @@ export class HeaderComponent implements OnInit {
 
   actualStep$: Observable<number> | null = null;
 
-  loginStatus: boolean = true;
+  loginOrRegistration: boolean = true;
+
+  loginStatus: boolean = false;
+
+  userEmail: string;
 
   constructor(
     private store: Store<IAppStateInterface>,
@@ -52,6 +56,8 @@ export class HeaderComponent implements OnInit {
       { name: 'YYYY/MM/DD' },
     ];
 
+    this.checkLogin();
+
     this.valutes = [{ name: 'EUR' }, { name: 'USA' }, { name: 'BYN' }, { name: 'PLN' }];
   }
 
@@ -69,15 +75,22 @@ export class HeaderComponent implements OnInit {
     return this.route.snapshot.routeConfig?.path === 'booking';
   }
 
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
+  openVerticallyCentered(registrationModal) {
+    this.modalService.open(registrationModal, { centered: true });
   }
 
   toLogin() {
-    this.loginStatus = true;
+    this.loginOrRegistration = true;
   }
 
   toRegistration() {
-    this.loginStatus = false;
+    this.loginOrRegistration = false;
+  }
+
+  checkLogin() {
+    if (localStorage.getItem('user')) {
+      this.loginStatus = true;
+      this.userEmail = JSON.parse(localStorage.getItem('user')).email;
+    }
   }
 }

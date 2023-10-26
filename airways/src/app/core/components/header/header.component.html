@@ -54,18 +54,19 @@
         </div>
       </div>
       <div class="login">
-        <button class="btn btn-outline-primary mb-2 me-2" (click)="openVerticallyCentered(content)">
-          Login
+        <button *ngIf="!loginStatus" class="btn btn-outline-primary mb-2 me-2" (click)="openVerticallyCentered(registrationModal)">
+          <p>Login</p>
         </button>
+        <p>Hello, {{userEmail}}</p>
       </div>
     </div>
   </div>
 </nav>
-<ng-template #content let-modal>
+<ng-template #registrationModal let-modal>
   <div class="modal-header">
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary" (click)="toLogin()">Sign In</button>
-      <button type="button" class="btn btn-primary" (click)="toRegistration()">Sign Up</button>
+      <button type="button" class="btn btn-primary" (click)="toLogin()">Log In</button>
+      <button type="button" class="btn btn-primary" (click)="toRegistration()">Registration</button>
     </div>
     <button
       type="button"
@@ -75,8 +76,8 @@
     ></button>
   </div>
   <div class="modal-body">
-    <app-sign-in *ngIf="loginStatus"></app-sign-in>
-    <app-sign-up *ngIf="!loginStatus"></app-sign-up>
+    <app-sign-in *ngIf="loginOrRegistration"></app-sign-in>
+    <app-sign-up *ngIf="!loginOrRegistration"></app-sign-up>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
