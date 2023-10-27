@@ -57,7 +57,10 @@
         <button *ngIf="!loginStatus" class="btn btn-outline-primary mb-2 me-2" (click)="openVerticallyCentered(registrationModal)">
           <p>Login</p>
         </button>
-        <p>Hello, {{userEmail}}</p>
+        <p *ngIf="loginStatus">Hello, {{userEmail}}</p>
+        <button *ngIf="loginStatus" class="btn btn-outline-primary mb-2 me-2" (click)="logOut()">
+          <p>LogOut</p>
+        </button>
       </div>
     </div>
   </div>
@@ -65,8 +68,8 @@
 <ng-template #registrationModal let-modal>
   <div class="modal-header">
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary" (click)="toLogin()">Log In</button>
-      <button type="button" class="btn btn-primary" (click)="toRegistration()">Registration</button>
+      <button type="button" [ngClass]="{active: loginOrRegistration}" class="btn btn-light" (click)="toLogin()">LogIn</button>
+      <button type="button" [ngClass]="{active: !loginOrRegistration}" class="btn btn-light" (click)="toRegistration()">Registration</button>
     </div>
     <button
       type="button"
@@ -80,6 +83,9 @@
     <app-sign-up *ngIf="!loginOrRegistration"></app-sign-up>
   </div>
   <div class="modal-footer">
+    <div class="forgotPassword">
+      <span *ngIf="loginOrRegistration" routerLink="/forgot-password">Forgot Password?</span>
+    </div>
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-template>

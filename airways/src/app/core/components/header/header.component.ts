@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import { IFormsOfDates, IValute } from './models/header.interface';
@@ -40,6 +41,7 @@ export class HeaderComponent implements OnInit {
     private store: Store<IAppStateInterface>,
     private route: ActivatedRoute,
     private modalService: NgbModal,
+    private authService: AuthService,
   ) {
     this.selectedValute$ = this.store.pipe(select(isLoadingSelectedValuteSelector));
     this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingSelectedFormDateSelector));
@@ -88,9 +90,13 @@ export class HeaderComponent implements OnInit {
   }
 
   checkLogin() {
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('user') && localStorage.getItem('user') !== 'null') {
       this.loginStatus = true;
       this.userEmail = JSON.parse(localStorage.getItem('user')).email;
     }
+  }
+
+  logOut() {
+    this.authService.SignOut();
   }
 }
