@@ -54,8 +54,38 @@
         </div>
       </div>
       <div class="login">
-        <!--here will be pop-up with login-->
+        <button *ngIf="!loginStatus" class="btn btn-outline-primary mb-2 me-2" (click)="openVerticallyCentered(registrationModal)">
+          <p>Login</p>
+        </button>
+        <p *ngIf="loginStatus">Hello, {{userEmail}}</p>
+        <button *ngIf="loginStatus" class="btn btn-outline-primary mb-2 me-2" (click)="logOut()">
+          <p>LogOut</p>
+        </button>
       </div>
     </div>
   </div>
 </nav>
+<ng-template #registrationModal let-modal>
+  <div class="modal-header">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" [ngClass]="{active: loginOrRegistration}" class="btn btn-light" (click)="toLogin()">LogIn</button>
+      <button type="button" [ngClass]="{active: !loginOrRegistration}" class="btn btn-light" (click)="toRegistration()">Registration</button>
+    </div>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-sign-in *ngIf="loginOrRegistration"></app-sign-in>
+    <app-sign-up *ngIf="!loginOrRegistration"></app-sign-up>
+  </div>
+  <div class="modal-footer">
+    <div class="forgotPassword">
+      <span *ngIf="loginOrRegistration" routerLink="/forgot-password">Forgot Password?</span>
+    </div>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

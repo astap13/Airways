@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import { IFormsOfDates, IValute } from './models/header.interface';
@@ -29,7 +31,18 @@ export class HeaderComponent implements OnInit {
 
   actualStep$: Observable<number> | null = null;
 
-  constructor(private store: Store<IAppStateInterface>, private route: ActivatedRoute) {
+  loginOrRegistration: boolean = true;
+
+  loginStatus: boolean = false;
+
+  userEmail: string;
+
+  constructor(
+    private store: Store<IAppStateInterface>,
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private authService: AuthService,
+  ) {
     this.selectedValute$ = this.store.pipe(select(isLoadingSelectedValuteSelector));
     this.selectedFormsOfDates$ = this.store.pipe(select(isLoadingSelectedFormDateSelector));
     this.actualStep$ = this.store.pipe(select(isLoadingStep));
@@ -44,6 +57,8 @@ export class HeaderComponent implements OnInit {
       { name: 'YYYY/DD/MM' },
       { name: 'YYYY/MM/DD' },
     ];
+
+    this.checkLogin();
 
     this.valutes = [{ name: 'EUR' }, { name: 'USA' }, { name: 'BYN' }, { name: 'PLN' }];
   }
@@ -60,5 +75,28 @@ export class HeaderComponent implements OnInit {
 
   isBookingRoute(): boolean {
     return this.route.snapshot.routeConfig?.path === 'booking';
+  }
+
+  openVerticallyCentered(registrationModal) {
+    this.modalService.open(registrationModal, { centered: true });
+  }
+
+  toLogin() {
+    this.loginOrRegistration = true;
+  }
+
+  toRegistration() {
+    this.loginOrRegistration = false;
+  }
+
+  checkLogin() {
+    if (localStorage.getItem('user') && localStorage.getItem('user') !== 'null') {
+      this.loginStatus = true;
+      this.userEmail = JSON.parse(localStorage.getItem('user')).email;
+    }
+  }
+
+  logOut() {
+    this.authService.SignOut();
   }
 }

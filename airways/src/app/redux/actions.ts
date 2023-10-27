@@ -1,12 +1,6 @@
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { createAction, props } from '@ngrx/store';
 
-interface IPassangers {
-  adult: number;
-  child: number;
-  infant: number;
-}
-
 export const getBookingValues = createAction('[BookingValues] Get Booking Values');
 
 export const setSelectedWay = createAction(
@@ -34,24 +28,24 @@ export const setSelectedToDate = createAction(
   props<{ selectedToDate: NgbDate }>(),
 );
 
-export const setSelectedPassanger = createAction(
-  '[BookingValues] Set selected Passangers',
-  props<{ selectedPassanger: IPassangers }>(),
+export const setSelectedpassenger = createAction(
+  '[BookingValues] Set selected Passengers',
+  props<{ selectedPassenger: any }>(),
 );
 
-export const setSelectedAdultPassanger = createAction(
-  '[BookingValues] Set selected Adult Passangers',
-  props<{ selectedAdultPassanger: number }>(),
+export const setSelectedAdultpassenger = createAction(
+  '[BookingValues] Set selected Adult Passengers',
+  props<{ selectedAdultpassenger: number }>(),
 );
 
-export const setSelectedChildPassanger = createAction(
-  '[BookingValues] Set selected Child Passangers',
-  props<{ selectedChildPassanger: number }>(),
+export const setSelectedChildpassenger = createAction(
+  '[BookingValues] Set selected Child Passengers',
+  props<{ selectedChildpassenger: number }>(),
 );
 
-export const setSelectedInfantPassanger = createAction(
-  '[BookingValues] Set selected Infant Passangers',
-  props<{ selectedInfantPassanger: number }>(),
+export const setSelectedInfantpassenger = createAction(
+  '[BookingValues] Set selected Infant Passengers',
+  props<{ selectedInfantpassenger: number }>(),
 );
 
 export const increaseSelectedAdultPassengers = createAction(

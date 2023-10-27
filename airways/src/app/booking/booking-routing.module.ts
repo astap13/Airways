@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PassangersFormsComponent } from './components/passangers-forms/passangers-forms.component';
+import { PassengersFormsComponent } from './components/passengers-forms/passengers-forms.component';
 import { FlightComponent } from './pages/flight/flight.component';
 import { MainComponent } from './pages/main/main.component';
 
@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {
         path: 'flightForm',
-        component: PassangersFormsComponent,
+        component: PassengersFormsComponent,
       },
     ],
   },

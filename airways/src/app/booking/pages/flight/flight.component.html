@@ -17,7 +17,7 @@
         <p>{{ formattedFromDate }} - {{ formattedToDate }}</p>
         <p>·</p>
         <span>
-          <p>{{ sumPassangers }}</p>
+          <p>{{ sumPassengers }}</p>
           <i class="bi bi-person-fill"></i>
         </span>
       </div>
@@ -32,6 +32,6 @@
       </button> -->
     </div>
   </div>
-  <app-carousel></app-carousel>
-  <app-passangers-forms></app-passangers-forms>
+  <app-carousel *ngIf="(actualStep$ | async) === 1"></app-carousel>
+  <app-passengers-forms *ngIf="(actualStep$ | async) === 2"></app-passengers-forms>
 </div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
-import { Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import {
@@ -24,13 +24,17 @@ import {
   styleUrls: ['./passengers.component.scss'],
 })
 export class PassengersComponent {
-  selectedAdults$: Observable<number>; // or Observable<number>
+  selectedAdults$: Observable<any>;
 
-  selectedChild$: Observable<number>;
+  selectedChild$: Observable<any>;
 
-  selectedInfant$: Observable<number>;
+  selectedInfant$: Observable<any>;
 
   isCollapsed: boolean = false;
+
+  sumPassengers: number = 1;
+
+  maxPassengers: number = 5;
 
   constructor(private store: Store<IAppStateInterface>) {
     this.selectedAdults$ = this.store.pipe(select(selectedAdultPassengers));
@@ -39,50 +43,44 @@ export class PassengersComponent {
   }
 
   increaseAdults() {
-    this.selectedAdults$.pipe(take(1)).subscribe((selectedAdults) => {
-      if (selectedAdults < 4) {
-        this.store.dispatch(increaseSelectedAdultPassengers());
-      }
-    });
+    if (this.sumPassengers < this.maxPassengers) {
+      this.store.dispatch(increaseSelectedAdultPassengers());
+      this.sumPassengers++;
+    }
   }
 
   decreaseAdults() {
-    this.selectedAdults$.pipe(take(1)).subscribe((selectedAdults) => {
-      if (selectedAdults > 1) {
-        this.store.dispatch(decreaseSelectedAdultPassengers());
-      }
-    });
+    if (this.sumPassengers > 1) {
+      this.store.dispatch(decreaseSelectedAdultPassengers());
+      this.sumPassengers--;
+    }
   }
 
   increaseChild() {
-    this.selectedChild$.pipe(take(1)).subscribe((selectedChild) => {
-      if (selectedChild < 4) {
-        this.store.dispatch(increaseSelectedChildPassengers());
-      }
-    });
+    if (this.sumPassengers < this.maxPassengers) {
+      this.store.dispatch(increaseSelectedChildPassengers());
+      this.sumPassengers++;
+    }
   }
 
   decreaseChild() {
-    this.selectedChild$.pipe(take(1)).subscribe((selectedChild) => {
-      if (selectedChild > 0) {
-        this.store.dispatch(decreaseSelectedChildPassengers());
-      }
-    });
+    if (this.sumPassengers > 1) {
+      this.store.dispatch(decreaseSelectedChildPassengers());
+      this.sumPassengers--;
+    }
   }
 
   increaseInfant() {
-    this.selectedInfant$.pipe(take(1)).subscribe((selectedInfant) => {
-      if (selectedInfant < 4) {
-        this.store.dispatch(increaseSelectedInfantPassengers());
-      }
-    });
+    if (this.sumPassengers < this.maxPassengers) {
+      this.store.dispatch(increaseSelectedInfantPassengers());
+      this.sumPassengers++;
+    }
   }
 
   decreaseInfant() {
-    this.selectedInfant$.pipe(take(1)).subscribe((selectedInfant) => {
-      if (selectedInfant > 0) {
-        this.store.dispatch(decreaseSelectedInfantPassengers());
-      }
-    });
+    if (this.sumPassengers > 1) {
+      this.store.dispatch(decreaseSelectedInfantPassengers());
+      this.sumPassengers--;
+    }
   }
 }

@@ -1,0 +1,7 @@
+<div class="container">
+    <div class="passenger-form-container">
+        <h1>Passengers</h1>
+        <p>Enter the passenger's names as they appear on document (passport or ID).</p>
+        <app-passenger-form-card *ngFor="let passenger of passengers" [passenger]="passenger"></app-passenger-form-card>
+    </div>
+</div>
