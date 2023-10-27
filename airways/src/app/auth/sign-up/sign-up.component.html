@@ -1,0 +1,33 @@
+<div class="displayTable">
+  <div class="displayTableCell">
+    <div class="authBlock">
+      <div class="formGroup input-group">
+        <span class="input-group-text" id="userEmail">✉️</span>
+        <input
+          type="email"
+          class="formControl form-control"
+          placeholder="Email Address"
+          aria-describedby="userEmail"
+          #userEmail
+          required
+        /><span class="input-group-text" id="password">🔐</span>
+        <input
+          type="password"
+          class="formControl form-control"
+          placeholder="Password"
+          aria-describedby="password"
+          #userPwd
+          required
+        />
+      </div>
+      <div class="formGroup">
+        <input
+          type="button"
+          class="btn btn-success"
+          value="Sign Up"
+          (click)="authService.SignUp(userEmail.value, userPwd.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
