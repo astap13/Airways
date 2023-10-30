@@ -1,39 +1,52 @@
-<div class="container">
-  <!-- <h1>{{passenger}}</h1> -->
-  <form [formGroup]="passengerControl" action="">
-    <input type="text" formControlName="firstName" />
-    <input type="text" formControlName="lastName" />
-    <fieldset>
+<div class="card">
+  <div class="card-header">Adult</div>
+  <div class="card-body">
+    <form class="passenger-form-container card" [formGroup]="passengerControl">
       <input
-        formControlName="sex"
-        type="radio"
-        class="btn-check"
-        name="sex"
-        value="male"
-        id="male"
-        autocomplete="off"
-        checked
+        class="form-control"
+        placeholder="First Name"
+        type="text"
+        formControlName="firstName"
       />
-      <label class="btn btn-secondary" for="male">Male</label>
-      <input
-        formControlName="sex"
-        type="radio"
-        class="btn-check"
-        name="sex"
-        value="female"
-        id="female"
-        autocomplete="off"
-      />
-      <label class="btn btn-secondary" for="female">Female</label>
-    </fieldset>
-			<input
-				class="form-control"
-				placeholder="yyyy-mm-dd"
-				name="dp"
-				ngbDatepicker
-				#d="ngbDatepicker"
-        formControlName="dateOfBirth"
-			/>
-			<button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
-  </form>
+      <input class="form-control" placeholder="Last Name" type="text" formControlName="lastName" />
+      <div class="input-group mb-3">
+        <div class="btn-group">
+          <input
+            formControlName="sex"
+            type="radio"
+            class="btn-check"
+            name="sex"
+            value="male"
+            id="male"
+            autocomplete="off"
+            checked
+          />
+          <label class="btn btn-success" for="male">Male</label>
+          <input
+            formControlName="sex"
+            type="radio"
+            class="btn-check"
+            name="sex"
+            value="female"
+            id="female"
+            autocomplete="off"
+          />
+          <label class="btn btn-success" for="female">Female</label>
+        </div>
+        <input
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dp"
+          ngbDatepicker
+          #d="ngbDatepicker"
+          formControlName="dateOfBirth"
+        />
+        <button
+          class="btn btn-outline-secondary bi bi-calendar3"
+          (click)="d.toggle()"
+          type="button"
+        ></button>
+      </div>
+    </form>
+  </div>
 </div>

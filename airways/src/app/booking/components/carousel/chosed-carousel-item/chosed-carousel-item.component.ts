@@ -27,7 +27,7 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['flight'] && !changes['flight'].firstChange) {
+    if (changes.flight && !changes.flight.firstChange) {
       this.request();
     }
   }
