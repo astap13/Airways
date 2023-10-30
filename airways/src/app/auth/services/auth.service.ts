@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { Injectable, NgZone } from '@angular/core';
+import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
@@ -30,6 +31,25 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+  }
+
+  GoogleAuth() {
+    return this.AuthLogin(new GoogleAuthProvider());
+  }
+
+  // Auth logic to run auth providers
+  AuthLogin(provider) {
+    return (
+      this.afAuth
+        .signInWithPopup(provider)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .then((result) => {
+          console.log('You have been successfully logged in!');
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    );
   }
 
   // Sign in with email/password
