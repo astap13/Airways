@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 /* eslint-disable import/no-extraneous-dependencies */
 import { Injectable, NgZone } from '@angular/core';
 import { GoogleAuthProvider } from '@angular/fire/auth';
@@ -18,6 +19,7 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public http: HttpClient,
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -26,11 +28,40 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
+        this.request();
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+  }
+
+  async request() {
+    const url = `https://airways-api-ckd3.onrender.com/user`;
+
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if (user && user.uid) {
+        const userData = user;
+
+        const requestData = {
+          uid: userData.uid,
+        };
+
+        const response = await this.http.post(url, requestData).toPromise();
+
+        if (response) {
+          console.log('Server response:', response);
+        } else {
+          console.error('Server response is empty');
+        }
+      } else {
+        console.error('User data not found in localStorage');
+      }
+    } catch (error) {
+      console.error('Error occurred during the POST request:', error);
+    }
   }
 
   GoogleAuth() {

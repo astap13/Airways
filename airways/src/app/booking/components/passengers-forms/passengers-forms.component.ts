@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
-import { selectedPassengers } from 'src/app/redux/selectors';
+
+import { selectedPassengers } from '../../../redux/selectors'; // Импортируйте селекторы из вашего приложения
 
 @Component({
   selector: 'app-passengers-forms',
@@ -14,15 +15,21 @@ import { selectedPassengers } from 'src/app/redux/selectors';
 export class PassengersFormsComponent {
   selectedPassengers$: Observable<any>;
 
-  passengers: any = [];
+  passengerForms: FormGroup[] = [];
 
   constructor(private store: Store<IAppStateInterface>, private fb: FormBuilder) {
     this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
     this.selectedPassengers$.subscribe((item) => {
-      this.passengers = [...item.adult, ...item.child, ...item.infant];
+      this.passengerForms = item.adult.map((passenger) => this.createPassengerFormGroup(passenger));
     });
   }
 
-  //TODO Присвоить всем пассажирам айди, искать этот айди и менять данные
-  //TODO Сделать запись пассажиров в бэке
+  createPassengerFormGroup(passenger: any): FormGroup {
+    return this.fb.group({
+      firstName: [passenger.firstName, Validators.required],
+      lastName: [passenger.lastName, Validators.required],
+      sex: [passenger.gender, Validators.required],
+      dateOfBirth: [passenger.birthDate, Validators.required],
+    });
+  }
 }

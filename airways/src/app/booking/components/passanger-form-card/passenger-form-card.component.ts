@@ -1,25 +1,42 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-passenger-form-card',
   templateUrl: './passenger-form-card.component.html',
   styleUrls: ['./passenger-form-card.component.scss'],
 })
-export class PassengerFormCardComponent implements OnInit {
-  passengerControl!: FormGroup;
+export class PassengerFormCardComponent implements OnChanges {
+  @Input() passenger: any;
 
-  @Input()
-  passenger!: any;
+  passengerForm: FormGroup;
 
-  ngOnInit() {
-    this.passengerControl = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      sex: new FormControl(''),
-      dateOfBirth: new FormControl(''),
+  constructor(private fb: FormBuilder) {
+    this.passengerForm = this.fb.group({
+      firstName: [''],
+      lastName: [''],
+      sex: [''],
+      dateOfBirth: [''],
     });
-    this.passengerControl.valueChanges.subscribe((value) => console.log(value));
-    this.passengerControl.statusChanges.subscribe((status) => console.log(status));
+  }
+
+  createPassengerFormGroup(passenger: any): FormGroup {
+    return this.fb.group({
+      firstName: [passenger.firstName, Validators.required],
+      lastName: [passenger.lastName, Validators.required],
+      sex: [passenger.gender, Validators.required],
+      dateOfBirth: [passenger.birthDate, Validators.required],
+    });
+  }
+
+  ngOnChanges() {
+    if (this.passenger) {
+      this.passengerForm = this.fb.group({
+        firstName: [this.passenger.firstName || '', Validators.required],
+        lastName: [this.passenger.lastName || '', Validators.required],
+        sex: [this.passenger.gender || '', Validators.required],
+        dateOfBirth: [this.passenger.birthDate || '', Validators.required],
+      });
+    }
   }
 }
