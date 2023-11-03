@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
 
 import { selectedPassengers } from '../../../redux/selectors'; // Импортируйте селекторы из вашего приложения
+import { PassengersServiceService } from '../../services/passengers-service.service';
 
 @Component({
   selector: 'app-passengers-forms',
@@ -17,10 +18,17 @@ export class PassengersFormsComponent {
 
   passengerForms: FormGroup[] = [];
 
-  constructor(private store: Store<IAppStateInterface>, private fb: FormBuilder) {
+  constructor(
+    private store: Store<IAppStateInterface>,
+    private fb: FormBuilder,
+    private passengersService: PassengersServiceService,
+  ) {
     this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
     this.selectedPassengers$.subscribe((item) => {
-      this.passengerForms = item.adult.map((passenger) => this.createPassengerFormGroup(passenger));
+      const allPassengers = [...item.adult, ...item.child, ...item.infant];
+      this.passengerForms = allPassengers.map((passenger) =>
+        this.createPassengerFormGroup(passenger),
+      );
     });
   }
 

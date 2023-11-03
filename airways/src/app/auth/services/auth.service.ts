@@ -46,15 +46,9 @@ export class AuthService {
         const requestData = {
           uid: userData.uid,
         };
-
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const response = await this.http.post(url, requestData).toPromise();
-      } else {
-        console.error('User data not found in localStorage');
+        await this.http.post(url, requestData).toPromise();
       }
-    } catch (error) {
-      console.error('Error occurred during the POST request:', error);
-    }
+    } catch (error) {}
   }
 
   GoogleAuth() {

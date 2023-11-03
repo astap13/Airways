@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header">Adult</div>
+  <div class="card-header">Passenger</div>
   <div class="card-body">
     <form class="passenger-form-container card" [formGroup]="passengerForm">
       <input
@@ -33,7 +33,7 @@
           />
           <label class="btn btn-success" for="female">Female</label>
         </div>
-        <input
+        <div><input
           class="form-control"
           placeholder="yyyy-mm-dd"
           name="dp"
@@ -45,7 +45,8 @@
           class="btn btn-outline-secondary bi bi-calendar3"
           (click)="d.toggle()"
           type="button"
-        ></button>
+        ></button></div>
+        
       </div>
     </form>
   </div>

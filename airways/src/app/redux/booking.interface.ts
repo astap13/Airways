@@ -41,6 +41,7 @@ export interface IFlight {
 }
 
 export interface IPassanger {
+  ageGroup?: string;
   firstName: string;
   lastName: string;
   gender: string;
