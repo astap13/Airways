@@ -6,8 +6,18 @@
     <form [formGroup]="profileForm" class="passenger-form-container card">
       <div formArrayName="passengers" class="form-item">
         <div *ngFor="let passenger of passengers.controls; let i = index" [formGroupName]="i">
-          <input class="form-control" placeholder="First Name" type="text" formControlName="firstName" />
-          <input class="form-control" placeholder="Last Name" type="text" formControlName="lastName" />
+          <input
+            class="form-control"
+            placeholder="First Name"
+            type="text"
+            formControlName="firstName"
+          />
+          <input
+            class="form-control"
+            placeholder="Last Name"
+            type="text"
+            formControlName="lastName"
+          />
 
           <div class="input-group mb-3">
             <div class="btn-group">
@@ -15,17 +25,18 @@
                 formControlName="sex"
                 type="radio"
                 class="btn-check"
-                name="sex"
+                [attr.name]="'sex' + i"
                 value="male"
                 id="male-{{ i }}"
                 autocomplete="off"
               />
               <label class="btn btn-success" for="male-{{ i }}">Male</label>
+
               <input
                 formControlName="sex"
                 type="radio"
                 class="btn-check"
-                name="sex"
+                [attr.name]="'sex' + i"
                 value="female"
                 id="female-{{ i }}"
                 autocomplete="off"
@@ -42,18 +53,26 @@
                 #d="ngbDatepicker"
                 formControlName="dateOfBirth"
               />
-              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+              <button
+                class="btn btn-outline-secondary bi bi-calendar3"
+                (click)="d.toggle()"
+                type="button"
+              ></button>
             </div>
           </div>
-          
-          <button class="btn btn-danger" (click)="removePassenger(i)" type="button">Remove Passenger</button>
+
+          <button class="btn btn-danger" (click)="removePassenger(i)" type="button">
+            Remove Passenger
+          </button>
         </div>
       </div>
-      
+
       <button class="btn btn-success" (click)="addPassenger()" type="button">Add Passenger</button>
     </form>
   </div>
   <p>Form Value: {{ profileForm.value | json }}</p>
 
-  <button class="btn btn-outline-secondary" (click)="savePassengers()" type="button">Pay Now</button>
+  <button class="btn btn-outline-secondary" (click)="savePassengers()" type="button">
+    Pay Now
+  </button>
 </div>
