@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
-import { IPassanger } from 'src/app/redux/booking.interface';
 
-import { selectedPassengers, selectedToFlight } from '../../../redux/selectors';
 import { PassengersServiceService } from '../../services/passengers-service.service';
 
 @Component({
@@ -17,43 +15,42 @@ import { PassengersServiceService } from '../../services/passengers-service.serv
 export class PassengersFormsComponent {
   selectedPassengers$: Observable<any>;
 
-  passengerForms: FormGroup[] = [];
-
-  passengers: IPassanger[] = [];
-
   flight$: any;
+
+  profileForm = this.fb.group({
+    passengers: this.fb.array([this.createPassengerFormGroup()]),
+  });
 
   constructor(
     private store: Store<IAppStateInterface>,
     private fb: FormBuilder,
     private passengersService: PassengersServiceService,
-  ) {
-    this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
-    this.flight$ = this.store.pipe(select(selectedToFlight));
-    this.selectedPassengers$.subscribe((item) => {
-      const allPassengers = [...item.adult, ...item.child, ...item.infant];
-      this.passengerForms = allPassengers.map((passenger) =>
-        this.createPassengerFormGroup(passenger),
-      );
-      // this.passengers.length = 0;
-      this.passengers.push(...allPassengers);
+  ) {}
+
+  createPassengerFormGroup(): FormGroup {
+    return this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      sex: ['male', Validators.required],
+      dateOfBirth: ['', Validators.required],
     });
-    // this.flight$.subscribe((el) => {
-    //   console.log(el);
-    // });
   }
 
-  createPassengerFormGroup(passenger: any): FormGroup {
-    return this.fb.group({
-      firstName: [passenger.firstName, Validators.required],
-      lastName: [passenger.lastName, Validators.required],
-      sex: [passenger.gender, Validators.required],
-      dateOfBirth: [passenger.birthDate, Validators.required],
-    });
+  get passengers() {
+    return this.profileForm.get('passengers') as FormArray;
+  }
+
+  addPassenger() {
+    this.passengers.push(this.createPassengerFormGroup());
+  }
+
+  removePassenger(index: number) {
+    this.passengers.removeAt(index);
   }
 
   savePassengers() {
-    console.log(this.passengers);
-    this.passengersService.request('test', this.passengers);
+    if (this.profileForm.valid) {
+      console.log(this.profileForm.value.passengers);
+    }
   }
 }
