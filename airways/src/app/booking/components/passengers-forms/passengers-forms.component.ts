@@ -35,13 +35,12 @@ export class PassengersFormsComponent {
       this.passengerForms = allPassengers.map((passenger) =>
         this.createPassengerFormGroup(passenger),
       );
-      this.passengers.length = 0;
+      // this.passengers.length = 0;
       this.passengers.push(...allPassengers);
     });
-    console.log(this.passengers);
-    this.flight$.subscribe((el) => {
-      console.log(el);
-    });
+    // this.flight$.subscribe((el) => {
+    //   console.log(el);
+    // });
   }
 
   createPassengerFormGroup(passenger: any): FormGroup {
@@ -53,5 +52,8 @@ export class PassengersFormsComponent {
     });
   }
 
-  savePassengers() {}
+  savePassengers() {
+    console.log(this.passengers);
+    this.passengersService.request('test', this.passengers);
+  }
 }

@@ -20,14 +20,14 @@ export class PassengerFormCardComponent implements OnChanges {
     });
   }
 
-  createPassengerFormGroup(passenger: any): FormGroup {
-    return this.fb.group({
-      firstName: [passenger.firstName, Validators.required],
-      lastName: [passenger.lastName, Validators.required],
-      sex: [passenger.gender, Validators.required],
-      dateOfBirth: [passenger.birthDate, Validators.required],
-    });
-  }
+  // createPassengerFormGroup(passenger: any): FormGroup {
+  //   return this.fb.group({
+  //     firstName: [passenger.firstName, Validators.required],
+  //     lastName: [passenger.lastName, Validators.required],
+  //     sex: [passenger.gender, Validators.required],
+  //     dateOfBirth: [passenger.birthDate, Validators.required],
+  //   });
+  // }
 
   ngOnChanges() {
     if (this.passenger) {
