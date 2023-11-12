@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
+import { selectedPassengers } from 'src/app/redux/selectors';
 
 import { PassengersServiceService } from '../../services/passengers-service.service';
 
@@ -13,19 +14,27 @@ import { PassengersServiceService } from '../../services/passengers-service.serv
   styleUrls: ['./passengers-forms.component.scss'],
 })
 export class PassengersFormsComponent {
-  selectedPassengers$: Observable<any>;
-
-  flight$: any;
-
   profileForm = this.fb.group({
     passengers: this.fb.array([this.createPassengerFormGroup()]),
   });
+
+  selectedPassengers$: Observable<any>;
+
+  countOfPassengers: number;
 
   constructor(
     private store: Store<IAppStateInterface>,
     private fb: FormBuilder,
     private passengersService: PassengersServiceService,
-  ) {}
+  ) {
+    this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
+    this.selectedPassengers$.subscribe((el) => {
+      let array = [...el.adult, ...el.child, ...el.infant];
+      for (let i = 0; i < array.length - 1; i++) {
+        this.addPassenger();
+      }
+    });
+  }
 
   createPassengerFormGroup(): FormGroup {
     return this.fb.group({
