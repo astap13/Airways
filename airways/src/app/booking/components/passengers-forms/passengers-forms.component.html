@@ -2,7 +2,6 @@
   <div class="passenger-form-container">
     <h1>Passengers</h1>
     <p>Enter the passenger's names as they appear on the document (passport or ID).</p>
-
     <form [formGroup]="profileForm" class="passenger-form-container card">
       <div formArrayName="passengers" class="form-item">
         <div *ngFor="let passenger of passengers.controls; let i = index" [formGroupName]="i">
@@ -70,8 +69,6 @@
       <button class="btn btn-success" (click)="addPassenger()" type="button">Add Passenger</button>
     </form>
   </div>
-  <p>Form Value: {{ profileForm.value | json }}</p>
-
   <button class="btn btn-outline-secondary" (click)="savePassengers()" type="button">
     Pay Now
   </button>

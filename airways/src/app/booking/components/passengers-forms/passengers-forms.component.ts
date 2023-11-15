@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { IAppStateInterface } from 'src/app/redux/appState.interface';
-import { selectedPassengers } from 'src/app/redux/selectors';
+import { selectedPassengers, selectedToFlight } from 'src/app/redux/selectors';
 
 import { PassengersServiceService } from '../../services/passengers-service.service';
 
@@ -20,6 +20,10 @@ export class PassengersFormsComponent {
 
   selectedPassengers$: Observable<any>;
 
+  selectedFlight$: Observable<any>;
+
+  flight: string;
+
   countOfPassengers: number;
 
   constructor(
@@ -33,6 +37,10 @@ export class PassengersFormsComponent {
       for (let i = 0; i < array.length - 1; i++) {
         this.addPassenger();
       }
+    });
+    this.selectedFlight$ = this.store.pipe(select(selectedToFlight));
+    this.selectedFlight$.subscribe((el) => {
+      this.flight = el;
     });
   }
 
@@ -59,7 +67,7 @@ export class PassengersFormsComponent {
 
   savePassengers() {
     if (this.profileForm.valid) {
-      this.passengersService.request('test', this.profileForm.value.passengers);
+      this.passengersService.request(this.flight, this.profileForm.value.passengers);
     }
   }
 }
