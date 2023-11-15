@@ -40,8 +40,8 @@ export class PassengersFormsComponent {
     return this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      sex: ['male', Validators.required],
-      dateOfBirth: ['', Validators.required],
+      gender: ['male', Validators.required],
+      birthDate: ['', Validators.required],
     });
   }
 
@@ -59,7 +59,7 @@ export class PassengersFormsComponent {
 
   savePassengers() {
     if (this.profileForm.valid) {
-      console.log(this.profileForm.value.passengers);
+      this.passengersService.request('test', this.profileForm.value.passengers);
     }
   }
 }

@@ -40,7 +40,6 @@ export class ChosedCarouselItemComponent implements OnInit, OnChanges {
     try {
       const response: any = await this.http.get(url).toPromise();
       this.response = response;
-      console.log(response);
       if (response && response.flightNumber) {
         if (this.flightType == 'from') {
           this.store.dispatch(

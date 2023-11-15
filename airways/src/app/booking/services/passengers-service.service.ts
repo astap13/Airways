@@ -9,25 +9,33 @@ import { IPassanger } from 'src/app/redux/booking.interface';
 export class PassengersServiceService {
   constructor(public http: HttpClient) {}
 
-  async request(flightID: string, date: IPassanger[]) {
+  async request(flightID: string, passengers: IPassanger[]) {
     const user = JSON.parse(localStorage.getItem('user'));
     const userData = user;
     const url = `https://airways-api-ckd3.onrender.com/user/${userData.uid}/cart`;
-    const updatedPassengers = date.map((passenger) => {
+    const updatedPassengers = passengers.map((passenger) => {
       const ageGroup = this.calculateAgeGroup(passenger.birthDate);
       return { ...passenger, ageGroup };
     });
-    const requestData = { flightID, date: updatedPassengers };
-    console.log(requestData, url);
-    // try {
-    //   await this.http.post(url, requestData).toPromise();
-    // } catch (error) {}
+    console.log(updatedPassengers);
+    const requestData = { flightID, passengers: updatedPassengers };
+    try {
+      await this.http.post(url, requestData).toPromise();
+    } catch (error) {}
   }
 
   calculateAgeGroup(birthDate: any): string {
     const now = new Date();
-    const birth = new Date(birthDate);
+    const birth = new Date(birthDate.year, birthDate.month - 1, birthDate.day);
     const age = now.getFullYear() - birth.getFullYear();
+
+    if (
+      now.getMonth() < birth.getMonth() ||
+      (now.getMonth() === birth.getMonth() && now.getDate() < birth.getDate())
+    ) {
+      return (age - 1).toString();
+    }
+
     if (age <= 2) {
       return 'Infant';
     } else if (age <= 12) {

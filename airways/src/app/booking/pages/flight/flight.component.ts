@@ -69,7 +69,6 @@ export class FlightComponent {
     this.selectedPassengers$.subscribe((passengerArray: any) => {
       this.sumPassengers =
         passengerArray.adult.length + passengerArray.child.length + passengerArray.infant.length;
-      console.log(passengerArray);
     });
   }
 

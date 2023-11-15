@@ -22,10 +22,10 @@
           <div class="input-group mb-3">
             <div class="btn-group">
               <input
-                formControlName="sex"
+                formControlName="gender"
                 type="radio"
                 class="btn-check"
-                [attr.name]="'sex' + i"
+                [attr.name]="'gender' + i"
                 value="male"
                 id="male-{{ i }}"
                 autocomplete="off"
@@ -33,10 +33,10 @@
               <label class="btn btn-success" for="male-{{ i }}">Male</label>
 
               <input
-                formControlName="sex"
+                formControlName="gender"
                 type="radio"
                 class="btn-check"
-                [attr.name]="'sex' + i"
+                [attr.name]="'gender' + i"
                 value="female"
                 id="female-{{ i }}"
                 autocomplete="off"
@@ -51,7 +51,7 @@
                 name="dp"
                 ngbDatepicker
                 #d="ngbDatepicker"
-                formControlName="dateOfBirth"
+                formControlName="birthDate"
               />
               <button
                 class="btn btn-outline-secondary bi bi-calendar3"
