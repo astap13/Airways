@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs';
 import { IPassanger } from 'src/app/redux/booking.interface';
 
 @Injectable({
@@ -25,23 +26,10 @@ export class PassengersServiceService {
     } catch (error) {}
   }
 
-  async getUserInfo() {
+  getUserInfo(): Observable<Response> {
     const user = JSON.parse(localStorage.getItem('user'));
-
-    if (!user || !user.uid) {
-      console.error('User information is missing or invalid');
-    }
-
-    const uid = user.uid;
-    const url = `https://airways-api-ckd3.onrender.com/user/${uid}`;
-
-    try {
-      const response = await this.http.get(url).toPromise();
-      this.userInfo = response;
-    } catch (error) {
-      // Обработка ошибок
-      console.error('Error fetching user data:', error);
-    }
+    const url = `https://airways-api-ckd3.onrender.com/user/${user.uid}`;
+    return this.http.get<Response>(url);
   }
 
   calculateAgeGroup(birthDate: any): string {

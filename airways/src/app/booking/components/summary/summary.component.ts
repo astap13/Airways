@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
 import { PassengersServiceService } from '../../services/passengers-service.service';
 
 @Component({
@@ -8,13 +10,18 @@ import { PassengersServiceService } from '../../services/passengers-service.serv
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent {
+  userInfo$: Observable<any>;
+
   userInfo: any;
 
-  constructor(private passengersService: PassengersServiceService) {}
+  constructor(private passengersService: PassengersServiceService) {
+    this.request();
+    this.userInfo.subscribe((el) => {
+      this.userInfo = el.cart.at(-1);
+    });
+  }
 
-  async request() {
-    await this.passengersService.getUserInfo();
-    this.userInfo = this.passengersService.userInfo;
-    console.log(this.userInfo);
+  request() {
+    this.userInfo = this.passengersService.getUserInfo();
   }
 }
