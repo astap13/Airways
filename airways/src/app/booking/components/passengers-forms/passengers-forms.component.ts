@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -30,6 +31,7 @@ export class PassengersFormsComponent {
     private store: Store<IAppStateInterface>,
     private fb: FormBuilder,
     private passengersService: PassengersServiceService,
+    private router: Router,
   ) {
     this.selectedPassengers$ = this.store.pipe(select(selectedPassengers));
     this.selectedPassengers$.subscribe((el) => {
@@ -68,6 +70,12 @@ export class PassengersFormsComponent {
   savePassengers() {
     if (this.profileForm.valid) {
       this.passengersService.request(this.flight, this.profileForm.value.passengers);
+      console.log(this.flight);
+      this.nextStep();
     }
+  }
+
+  nextStep() {
+    this.router.navigate(['booking/summary']);
   }
 }

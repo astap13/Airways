@@ -9,7 +9,9 @@ import { IPassanger } from 'src/app/redux/booking.interface';
 export class PassengersServiceService {
   constructor(public http: HttpClient) {}
 
-  async request(flightID: string, passengers: IPassanger[]) {
+  userInfo: any;
+
+  async request(flightId: string, passengers: IPassanger[]) {
     const user = JSON.parse(localStorage.getItem('user'));
     const userData = user;
     const url = `https://airways-api-ckd3.onrender.com/user/${userData.uid}/cart`;
@@ -17,11 +19,29 @@ export class PassengersServiceService {
       const ageGroup = this.calculateAgeGroup(passenger.birthDate);
       return { ...passenger, ageGroup };
     });
-    console.log(updatedPassengers);
-    const requestData = { flightID, passengers: updatedPassengers };
+    const requestData = { flightId, passengers: updatedPassengers };
     try {
       await this.http.post(url, requestData).toPromise();
     } catch (error) {}
+  }
+
+  async getUserInfo() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user || !user.uid) {
+      console.error('User information is missing or invalid');
+    }
+
+    const uid = user.uid;
+    const url = `https://airways-api-ckd3.onrender.com/user/${uid}`;
+
+    try {
+      const response = await this.http.get(url).toPromise();
+      this.userInfo = response;
+    } catch (error) {
+      // Обработка ошибок
+      console.error('Error fetching user data:', error);
+    }
   }
 
   calculateAgeGroup(birthDate: any): string {
