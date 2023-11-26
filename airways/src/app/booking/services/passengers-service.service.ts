@@ -12,6 +12,8 @@ export class PassengersServiceService {
 
   userInfo: any;
 
+  //переписать на rxjs
+
   async request(flightId: string, passengers: IPassanger[]) {
     const user = JSON.parse(localStorage.getItem('user'));
     const userData = user;
@@ -29,6 +31,11 @@ export class PassengersServiceService {
   getUserInfo(): Observable<Response> {
     const user = JSON.parse(localStorage.getItem('user'));
     const url = `https://airways-api-ckd3.onrender.com/user/${user.uid}`;
+    return this.http.get<Response>(url);
+  }
+
+  getFlightInfo(fligthNumber): Observable<Response> {
+    const url = `https://airways-api-ckd3.onrender.com/flights/searchByFlightNumber/${fligthNumber}`;
     return this.http.get<Response>(url);
   }
 

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
 import { PassengersServiceService } from '../../services/passengers-service.service';
 
 @Component({
@@ -10,9 +8,9 @@ import { PassengersServiceService } from '../../services/passengers-service.serv
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent {
-  userInfo$: Observable<any>;
-
   userInfo: any;
+
+  flightInfo: any;
 
   constructor(private passengersService: PassengersServiceService) {
     this.request();
@@ -23,5 +21,8 @@ export class SummaryComponent {
 
   request() {
     this.userInfo = this.passengersService.getUserInfo();
+    this.flightInfo = this.passengersService.getFlightInfo(this.userInfo.flightId);
+    this.userInfo.subscribe((el) => console.log(el));
+    this.flightInfo.subscribe((el) => console.log(el));
   }
 }
