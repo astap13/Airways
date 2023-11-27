@@ -4,6 +4,47 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPassanger } from 'src/app/redux/booking.interface';
 
+interface Passenger {
+  ageGroup: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  birthDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  _id: string;
+}
+
+export interface CartItem {
+  flightId?: string | null;
+  passengers?: Passenger[];
+  _id?: string;
+}
+
+export interface UserData {
+  _id: string;
+  uid: string;
+  cart: CartItem[];
+  __v: number;
+}
+
+export interface FlightInfo {
+  time: {
+    from: string;
+    to: string;
+  };
+  _id: string;
+  from: string;
+  to: string;
+  date: string;
+  seats: number;
+  freeSeats: number;
+  price: number;
+  flightNumber: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,15 +69,15 @@ export class PassengersServiceService {
     } catch (error) {}
   }
 
-  getUserInfo(): Observable<Response> {
+  getUserInfo(): Observable<UserData> {
     const user = JSON.parse(localStorage.getItem('user'));
     const url = `https://airways-api-ckd3.onrender.com/user/${user.uid}`;
-    return this.http.get<Response>(url);
+    return this.http.get<UserData>(url);
   }
 
-  getFlightInfo(fligthNumber): Observable<Response> {
+  getFlightInfo(fligthNumber): Observable<FlightInfo> {
     const url = `https://airways-api-ckd3.onrender.com/flights/searchByFlightNumber/${fligthNumber}`;
-    return this.http.get<Response>(url);
+    return this.http.get<FlightInfo>(url);
   }
 
   calculateAgeGroup(birthDate: any): string {

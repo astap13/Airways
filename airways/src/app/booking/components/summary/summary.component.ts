@@ -1,28 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { PassengersServiceService } from '../../services/passengers-service.service';
+import { Observable } from 'rxjs';
+
+import {
+  CartItem,
+  FlightInfo,
+  PassengersServiceService,
+  UserData,
+} from '../../services/passengers-service.service';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
 })
-export class SummaryComponent {
-  userInfo: any;
+export class SummaryComponent implements OnInit {
+  userInfo$: Observable<UserData>;
 
-  flightInfo: any;
+  userInfo: CartItem;
 
-  constructor(private passengersService: PassengersServiceService) {
-    this.request();
-    this.userInfo.subscribe((el) => {
-      this.userInfo = el.cart.at(-1);
+  flightInfo: FlightInfo;
+
+  constructor(private passengersService: PassengersServiceService) {}
+
+  ngOnInit() {
+    this.userInfo$ = this.passengersService.getUserInfo();
+    this.userInfo$.subscribe((user: UserData) => {
+      this.userInfo = user.cart.at(-1);
+      this.requestFlightInfo();
     });
   }
 
-  request() {
-    this.userInfo = this.passengersService.getUserInfo();
-    this.flightInfo = this.passengersService.getFlightInfo(this.userInfo.flightId);
-    this.userInfo.subscribe((el) => console.log(el));
-    this.flightInfo.subscribe((el) => console.log(el));
+  private requestFlightInfo() {
+    if (this.userInfo) {
+      this.passengersService.getFlightInfo(this.userInfo.flightId).subscribe((flightInfo) => {
+        this.flightInfo = flightInfo;
+      });
+    }
   }
 }
