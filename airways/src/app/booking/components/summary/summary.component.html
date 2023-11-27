@@ -1,11 +1,21 @@
-<div class="card" style="width: 18rem;" *ngIf="userInfo && flightInfo">
+<div class="card" style="width: 18rem" *ngIf="userInfo && flightInfo">
   <div class="card-body">
     <div class="card-header">
-      <p><b>Flight number: {{ userInfo.flightId }} {{flightInfo.from}}-{{flightInfo.to}}</b></p>
-      <p>{{flightInfo.date | date:'MMM dd, yyyy hh:mm'}}</p>
+      <p>
+        <b>Flight number: {{ userInfo.flightId }} {{ flightInfo.from }}-{{ flightInfo.to }}</b>
+      </p>
+      <p>{{ flightInfo.date | date : 'MMM dd, yyyy hh:mm' }}</p>
     </div>
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <button class="btn btn-primary">Go somewhere</button>
+    <p class="card-title">Passengers</p>
+    <div *ngFor="let passenger of userInfo.passengers">
+      <p>
+        <b>{{ passenger.firstName }} {{ passenger.lastName }}</b> | {{ passenger.ageGroup }} |
+        {{ passenger.gender }}
+      </p>
+      <small>1checked bag (total 23 kg) included</small>
+      <small>1 cabin bag + 1 personal item (max. 8 kg) included</small>
+      <hr />
+    </div>
   </div>
+  <h1>Total price: {{totalPrice}}</h1>
 </div>

@@ -21,6 +21,8 @@ export class SummaryComponent implements OnInit {
 
   flightInfo: FlightInfo;
 
+  totalPrice: Number = 0;
+
   constructor(private passengersService: PassengersServiceService) {}
 
   ngOnInit() {
@@ -28,6 +30,8 @@ export class SummaryComponent implements OnInit {
     this.userInfo$.subscribe((user: UserData) => {
       this.userInfo = user.cart.at(-1);
       this.requestFlightInfo();
+
+      // this.countTotalPrice();
     });
   }
 
@@ -35,7 +39,12 @@ export class SummaryComponent implements OnInit {
     if (this.userInfo) {
       this.passengersService.getFlightInfo(this.userInfo.flightId).subscribe((flightInfo) => {
         this.flightInfo = flightInfo;
+        this.countTotalPrice();
       });
     }
+  }
+
+  countTotalPrice() {
+    this.totalPrice = this.flightInfo.price * this.userInfo.passengers.length;
   }
 }
