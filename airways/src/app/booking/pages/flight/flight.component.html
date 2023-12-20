@@ -34,4 +34,5 @@
   </div>
   <app-carousel *ngIf="(actualStep$ | async) === 1"></app-carousel>
   <app-passengers-forms *ngIf="(actualStep$ | async) === 2"></app-passengers-forms>
+  <app-summary *ngIf="(actualStep$ | async) === 3"></app-summary >
 </div>
