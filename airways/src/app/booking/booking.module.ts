@@ -19,13 +19,13 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { ChosedCarouselItemComponent } from './components/carousel/chosed-carousel-item/chosed-carousel-item.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DirectionsComponent } from './components/directions/directions.component';
-import { PassengerFormCardComponent } from './components/passanger-form-card/passenger-form-card.component';
 import { PassengersFormsComponent } from './components/passengers-forms/passengers-forms.component';
 import { PassengersComponent } from './components/passengers/passengers.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { FlightComponent } from './pages/flight/flight.component';
 import { MainComponent } from './pages/main/main.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { MainComponent } from './pages/main/main.component';
     CarouselItemComponent,
     ChosedCarouselItemComponent,
     PassengersFormsComponent,
-    PassengerFormCardComponent,
+    SummaryComponent,
   ],
   imports: [
     CommonModule,

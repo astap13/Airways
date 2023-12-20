@@ -2,6 +2,8 @@ import { NgFor } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 /* eslint-disable import/no-extraneous-dependencies */
 import { isDevMode, NgModule } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -69,6 +71,8 @@ import { CoreModule } from './core/core.module';
       trace: false,
       traceLimit: 75,
     }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
 })
 export class AppModule {}

@@ -1,7 +1,75 @@
 <div class="container">
-    <div class="passenger-form-container">
-        <h1>Passengers</h1>
-        <p>Enter the passenger's names as they appear on document (passport or ID).</p>
-        <app-passenger-form-card *ngFor="let passenger of passengers" [passenger]="passenger"></app-passenger-form-card>
-    </div>
+  <div class="passenger-form-container">
+    <h1>Passengers</h1>
+    <p>Enter the passenger's names as they appear on the document (passport or ID).</p>
+    <form [formGroup]="profileForm" class="passenger-form-container card">
+      <div formArrayName="passengers" class="form-item">
+        <div *ngFor="let passenger of passengers.controls; let i = index" [formGroupName]="i">
+          <input
+            class="form-control"
+            placeholder="First Name"
+            type="text"
+            formControlName="firstName"
+          />
+          <input
+            class="form-control"
+            placeholder="Last Name"
+            type="text"
+            formControlName="lastName"
+          />
+
+          <div class="input-group mb-3">
+            <div class="btn-group">
+              <input
+                formControlName="gender"
+                type="radio"
+                class="btn-check"
+                [attr.name]="'gender' + i"
+                value="male"
+                id="male-{{ i }}"
+                autocomplete="off"
+              />
+              <label class="btn btn-success" for="male-{{ i }}">Male</label>
+
+              <input
+                formControlName="gender"
+                type="radio"
+                class="btn-check"
+                [attr.name]="'gender' + i"
+                value="female"
+                id="female-{{ i }}"
+                autocomplete="off"
+              />
+              <label class="btn btn-success" for="female-{{ i }}">Female</label>
+            </div>
+
+            <div>
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dp"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                formControlName="birthDate"
+              />
+              <button
+                class="btn btn-outline-secondary bi bi-calendar3"
+                (click)="d.toggle()"
+                type="button"
+              ></button>
+            </div>
+          </div>
+
+          <button class="btn btn-danger" (click)="removePassenger(i)" type="button">
+            Remove Passenger
+          </button>
+        </div>
+      </div>
+
+      <button class="btn btn-success" (click)="addPassenger()" type="button">Add Passenger</button>
+    </form>
+  </div>
+  <button class="btn btn-outline-secondary" (click)="savePassengers()" type="button">
+    Pay Now
+  </button>
 </div>

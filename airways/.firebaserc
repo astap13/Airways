@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "airways-a8ed2"
+  },
+  "targets": {
+    "airways-a8ed2": {
+      "hosting": {
+        "airways": [
+          "airways-a8ed2"
+        ]
+      }
+    }
+  }
+}

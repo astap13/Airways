@@ -29,6 +29,11 @@
           (click)="authService.SignIn(userName.value, userPassword.value)"
         />
       </div>
+      <div class="formGroup login-with-google-btn-container">
+        <button class="login-with-google-btn" type="button" (click)="authService.GoogleAuth()">
+          Log in with Google
+        </button>
+      </div>
     </div>
   </div>
 </div>
